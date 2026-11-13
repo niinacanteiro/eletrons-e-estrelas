@@ -1171,9 +1171,10 @@ section[id],h2,h3,.x-lab{scroll-margin-top:84px}
 
 /* ===== Entrada sem caixa, fundida ao céu ===== */
 .hero{border-radius:0!important;box-shadow:none!important;background:transparent!important;border:0!important;overflow:visible}
-.hero__img{-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 45%,transparent 100%);mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 45%,transparent 100%)}
-.hero::after{background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.15) 45%,transparent 70%)!important;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 45%,transparent 100%);mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 45%,transparent 100%)}
-.hero__stars{-webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,#000 50%,transparent 100%);mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,#000 50%,transparent 100%)}
+.hero__img{-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 75%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 75%,transparent 100%);mask-composite:intersect;}
+.hero::after{background:radial-gradient(ellipse 60% 55% at 35% 75%,rgba(0,0,0,.45),transparent 70%)!important;-webkit-mask-image:none;mask-image:none}
+.hero__stars{display:none!important}
+.hero>.callout{border-color:rgba(255,255,255,.08)!important;background:rgba(10,12,24,.35)!important;backdrop-filter:blur(6px)}
 .hero__credit{opacity:.55}
 .tw{position:relative}
 .tw-ghost{visibility:hidden}
