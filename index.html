@@ -1356,6 +1356,6 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches){live.textContent=txt;
 function tick(){i++;live.textContent=txt.slice(0,i);if(i<txt.length){var c=txt.charAt(i-1);setTimeout(tick,/[.,:]/.test(c)?260:26+Math.random()*34)}else setTimeout(apaga,4200)}
 function apaga(){i--;live.textContent=txt.slice(0,i);if(i>0)setTimeout(apaga,12);else setTimeout(tick,900)}
 setTimeout(tick,600)})();</script>
-<script src="cosmos.js?v=5" defer></script><script src="extras.js?v=1" defer></script>
+<script src="cosmos.js?v=5" defer></script><script src="extras.js?v=2" defer></script>
 </body>
 </html>
