@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="hark.css" />
     <link rel="stylesheet" href="hark-hero.css" />
+    <link rel="stylesheet" href="hark-charts.css" />
     <style>
       .x-eq {
         background: var(--fill-tertiary);
@@ -63,6 +64,57 @@
         text-transform: uppercase;
         letter-spacing: 0.06em;
       }
+      .x-lab {
+        margin: 32px 0 24px;
+        padding: 24px;
+        background: var(--fill-tertiary);
+        border-radius: var(--r-l);
+        display: grid;
+        gap: 20px;
+      }
+      .x-lab__title { margin: 0; font: var(--type-heading); }
+      .x-lab .stats { padding-top: 0; }
+      .x-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 24px; }
+      .x-field { display: grid; gap: 2px; }
+      .x-field label { display: flex; justify-content: space-between; gap: 8px; font: var(--type-label); }
+      .x-field output { font: var(--type-small); font-family: "Geist Mono", ui-monospace, monospace; color: var(--text-secondary); }
+      .x-field input[type="range"] { width: 100%; min-height: var(--tap); margin: 0; accent-color: var(--fill-primary); touch-action: pan-y; }
+      .x-svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: var(--fill-primary-on);
+        border: 1px solid var(--stroke-secondary);
+        border-radius: var(--r-m);
+        color: var(--text-primary);
+        font-family: var(--sans);
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .x-svg text { fill: currentColor; font-size: 14px; }
+      .x-svg .x-muted { fill: var(--text-secondary); font-size: 13px; }
+      .x-wire { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .x-faint { fill: none; stroke: var(--stroke-primary); stroke-width: 1; }
+      .x-e { fill: var(--fill-system-orange); filter: drop-shadow(0 0 3px var(--fill-system-orange)); }
+      .x-blade { transform-box: view-box; transition: transform 0.35s var(--ease-out); }
+      .x-led { fill: var(--fill-tertiary); stroke: var(--stroke-primary); stroke-width: 1.5; transition: fill 0.2s, filter 0.2s; }
+      .x-led.is-on { stroke: none; }
+      .x-led--g.is-on { fill: var(--fill-system-green); filter: drop-shadow(0 0 10px var(--fill-system-green)); }
+      .x-led--y.is-on { fill: var(--fill-system-orange); filter: drop-shadow(0 0 10px var(--fill-system-orange)); }
+      .x-led--r.is-on { fill: var(--fill-system-red); filter: drop-shadow(0 0 10px var(--fill-system-red)); }
+      .x-arm { transform-box: view-box; transform-origin: 320px 78px; transition: transform 0.6s var(--ease-out); }
+      .x-arm.is-open { transform: rotate(80deg); }
+      .x-pg { touch-action: none; cursor: crosshair; }
+      .x-handle { fill: var(--fill-primary); stroke: var(--fill-primary-on); stroke-width: 2; cursor: grab; }
+      .x-hit { fill: transparent; cursor: grab; }
+      .x-curve { fill: none; stroke: var(--fill-system-orange); stroke-width: 2.5; }
+      .x-lab .x-code { margin: 0; }
+      .x-code .is-active { background: var(--fill-primary); color: var(--text-primary-on); }
+      .x-lab sub, .x-lab sup { font-size: 12px; }
+      .x-code .x-ln { display: block; padding: 0 8px; margin: 0 -8px; border-radius: 4px; transition: background 0.2s; }
+      .x-status { margin: 0; font: var(--type-body-strong); }
+      .x-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: start; }
+      @media (max-width: 599px) { .x-lab { padding: 16px; margin-inline: calc(var(--gutter) * -0.5); } }
     </style>
   </head>
   <body>
@@ -85,7 +137,7 @@
           <p class="hero__credit">Foto: a Via Láctea</p>
         </section>
 
-        <section class="section" id="sobre" data-nav="Sobre">
+        <section class="section" id="sobre">
           <div class="head">
             <p class="head__eyebrow">Sobre</p>
             <h2>Relatórios de laboratório viram resumos diretos.</h2>
@@ -102,7 +154,7 @@
           </p>
         </section>
 
-        <section class="section" id="rc" data-nav="Circuito RC">
+        <section class="section" id="rc" data-nav="Laboratório RC">
           <div class="head">
             <p class="head__eyebrow">Circuitos elétricos</p>
             <h2>Circuito RC: como o capacitor carrega.</h2>
@@ -149,6 +201,71 @@
               </div>
             </article>
           </div>
+          <div class="x-lab" id="rc-lab">
+            <p class="x-lab__title">Laboratório RC interativo</p>
+            <div class="aside">
+              <h3>Como usar</h3>
+              <p class="fineprint">Ajuste V<sub>s</sub>, R e C nos controles. Toque em <b>Carregar</b> para fechar a chave na fonte, em <b>Descarregar</b> para ligar o capacitor só ao resistor e em <b>Pausar</b> para congelar o tempo. Os elétrons andam mais rápido quanto maior a corrente.</p>
+            </div>
+            <div class="x-controls">
+              <div class="x-field">
+                <label for="rc-vs">Tensão V<sub>s</sub> <output id="rc-vs-out">12 V</output></label>
+                <input type="range" id="rc-vs" min="1" max="24" step="0.5" value="12" />
+              </div>
+              <div class="x-field">
+                <label for="rc-r">Resistor R <output id="rc-r-out">10 kΩ</output></label>
+                <input type="range" id="rc-r" min="0" max="1000" step="1" value="667" />
+              </div>
+              <div class="x-field">
+                <label for="rc-c">Capacitor C <output id="rc-c-out">100 µF</output></label>
+                <input type="range" id="rc-c" min="0" max="1000" step="1" value="667" />
+              </div>
+            </div>
+            <div class="links">
+              <button type="button" class="btn" id="rc-charge">Carregar</button>
+              <button type="button" class="btn" id="rc-discharge">Descarregar</button>
+              <button type="button" class="btn" id="rc-pause" aria-pressed="false">Pausar</button>
+            </div>
+            <svg class="x-svg" id="rc-svg" viewBox="0 0 430 220" role="img" aria-label="Circuito RC animado: fonte, chave, resistor e capacitor, com elétrons em movimento">
+              <path class="x-wire" d="M80 96 V40 H120 M80 112 V180 H360 V120 M360 100 V40 H300 M210 40 H160" />
+              <path class="x-wire" d="M210 40 l8 -10 l12 20 l12 -20 l12 20 l12 -20 l12 20 l12 -20 l10 10" />
+              <path class="x-wire" d="M132 68 V180" />
+              <line class="x-wire" x1="60" y1="96" x2="100" y2="96" />
+              <line class="x-wire" x1="70" y1="112" x2="90" y2="112" style="stroke-width:5" />
+              <line class="x-wire" x1="335" y1="100" x2="385" y2="100" style="stroke-width:3" />
+              <line class="x-wire" x1="335" y1="120" x2="385" y2="120" style="stroke-width:3" />
+              <rect id="rc-fill" x="337" y="102" width="46" height="16" style="fill:var(--fill-system-orange)" opacity="0" />
+              <rect class="x-faint" x="400" y="60" width="14" height="100" rx="3" />
+              <rect id="rc-gauge" x="400" y="160" width="14" height="0" rx="3" style="fill:var(--fill-system-orange)" />
+              <line id="rc-blade" class="x-wire x-blade" x1="160" y1="40" x2="120" y2="40" style="transform-origin:160px 40px;transform:rotate(25deg)" />
+              <circle cx="160" cy="40" r="4" style="fill:currentColor" />
+              <circle cx="120" cy="40" r="3.5" style="fill:var(--fill-primary-on);stroke:currentColor;stroke-width:2" />
+              <circle cx="132" cy="68" r="3.5" style="fill:var(--fill-primary-on);stroke:currentColor;stroke-width:2" />
+              <text x="92" y="92" class="x-muted">+</text>
+              <text x="56" y="100" text-anchor="end">V<tspan font-size="11" dy="3">s</tspan></text>
+              <text x="56" y="120" text-anchor="end" class="x-muted" id="rc-svg-vs">12 V</text>
+              <text x="260" y="22" text-anchor="middle">R</text>
+              <text x="260" y="72" text-anchor="middle" class="x-muted" id="rc-svg-r">10 kΩ</text>
+              <text x="328" y="104" text-anchor="end">C</text>
+              <text x="328" y="122" text-anchor="end" class="x-muted" id="rc-svg-c">100 µF</text>
+              <text x="160" y="76" text-anchor="middle" class="x-muted" id="rc-svg-sw">aberta</text>
+              <text x="407" y="180" text-anchor="middle" class="x-muted" id="rc-svg-pct">0%</text>
+              <path id="rc-path-c" d="M80 180 V40 H360 V180 Z" fill="none" />
+              <path id="rc-path-d" d="M132 180 V68 L160 40 H360 V180 Z" fill="none" />
+              <g id="rc-dots"></g>
+            </svg>
+            <section class="stats" aria-live="polite">
+              <div class="stat"><span class="stat__fig" id="rc-tau">1 s</span><span class="stat__label">τ = RC</span></div>
+              <div class="stat"><span class="stat__fig" id="rc-v">0,00 V</span><span class="stat__label">v<sub>C</sub></span></div>
+              <div class="stat"><span class="stat__fig" id="rc-i">0 mA</span><span class="stat__label">Corrente i</span></div>
+              <div class="stat"><span class="stat__fig" id="rc-pct">0%</span><span class="stat__label">Carregado</span></div>
+            </section>
+            <figure class="chart">
+              <figcaption class="chart__cap">v<sub>C</sub>(t) e i(t) ao vivo<small id="rc-cap">Tensão em V (eixo esquerdo), corrente em mA (eixo direito); tracejados em τ e 5τ</small></figcaption>
+              <div class="chart__canvas"><canvas id="rc-chart" role="img" aria-label="Na carga, a tensão do capacitor sobe e a corrente cai exponencialmente; em τ a tensão chega a 63%, em 5τ a 99%"></canvas></div>
+            </figure>
+            <p class="fineprint" id="rc-speed">Animação em tempo real.</p>
+          </div>
           <div class="links">
             <a class="btn" href="https://github.com/niinacanteiro/relatorios-latex" target="_blank" rel="noopener">Fonte: relatorios-latex no GitHub</a>
           </div>
@@ -156,7 +273,7 @@
 
         <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
 
-        <section class="section" id="potencia" data-nav="Simulação">
+        <section class="section" id="potencia">
           <div class="head">
             <p class="head__eyebrow">Eletrônica de potência</p>
             <h2>Simular antes de montar poupa componentes.</h2>
@@ -174,7 +291,7 @@
           </figure>
         </section>
 
-        <section class="section" id="python" data-nav="Python">
+        <section class="section" id="python" data-nav="Interpolação">
           <div class="head">
             <p class="head__eyebrow">Métodos numéricos em Python</p>
             <h2>Interpolação quadrática: uma parábola por três pontos.</h2>
@@ -198,6 +315,30 @@ def interp_quadratica(xs, ys, x):
     return total
 print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
           <p class="fineprint">Os pontos estão em y = x², então P(3) = 9,0.</p>
+          <div class="x-lab" id="ip-lab">
+            <p class="x-lab__title">Playground de interpolação</p>
+            <div class="aside">
+              <h3>Como usar</h3>
+              <p class="fineprint">Arraste os três pontos pretos; a parábola de Lagrange se redesenha na hora. Passe o mouse ou toque no gráfico para ler P(x) naquele x.</p>
+            </div>
+            <svg class="x-svg x-pg" id="ip-svg" viewBox="0 0 420 280" role="img" aria-label="Gráfico com três pontos arrastáveis e a parábola que passa por eles">
+              <g id="ip-grid"></g>
+              <path id="ip-curve" class="x-curve" d="" />
+              <g id="ip-probe" style="display:none">
+                <line id="ip-probe-line" class="x-faint" y1="10" y2="250" style="stroke-dasharray:3 4" />
+                <circle id="ip-probe-dot" r="5" style="fill:var(--fill-system-orange)" />
+                <text id="ip-probe-text" y="26" text-anchor="middle"></text>
+              </g>
+              <g id="ip-pts"></g>
+            </svg>
+            <section class="stats" aria-live="polite">
+              <div class="stat"><span class="stat__fig" id="ip-a">1,00</span><span class="stat__label">a</span></div>
+              <div class="stat"><span class="stat__fig" id="ip-b">0,00</span><span class="stat__label">b</span></div>
+              <div class="stat"><span class="stat__fig" id="ip-c">0,00</span><span class="stat__label">c</span></div>
+              <div class="stat"><span class="stat__fig" id="ip-px">—</span><span class="stat__label" id="ip-px-label">P(x): toque no gráfico</span></div>
+            </section>
+            <p class="x-status" id="ip-eq">P(x) = 1,00x² + 0,00x + 0,00</p>
+          </div>
           <div class="links">
             <a class="btn" href="https://github.com/niinacanteiro/Metodos_Computacionais" target="_blank" rel="noopener">Fonte: Metodos_Computacionais no GitHub</a>
           </div>
@@ -222,9 +363,77 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
               <p><a class="link" href="https://github.com/niinacanteiro/tinkercad-circuitos" target="_blank" rel="noopener">tinkercad-circuitos</a></p>
             </div>
           </div>
+          <div class="x-lab" id="tl-lab">
+            <p class="x-lab__title">Semáforo Arduino simulado</p>
+            <div class="aside">
+              <h3>Como usar</h3>
+              <p class="fineprint">Toque em <b>Ligar</b>. O LED aceso brilha, os pontos mostram a corrente saindo do pino e a linha de código em execução fica destacada: verde 5 s, amarelo 2 s, vermelho 5 s, em loop.</p>
+            </div>
+            <div class="links">
+              <button type="button" class="btn" id="tl-btn" aria-pressed="false">Ligar</button>
+            </div>
+            <p class="x-status" id="tl-status" aria-live="polite">Desligado</p>
+            <div class="x-two">
+              <svg class="x-svg" id="tl-svg" viewBox="0 0 360 230" role="img" aria-label="Arduino ligado a três LEDs: verde, amarelo e vermelho">
+                <rect x="20" y="40" width="110" height="150" rx="10" class="x-faint" style="stroke-width:2" />
+                <text x="34" y="64">Arduino</text>
+                <text x="122" y="74" text-anchor="end" class="x-muted">13</text>
+                <text x="122" y="114" text-anchor="end" class="x-muted">12</text>
+                <text x="122" y="154" text-anchor="end" class="x-muted">11</text>
+                <text x="75" y="184" text-anchor="middle" class="x-muted">GND</text>
+                <path class="x-wire" d="M130 70 H180 l5 -7 l8 14 l8 -14 l8 14 l8 -14 l8 14 l5 -7 H274 M130 110 H180 l5 -7 l8 14 l8 -14 l8 14 l8 -14 l8 14 l5 -7 H274 M130 150 H180 l5 -7 l8 14 l8 -14 l8 14 l8 -14 l8 14 l5 -7 H274 M306 70 H330 V210 H75 V190 M306 110 H330 M306 150 H330" />
+                <rect x="268" y="46" width="44" height="128" rx="14" class="x-faint" style="stroke-width:2" />
+                <circle class="x-led x-led--g" id="tl-g" cx="290" cy="70" r="14" />
+                <circle class="x-led x-led--y" id="tl-y" cx="290" cy="110" r="14" />
+                <circle class="x-led x-led--r" id="tl-r" cx="290" cy="150" r="14" />
+                <text x="210" y="34" text-anchor="middle" class="x-muted">220 Ω</text>
+                <path id="tl-p0" d="M130 70 H330 V210 H75 V190" fill="none" />
+                <path id="tl-p1" d="M130 110 H330 V210 H75 V190" fill="none" />
+                <path id="tl-p2" d="M130 150 H330 V210 H75 V190" fill="none" />
+                <g id="tl-dots"></g>
+              </svg>
+              <pre class="x-code" id="tl-code"><code><span class="x-ln">void loop() {</span><span class="x-ln" data-l="0">  digitalWrite(VERDE, HIGH);</span><span class="x-ln" data-l="0">  delay(5000);  // verde 5 s</span><span class="x-ln">  digitalWrite(VERDE, LOW);</span><span class="x-ln" data-l="1">  digitalWrite(AMARELO, HIGH);</span><span class="x-ln" data-l="1">  delay(2000);  // amarelo 2 s</span><span class="x-ln">  digitalWrite(AMARELO, LOW);</span><span class="x-ln" data-l="2">  digitalWrite(VERMELHO, HIGH);</span><span class="x-ln" data-l="2">  delay(5000);  // vermelho 5 s</span><span class="x-ln">  digitalWrite(VERMELHO, LOW);</span><span class="x-ln">}</span></code></pre>
+            </div>
+          </div>
+          <div class="x-lab" id="gate-lab">
+            <p class="x-lab__title">Cancela automática</p>
+            <div class="aside">
+              <h3>Como usar</h3>
+              <p class="fineprint">Arraste o controle de distância para aproximar o carro do sensor ultrassônico. Abaixo de 20 cm a cancela abre; acima, fecha.</p>
+            </div>
+            <div class="x-controls">
+              <div class="x-field">
+                <label for="gate-d">Distância do carro <output id="gate-d-out">60 cm</output></label>
+                <input type="range" id="gate-d" min="0" max="100" step="1" value="60" />
+              </div>
+            </div>
+            <p class="x-status" id="gate-status" aria-live="polite">Cancela fechada</p>
+            <div class="x-two">
+              <svg class="x-svg" viewBox="0 0 360 160" role="img" aria-label="Carro, sensor ultrassônico e cancela">
+                <line class="x-faint" x1="0" y1="138" x2="360" y2="138" style="stroke-width:2" />
+                <rect x="180" y="96" width="20" height="16" rx="3" style="fill:currentColor" />
+                <line class="x-wire" x1="190" y1="112" x2="190" y2="138" />
+                <text x="190" y="90" text-anchor="middle" class="x-muted">sensor</text>
+                <line id="gate-beam" class="x-faint" x1="180" y1="104" x2="110" y2="104" style="stroke:var(--fill-system-orange);stroke-dasharray:4 4;stroke-width:2" />
+                <g id="gate-car">
+                  <rect x="0" y="104" width="60" height="22" rx="6" style="fill:var(--text-secondary)" />
+                  <rect x="10" y="92" width="34" height="16" rx="5" style="fill:var(--text-secondary)" />
+                  <circle cx="14" cy="130" r="7" style="fill:currentColor" />
+                  <circle cx="46" cy="130" r="7" style="fill:currentColor" />
+                </g>
+                <rect x="314" y="72" width="12" height="66" rx="3" style="fill:currentColor" />
+                <g class="x-arm" id="gate-arm">
+                  <rect x="220" y="73" width="100" height="10" rx="5" style="fill:var(--fill-system-red)" />
+                  <rect x="240" y="73" width="14" height="10" style="fill:var(--fill-primary-on)" />
+                  <rect x="270" y="73" width="14" height="10" style="fill:var(--fill-primary-on)" />
+                </g>
+              </svg>
+              <pre class="x-code" id="gate-code"><code><span class="x-ln">long d = medirDistancia();  // cm</span><span class="x-ln" data-g="open">if (d &lt; 20) servo.write(90);  // abre</span><span class="x-ln" data-g="closed">else        servo.write(0);   // fecha</span></code></pre>
+            </div>
+          </div>
         </section>
 
-        <section class="section" id="latex" data-nav="LaTeX">
+        <section class="section" id="latex">
           <div class="head">
             <p class="head__eyebrow">Escrever relatórios em LaTeX</p>
             <h2>Três pacotes que uso em todo relatório.</h2>
@@ -242,7 +451,7 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
           </div>
         </section>
 
-        <section class="section" id="material" data-nav="Material">
+        <section class="section" id="material">
           <div class="head">
             <p class="head__eyebrow">Material recomendado</p>
             <h2>Material que eu recomendo</h2>
@@ -265,6 +474,20 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
         </section>
 
         <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
+
+        <section class="section" id="visitantes" data-nav="Visitantes">
+          <div class="head">
+            <p class="head__eyebrow">Visitantes</p>
+            <h2>Quem já passou por aqui.</h2>
+          </div>
+          <section class="stats">
+            <div class="stat"><span class="stat__fig" id="visit-count" aria-live="polite">—</span><span class="stat__label">Visitas no total</span></div>
+          </section>
+          <div class="links">
+            <a class="btn" href="https://eletronseestrelas.goatcounter.com" target="_blank" rel="noopener">Ver gráfico de visitas</a>
+          </div>
+          <p class="fineprint">Contagem anônima pelo GoatCounter, sem cookies.</p>
+        </section>
       </main>
       <footer class="foot">
         <p>Feito por Nicoly Canteiro · Conteúdo gratuito para estudo · <a class="link" href="https://github.com/niinacanteiro" target="_blank" rel="noopener">github.com/niinacanteiro</a></p>
@@ -273,6 +496,332 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
       </footer>
     </div>
     <script src="hark.js"></script>
-  <script data-goatcounter="https://eletronseestrelas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</body>
+    <script src="chart.js"></script>
+    <script src="datalabels.js"></script>
+    <script src="hark-charts.js"></script>
+    <script>
+      (function () {
+        var $ = function (id) { return document.getElementById(id); };
+        var NS = "http://www.w3.org/2000/svg";
+        function nf(v, d) { return v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+        function trim0(s) { return s.replace(/,0+(?=\s|$)/, ""); }
+        function sig2(x) { var p = Math.pow(10, Math.floor(Math.log10(x)) - 1); return Math.round(x / p) * p; }
+        function fmtR(r) { return r >= 1000 ? trim0(nf(r / 1000, r >= 10000 ? 0 : 1)) + " kΩ" : nf(r, 0) + " Ω"; }
+        function fmtC(c) { return c >= 10 ? nf(c, 0) + " µF" : trim0(nf(c, 1)) + " µF"; }
+        function fmtT(s) {
+          if (s < 1) { var ms = s * 1000; return (ms < 10 ? trim0(nf(ms, 1)) : nf(ms, 0)) + " ms"; }
+          return trim0(nf(s, s < 10 ? 2 : 1)) + " s";
+        }
+        function fmtI(a) {
+          var x = Math.abs(a), sg = a < -1e-12 ? "−" : "";
+          if (x >= 1) return sg + nf(x, 2) + " A";
+          if (x >= 1e-3) return sg + nf(x * 1000, 2) + " mA";
+          return sg + nf(x * 1e6, 0) + " µA";
+        }
+        function el(tag, attrs, parent) {
+          var e = document.createElementNS(NS, tag);
+          for (var k in attrs) e.setAttribute(k, attrs[k]);
+          if (parent) parent.appendChild(e);
+          return e;
+        }
+
+        /* ---------- Laboratório RC ---------- */
+        var S = { Vs: 12, R: 10000, C: 100, tau: 1, k: 1, v: 0, mode: "idle", paused: false, t: 0, top: 12, iref: 1, off: 0, acc: 0 };
+        var paths = { charge: $("rc-path-c"), discharge: $("rc-path-d") };
+        var dotsG = $("rc-dots"), dots = [];
+        for (var n = 0; n < 16; n++) dots.push(el("circle", { r: 4, class: "x-e", opacity: 0 }, dotsG));
+
+        var chart = new Chart($("rc-chart"), {
+          type: "line",
+          data: {
+            datasets: [
+              { label: "vC (V)", data: [], yAxisID: "y" },
+              { label: "i (mA)", data: [], yAxisID: "y1" },
+              { label: "", data: [], yAxisID: "y", borderColor: "var(--chart-reference)", borderDash: [3, 4], borderWidth: 1, pointRadius: 0 },
+              { label: "", data: [], yAxisID: "y", borderColor: "var(--chart-reference)", borderDash: [3, 4], borderWidth: 1, pointRadius: 0 },
+            ],
+          },
+          options: {
+            animation: false,
+            scales: {
+              x: { type: "linear", min: 0, max: 6, ticks: { callback: function (v) { return fmtT(v); } } },
+              y: { min: 0, max: 12, ticks: { callback: function (v) { return v.toLocaleString("pt-BR") + " V"; } } },
+              y1: { position: "right", min: 0, max: 1.2, grid: { drawOnChartArea: false }, ticks: { callback: function (v) { return v.toLocaleString("pt-BR", { maximumFractionDigits: 3 }) + " mA"; } } },
+            },
+            plugins: {
+              tooltip: {
+                filter: function (it) { return it.datasetIndex < 2; },
+                callbacks: {
+                  title: function (items) { return items.length ? "t = " + fmtT(items[0].parsed.x) : ""; },
+                  label: function (ctx) { return ctx.datasetIndex === 0 ? "vC " + nf(ctx.parsed.y, 2) + " V" : "i " + fmtI(ctx.parsed.y / 1000); },
+                },
+              },
+            },
+          },
+          plugins: [{
+            id: "tauLabels",
+            afterDatasetsDraw: function (c) {
+              var ctx = c.ctx, xs = c.scales.x, a = c.chartArea;
+              ctx.save();
+              ctx.fillStyle = getComputedStyle(c.canvas).color;
+              ctx.font = "12px Geist, sans-serif";
+              ctx.textAlign = "left";
+              [[S.tau, "τ"], [5 * S.tau, "5τ"]].forEach(function (m) {
+                var px = xs.getPixelForValue(m[0]);
+                if (px >= a.left && px <= a.right) ctx.fillText(m[1], px + 4, a.top + 12);
+              });
+              ctx.restore();
+            },
+          }],
+        });
+
+        function current() {
+          if (S.mode === "charge") return (S.Vs - S.v) / S.R;
+          if (S.mode === "discharge") return -S.v / S.R;
+          return 0;
+        }
+        function setupChart() {
+          var o = chart.options.scales, ds = chart.data.datasets;
+          S.top = Math.max(S.Vs, S.v);
+          var i0 = S.mode === "charge" ? (S.Vs - S.v) / S.R : S.mode === "discharge" ? S.v / S.R : S.Vs / S.R;
+          S.iref = Math.max(Math.abs(i0), S.Vs / S.R, 1e-9);
+          var imA = Math.max(Math.abs(i0), S.Vs / S.R) * 1000;
+          o.x.max = 6 * S.tau;
+          o.y.max = S.top;
+          o.y1.min = S.mode === "discharge" ? -imA : 0;
+          o.y1.max = S.mode === "discharge" ? 0 : imA;
+          ds[0].data = []; ds[1].data = [];
+          ds[2].data = [{ x: S.tau, y: 0 }, { x: S.tau, y: S.top }];
+          ds[3].data = [{ x: 5 * S.tau, y: 0 }, { x: 5 * S.tau, y: S.top }];
+          $("rc-cap").textContent = "Tensão em V (eixo esquerdo), corrente em mA (eixo direito); tracejados em τ = " + fmtT(S.tau) + " e 5τ = " + fmtT(5 * S.tau);
+          S.t = 0; S.acc = 0;
+          if (S.mode !== "idle") pushPoint();
+          chart.update("none");
+        }
+        function pushPoint() {
+          chart.data.datasets[0].data.push({ x: S.t, y: S.v });
+          chart.data.datasets[1].data.push({ x: S.t, y: current() * 1000 });
+        }
+        function readParams() {
+          S.Vs = parseFloat($("rc-vs").value);
+          S.R = sig2(100 * Math.pow(10, (3 * $("rc-r").value) / 1000));
+          S.C = sig2(Math.pow(10, (3 * $("rc-c").value) / 1000));
+          S.tau = S.R * S.C * 1e-6;
+          S.k = Math.min(4, Math.max(0.8, S.tau)) / S.tau;
+          var vs = trim0(nf(S.Vs, 1)) + " V";
+          $("rc-vs-out").textContent = vs; $("rc-svg-vs").textContent = vs;
+          $("rc-r-out").textContent = fmtR(S.R); $("rc-svg-r").textContent = fmtR(S.R);
+          $("rc-c-out").textContent = fmtC(S.C); $("rc-svg-c").textContent = fmtC(S.C);
+          $("rc-tau").textContent = fmtT(S.tau);
+          var r = 1 / S.k;
+          $("rc-speed").textContent = Math.abs(r - 1) < 0.01 ? "Animação em tempo real." : "Animação ajustada: 1 s na tela equivale a " + fmtT(r) + " no circuito.";
+          setupChart();
+        }
+        function setMode(m) {
+          S.mode = m; S.paused = false;
+          $("rc-pause").textContent = "Pausar"; $("rc-pause").setAttribute("aria-pressed", "false");
+          $("rc-blade").style.transform = "rotate(" + (m === "charge" ? 0 : m === "discharge" ? -45 : 25) + "deg)";
+          $("rc-svg-sw").textContent = m === "charge" ? "na fonte" : m === "discharge" ? "descarga" : "aberta";
+          setupChart();
+        }
+        ["rc-vs", "rc-r", "rc-c"].forEach(function (id) { $(id).addEventListener("input", readParams); });
+        $("rc-charge").addEventListener("click", function () { setMode("charge"); });
+        $("rc-discharge").addEventListener("click", function () { setMode("discharge"); });
+        $("rc-pause").addEventListener("click", function () {
+          if (S.mode === "idle") return;
+          S.paused = !S.paused;
+          this.textContent = S.paused ? "Continuar" : "Pausar";
+          this.setAttribute("aria-pressed", String(S.paused));
+        });
+
+        /* ---------- Semáforo ---------- */
+        var phases = [{ led: "tl-g", dur: 5, name: "Verde" }, { led: "tl-y", dur: 2, name: "Amarelo" }, { led: "tl-r", dur: 5, name: "Vermelho" }];
+        var T = { on: false, p: 0, el: 0, off: 0 };
+        var tlDots = [];
+        for (var m = 0; m < 10; m++) tlDots.push(el("circle", { r: 3.5, class: "x-e", opacity: 0 }, $("tl-dots")));
+        var tlLines = document.querySelectorAll("#tl-code .x-ln");
+        function tlShow() {
+          phases.forEach(function (ph, i) { $(ph.led).classList.toggle("is-on", T.on && i === T.p); });
+          tlLines.forEach(function (ln) { ln.classList.toggle("is-active", T.on && ln.dataset.l === String(T.p)); });
+          $("tl-status").textContent = T.on ? phases[T.p].name + " · " + phases[T.p].dur + " s" : "Desligado";
+          if (!T.on) tlDots.forEach(function (d) { d.setAttribute("opacity", 0); });
+        }
+        $("tl-btn").addEventListener("click", function () {
+          T.on = !T.on; T.p = 0; T.el = 0;
+          this.textContent = T.on ? "Desligar" : "Ligar";
+          this.setAttribute("aria-pressed", String(T.on));
+          tlShow();
+        });
+
+        /* ---------- Laço de animação ---------- */
+        var last = performance.now();
+        function frame(now) {
+          var dt = Math.min(0.05, (now - last) / 1000);
+          last = now;
+          // RC
+          if (S.mode !== "idle" && !S.paused) {
+            var ds = dt / S.k, target = S.mode === "charge" ? S.Vs : 0;
+            S.t += ds;
+            S.v = target + (S.v - target) * Math.exp(-ds / S.tau);
+            S.acc += dt;
+            if (S.t <= 6 * S.tau && S.acc >= 0.04) { S.acc = 0; pushPoint(); chart.update("none"); }
+          }
+          var i = current(), frac = Math.min(1, Math.abs(i) / S.iref);
+          var path = S.mode === "discharge" ? paths.discharge : paths.charge, L = path.getTotalLength();
+          if (!S.paused) S.off += (S.mode === "charge" ? -1 : 1) * 220 * frac * dt;
+          dots.forEach(function (d, j) {
+            var s = (((S.off + (j * L) / dots.length) % L) + L) % L, p = path.getPointAtLength(s);
+            d.setAttribute("cx", p.x); d.setAttribute("cy", p.y);
+            d.setAttribute("opacity", S.mode === "idle" ? 0 : Math.min(1, frac * 5));
+          });
+          var pct = Math.min(100, Math.max(0, (S.v / S.Vs) * 100));
+          $("rc-v").textContent = nf(S.v, 2) + " V";
+          $("rc-i").textContent = fmtI(i);
+          $("rc-pct").textContent = nf(pct, 0) + "%";
+          $("rc-svg-pct").textContent = nf(pct, 0) + "%";
+          $("rc-fill").setAttribute("opacity", (pct / 100) * 0.85);
+          $("rc-gauge").setAttribute("y", 160 - pct);
+          $("rc-gauge").setAttribute("height", pct);
+          // Semáforo
+          if (T.on) {
+            T.el += dt;
+            if (T.el >= phases[T.p].dur) { T.el = 0; T.p = (T.p + 1) % 3; tlShow(); }
+            var tp = $("tl-p" + T.p), TL = tp.getTotalLength();
+            T.off += 90 * dt;
+            tlDots.forEach(function (d, j) {
+              var p = tp.getPointAtLength((T.off + (j * TL) / tlDots.length) % TL);
+              d.setAttribute("cx", p.x); d.setAttribute("cy", p.y); d.setAttribute("opacity", 1);
+            });
+          }
+          requestAnimationFrame(frame);
+        }
+        readParams();
+        setMode("idle");
+        tlShow();
+        requestAnimationFrame(frame);
+
+        /* ---------- Interpolação ---------- */
+        var svg = $("ip-svg"), X0 = 40, X1 = 405, Y0 = 15, Y1 = 255, XMAX = 6, YMIN = -4, YMAX = 20;
+        var pts = [{ x: 1, y: 1 }, { x: 2, y: 4 }, { x: 4, y: 16 }], drag = -1, probeX = null;
+        function sx(x) { return X0 + (x / XMAX) * (X1 - X0); }
+        function sy(y) { return Y1 - ((y - YMIN) / (YMAX - YMIN)) * (Y1 - Y0); }
+        var defs = el("defs", {}, svg), cp = el("clipPath", { id: "ip-clip" }, defs);
+        el("rect", { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0 }, cp);
+        $("ip-curve").setAttribute("clip-path", "url(#ip-clip)");
+        var grid = $("ip-grid");
+        for (var gx = 0; gx <= XMAX; gx++) {
+          el("line", { x1: sx(gx), x2: sx(gx), y1: Y0, y2: Y1, class: "x-faint", style: gx === 0 ? "stroke-width:2" : "" }, grid);
+          el("text", { x: sx(gx), y: Y1 + 18, "text-anchor": "middle", class: "x-muted" }, grid).textContent = gx;
+        }
+        for (var gy = YMIN; gy <= YMAX; gy += 4) {
+          el("line", { x1: X0, x2: X1, y1: sy(gy), y2: sy(gy), class: "x-faint", style: gy === 0 ? "stroke-width:2" : "" }, grid);
+          el("text", { x: X0 - 8, y: sy(gy) + 4, "text-anchor": "end", class: "x-muted" }, grid).textContent = gy;
+        }
+        var ptsG = $("ip-pts"), handles = pts.map(function (p, idx) {
+          var g = el("g", { "aria-label": "Ponto " + (idx + 1) }, ptsG);
+          var lab = el("text", { "text-anchor": "middle", class: "x-muted" }, g);
+          el("circle", { r: 8, class: "x-handle" }, g);
+          var hit = el("circle", { r: 22, class: "x-hit" }, g);
+          hit.addEventListener("pointerdown", function (e) { drag = idx; svg.setPointerCapture(e.pointerId); e.preventDefault(); });
+          return { g: g, lab: lab };
+        });
+        function coeffs() {
+          var a = 0, b = 0, c = 0;
+          for (var i = 0; i < 3; i++) {
+            var j = (i + 1) % 3, k = (i + 2) % 3, xi = pts[i].x, xj = pts[j].x, xk = pts[k].x;
+            var d = (xi - xj) * (xi - xk), y = pts[i].y;
+            a += y / d; b += (-y * (xj + xk)) / d; c += (y * xj * xk) / d;
+          }
+          return { a: a, b: b, c: c };
+        }
+        function sgn(v) { return (v < 0 ? " − " : " + ") + nf(Math.abs(v), 2); }
+        function ipDraw() {
+          var q = coeffs(), d = "";
+          for (var s = 0; s <= 150; s++) {
+            var x = (s / 150) * XMAX, y = q.a * x * x + q.b * x + q.c;
+            y = Math.max(-200, Math.min(200, y));
+            d += (s ? "L" : "M") + sx(x).toFixed(1) + " " + sy(y).toFixed(1);
+          }
+          $("ip-curve").setAttribute("d", d);
+          pts.forEach(function (p, i) {
+            handles[i].g.setAttribute("transform", "translate(" + sx(p.x) + " " + sy(p.y) + ")");
+            handles[i].lab.setAttribute("y", p.y > 16 ? 30 : -16);
+            handles[i].lab.textContent = "(" + nf(p.x, 1) + "; " + nf(p.y, 1) + ")";
+          });
+          $("ip-a").textContent = nf(q.a, 2);
+          $("ip-b").textContent = nf(q.b, 2);
+          $("ip-c").textContent = nf(q.c, 2);
+          $("ip-eq").textContent = "P(x) = " + nf(q.a, 2) + "x²" + sgn(q.b) + "x" + sgn(q.c);
+          if (probeX !== null) {
+            var py = q.a * probeX * probeX + q.b * probeX + q.c, inY = py >= YMIN && py <= YMAX;
+            $("ip-probe").style.display = "";
+            $("ip-probe-line").setAttribute("x1", sx(probeX)); $("ip-probe-line").setAttribute("x2", sx(probeX));
+            $("ip-probe-dot").setAttribute("cx", sx(probeX)); $("ip-probe-dot").setAttribute("cy", sy(Math.max(YMIN, Math.min(YMAX, py))));
+            $("ip-probe-dot").style.display = inY ? "" : "none";
+            var t = $("ip-probe-text");
+            t.setAttribute("x", Math.max(90, Math.min(360, sx(probeX))));
+            t.textContent = "P(" + nf(probeX, 1) + ") = " + nf(py, 2);
+            $("ip-px").textContent = nf(py, 2);
+            $("ip-px-label").textContent = "P(" + nf(probeX, 1) + ")";
+          }
+        }
+        function toData(e) {
+          var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+          var p = pt.matrixTransform(svg.getScreenCTM().inverse());
+          return { x: ((p.x - X0) / (X1 - X0)) * XMAX, y: YMIN + ((Y1 - p.y) / (Y1 - Y0)) * (YMAX - YMIN) };
+        }
+        svg.addEventListener("pointermove", function (e) {
+          var d = toData(e);
+          if (drag >= 0) {
+            var lo = drag > 0 ? pts[drag - 1].x + 0.2 : 0, hi = drag < 2 ? pts[drag + 1].x - 0.2 : XMAX;
+            pts[drag].x = Math.round(Math.max(lo, Math.min(hi, d.x)) * 10) / 10;
+            pts[drag].y = Math.round(Math.max(YMIN, Math.min(YMAX, d.y)) * 10) / 10;
+          } else if (d.x >= 0 && d.x <= XMAX) {
+            probeX = Math.round(d.x * 10) / 10;
+          }
+          ipDraw();
+        });
+        svg.addEventListener("pointerdown", function (e) {
+          if (drag >= 0) return;
+          var d = toData(e);
+          if (d.x >= 0 && d.x <= XMAX) { probeX = Math.round(d.x * 10) / 10; ipDraw(); }
+        });
+        function endDrag() { drag = -1; }
+        svg.addEventListener("pointerup", endDrag);
+        svg.addEventListener("pointercancel", endDrag);
+        ipDraw();
+
+        /* ---------- Cancela ---------- */
+        var gLines = document.querySelectorAll("#gate-code .x-ln");
+        function gate() {
+          var d = parseInt($("gate-d").value, 10), open = d < 20, front = 170 - d * 1.4;
+          $("gate-d-out").textContent = d + " cm";
+          $("gate-car").setAttribute("transform", "translate(" + (front - 60) + " 0)");
+          $("gate-beam").setAttribute("x2", front);
+          $("gate-arm").classList.toggle("is-open", open);
+          $("gate-status").textContent = (open ? "Cancela aberta" : "Cancela fechada") + " · d = " + d + " cm";
+          gLines.forEach(function (ln) { ln.classList.toggle("is-active", ln.dataset.g === (open ? "open" : "closed")); });
+        }
+        $("gate-d").addEventListener("input", gate);
+        gate();
+
+        /* ---------- Visitantes ---------- */
+        var vc = $("visit-count");
+        fetch("https://eletronseestrelas.goatcounter.com/counter/TOTAL.json")
+          .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+          .then(function (j) {
+            var total = parseInt(String(j.count).replace(/\D/g, ""), 10);
+            if (isNaN(total)) throw new Error();
+            var t0 = performance.now();
+            (function step(now) {
+              var f = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - f, 3);
+              vc.textContent = Math.round(total * e).toLocaleString("pt-BR");
+              if (f < 1) requestAnimationFrame(step);
+            })(t0);
+          })
+          .catch(function () { vc.textContent = "—"; });
+      })();
+    </script>
+    <script data-goatcounter="https://eletronseestrelas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </body>
 </html>
