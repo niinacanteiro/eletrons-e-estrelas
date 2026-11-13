@@ -151,6 +151,12 @@ a:not(.btn){color:#F7B2FF}
 .flash__b h3{margin:0}
 .flash:hover .flash__in{box-shadow:0 0 0 0}
 @media (prefers-reduced-motion:reduce){.flash__in{transition:none}}
+.steps{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))!important;gap:20px!important}
+.steps .flash{display:block!important;grid-template-columns:none!important;width:auto!important;max-width:none!important;min-width:0}
+.flash__in{display:grid}
+.flash__f,.flash__b{position:relative!important;inset:auto!important;grid-area:1/1;min-height:210px;overflow-wrap:break-word}
+.flash__b p,.flash__b li{font-size:15px;line-height:1.55}
+
 
 .floors{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:50}
 .floors ol{list-style:none;margin:0;padding:0;position:relative}
