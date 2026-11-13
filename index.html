@@ -116,7 +116,18 @@
       .x-status { margin: 0; font: var(--type-body-strong); }
       .x-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: start; }
       @media (max-width: 599px) { .x-lab { padding: 16px; margin-inline: calc(var(--gutter) * -0.5); } }
-    </style>
+    
+/* universo integrado: topo sem moldura */
+.hero{background:transparent!important;border:0!important;box-shadow:none!important}
+.hero__img,.hero__credit{display:none!important}
+.nav.glass{background:rgba(0,0,0,.35)!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:none!important;backdrop-filter:blur(8px)}
+.hero__sub .caret{display:inline-block;width:2px;height:1em;margin-left:2px;vertical-align:-.12em;background:currentColor;animation:ee-caret 1s steps(1) infinite}
+@keyframes ee-caret{50%{opacity:0}}
+.ceu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.ceu-grid .flash{display:block}
+.flash__f,.flash__b{border:1px solid rgba(255,255,255,.14)}
+.flash__f .flash__ic{width:54px;height:54px;border-radius:50%;margin-bottom:8px}
+</style>
   <style>
 .hero{overflow:hidden}
 .hero__img--drift{animation:ee-drift 60s ease-in-out infinite alternate;transform-origin:60% 50%;will-change:transform;filter:saturate(1.25) contrast(1.05)}
@@ -191,17 +202,16 @@ a:not(.btn){color:#D6DEEC}
 </head>
   <body>
 <canvas id="cosmos" aria-hidden="true"></canvas>
-<nav class="floors" aria-label="Andares da página"><p class="floors__title">ANDARES</p><ol><span class="floors__fill" aria-hidden="true"></span><li><a href="#top" data-floor="top"><span class="floors__n">01</span><span class="floors__dot"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__n">02</span><span class="floors__dot"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__n">03</span><span class="floors__dot"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__n">04</span><span class="floors__dot"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#python" data-floor="python"><span class="floors__n">05</span><span class="floors__dot"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__n">06</span><span class="floors__dot"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__n">07</span><span class="floors__dot"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#material" data-floor="material"><span class="floors__n">08</span><span class="floors__dot"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__n">09</span><span class="floors__dot"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
+<nav class="floors" aria-label="Andares da página"><p class="floors__title">ANDARES</p><ol><span class="floors__fill" aria-hidden="true"></span><li><a href="#top" data-floor="top"><span class="floors__n">01</span><span class="floors__dot"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__n">02</span><span class="floors__dot"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__n">03</span><span class="floors__dot"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__n">04</span><span class="floors__dot"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#python" data-floor="python"><span class="floors__n">05</span><span class="floors__dot"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__n">06</span><span class="floors__dot"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__n">07</span><span class="floors__dot"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#ceu" data-floor="ceu"><span class="floors__n">08</span><span class="floors__dot"></span><span class="floors__lbl">Céu</span></a></li><li><a href="#material" data-floor="material"><span class="floors__n">09</span><span class="floors__dot"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__n">10</span><span class="floors__dot"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
     <div class="page" id="top">
       <header class="nav glass" data-auto></header>
       <main class="main">
         <section class="hero">
-          <img class="hero__img hero__img--drift" src="via-lactea-nebulosas.jpg" alt="Faixa da Via Láctea com nebulosas rosa, roxas e laranja" />
-          <canvas class="hero__stars" aria-hidden="true"></canvas>
+                    <canvas class="hero__stars" aria-hidden="true"></canvas>
           <div class="hero__copy">
             <p class="hero__eyebrow">Engenharia Elétrica e Física · gratuito</p>
             <h1>Elétrons e Estrelas</h1>
-            <p class="hero__sub">Engenharia Elétrica e Física explicadas por uma estudante: resumos, equações resolvidas e simulações de aulas de laboratório reais.</p>
+            <p class="hero__sub" data-type>Engenharia Elétrica e Física explicadas por uma estudante: resumos, equações resolvidas e simulações de aulas de laboratório reais.</p>
             <p class="hero__meta">Por Nicoly Canteiro (Nina) · Bacharelado em Engenharia Elétrica · IFMT Campus Pontes e Lacerda</p>
           </div>
           <aside class="callout" aria-label="Próximo passo">
@@ -209,7 +219,6 @@ a:not(.btn){color:#D6DEEC}
             <p class="callout__lead"><strong>Comece pelo circuito RC.</strong> A carga do capacitor em quatro passos curtos.</p>
             <a class="btn" href="#rc">Comece pelo circuito RC</a>
           </aside>
-          <p class="hero__credit">Foto: ESO (CC BY 4.0)</p>
         </section>
 
         <section class="section" id="sobre">
@@ -533,6 +542,24 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
               <p class="callout__head">Dica</p>
               <p class="callout__lead"><strong>Use o Overleaf.</strong> Ele compila LaTeX online, de graça, sem instalar nada.</p>
             </aside>
+          </div>
+        </section>
+
+        <section class="section" id="ceu" data-nav="Céu">
+          <div class="head">
+            <p class="head__eyebrow">Flash cards do universo</p>
+            <h2>O céu que passa enquanto você rola</h2>
+            <p>Os planetas, galáxias e nebulosas do fundo foram desenhados por código, sem fotos. Vire os cards para entender o que cada um é.</p>
+          </div>
+          <div class="ceu-grid">
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: Por que Saturno tem anéis?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle at 35% 35%,#f0d9a8,#8a6a3c 70%,#2a1d10)"></span><p class="flash__tag">Saturno</p><p class="flash__q">Por que Saturno tem anéis?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Saturno</h3><p>Os anéis são bilhões de pedaços de gelo e rocha, de grãos de poeira a blocos do tamanho de casas, girando em órbita. São largos (cerca de 280 mil km), mas finos: em geral menos de 1 km de espessura.</p></div></div></div>
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: Por que Marte é vermelho?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle at 35% 35%,#e8936a,#8a3a1c 70%,#200a04)"></span><p class="flash__tag">Marte</p><p class="flash__q">Por que Marte é vermelho?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Marte</h3><p>O solo tem muito óxido de ferro, a mesma ferrugem do dia a dia. A atmosfera é fina, quase toda de CO₂, e a gravidade é cerca de 38% da Terra.</p></div></div></div>
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: O que é a Grande Mancha Vermelha?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle at 35% 35%,#f2dcc0,#a0714a 70%,#2a1a0e)"></span><p class="flash__tag">Júpiter</p><p class="flash__q">O que é a Grande Mancha Vermelha?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Júpiter</h3><p>Uma tempestade gigante que gira há pelo menos 190 anos e é maior que a Terra. Júpiter é o maior planeta: caberiam mais de 1.300 Terras dentro dele.</p></div></div></div>
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: Por que a Terra tem campo magnético?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle at 35% 35%,#8fc4ff,#1f5aa8 60%,#06142c)"></span><p class="flash__tag">Terra</p><p class="flash__q">Por que a Terra tem campo magnético?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Terra</h3><p>O ferro líquido em movimento no núcleo externo gera correntes elétricas, e essas correntes criam o campo. É o mesmo princípio de um eletroímã, e ele nos protege do vento solar.</p></div></div></div>
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: Como Netuno tem ventos tão fortes?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle at 35% 35%,#a8c8ff,#2f5fd0 65%,#08142e)"></span><p class="flash__tag">Netuno</p><p class="flash__q">Como Netuno tem ventos tão fortes?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Netuno</h3><p>Ele recebe pouca luz do Sol, mas o calor interno e a quase ausência de atrito na atmosfera deixam os ventos chegar a cerca de 2.100 km/h, os mais rápidos do Sistema Solar.</p></div></div></div>
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: O que forma os braços de uma galáxia espiral?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle,#fff3dc 0,#b8c6ff 30%,#1a1e40 70%)"></span><p class="flash__tag">Galáxias</p><p class="flash__q">O que forma os braços de uma galáxia espiral?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Galáxias</h3><p>Ondas de densidade: regiões onde gás e estrelas se acumulam, como um engarrafamento. Ali nascem estrelas jovens e azuis, por isso os braços brilham mais.</p></div></div></div>
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: O que é uma nebulosa?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle,#ffb3c8 0,#8a5cff 45%,#120a2a 75%)"></span><p class="flash__tag">Nebulosas</p><p class="flash__q">O que é uma nebulosa?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Nebulosas</h3><p>Uma nuvem de gás (principalmente hidrogênio) e poeira. O gás aquecido por estrelas próximas brilha em cores: o rosa vem do hidrogênio e o azul é luz refletida pela poeira.</p></div></div></div>
+<div class="flash" tabindex="0" role="button" aria-label="Flash card: O que elétrons têm a ver com estrelas?. Toque para ver a resposta."><div class="flash__in"><div class="flash__f"><span class="flash__ic" style="background:radial-gradient(circle,#fff 0,#ffd27a 30%,#5a3a10 70%)"></span><p class="flash__tag">Elétrons e estrelas</p><p class="flash__q">O que elétrons têm a ver com estrelas?</p><p class="flash__hint">toque para virar ✦</p></div><div class="flash__b"><h3>Elétrons e estrelas</h3><p>A luz das estrelas nasce quando elétrons dos átomos mudam de nível de energia. Cada salto libera um fóton de uma cor exata, e é assim que a espectroscopia descobre do que uma estrela é feita.</p></div></div></div>
           </div>
         </section>
 
@@ -916,32 +943,12 @@ function f(){x.clearRect(0,0,W,H);for(var i=0;i<s.length;i++){var t=s[i];t.p+=t.
 rs();addEventListener('resize',rs);f();})();
 </script>
 <script>(function(){var ls=[].slice.call(document.querySelectorAll('.floors a'));if(!ls.length||!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var f=e.target.getAttribute('data-floor-of');ls.forEach(function(a){a.classList.toggle('is-on',a.dataset.floor===f)})}})},{rootMargin:'-45% 0px -50% 0px'});ls.forEach(function(a){var id=a.dataset.floor,s=id==='top'?document.querySelector('.hero'):document.getElementById(id);if(s){s.setAttribute('data-floor-of',id);io.observe(s)}});})();</script>
-<script>(function(){var c=document.getElementById('cosmos');if(!c)return;var x=c.getContext('2d'),W,H,D,dpr=Math.min(2,window.devicePixelRatio||1),still=matchMedia('(prefers-reduced-motion: reduce)').matches,t0=performance.now(),next=1800,L=[],shots=[],B=[];
-var PL=[{f:.08,x:.86,r:70,c1:'#cfd8ea',c2:'#3a4256',ring:1,sp:.55},{f:.26,x:.08,r:46,c1:'#9fb3d8',c2:'#141a2a',sp:.75},{f:.44,x:.91,r:110,c1:'#e3d6c4',c2:'#2a2018',ring:1,sp:.45},{f:.62,x:.06,r:34,c1:'#b9c7e8',c2:'#10141f',moon:1,sp:.8},{f:.79,x:.89,r:58,c1:'#d4dbe6',c2:'#1d2230',sp:.6},{f:.95,x:.12,r:90,c1:'#aab8d6',c2:'#0d1120',ring:1,sp:.5}];
-var GX=[{f:.15,x:.28,r:170,a:.5},{f:.5,x:.66,r:230,a:-.6},{f:.85,x:.38,r:190,a:.3}];
-function rs(){W=innerWidth;H=innerHeight;D=Math.max(document.documentElement.scrollHeight,H);c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);L=[];[[220,.08,.6],[120,.22,1],[50,.45,1.6]].forEach(function(k){var a=[];for(var i=0;i<k[0];i++)a.push({x:Math.random()*W,y:Math.random()*H*3,r:Math.random()*k[2]+.3,p:Math.random()*6.3,c:Math.random()<.7?'255,255,255':'190,205,255'});L.push({a:a,sp:k[1]})});
-B=GX.map(function(){var pts=[];for(var i=0;i<900;i++){var arm=i%2,t=Math.random(),r=Math.pow(t,.6);pts.push({r:r,a:arm*Math.PI+r*5+(Math.random()-.5)*.6,z:Math.random()})}return pts})}
-rs();addEventListener('resize',rs);setTimeout(rs,1500);
-function Y(f,sp){return H*.5+(f*(D-H)-scrollY)*sp}
-function planet(px,py,p,t){var g=x.createRadialGradient(px,py,p.r*.6,px,py,p.r*2.2);g.addColorStop(0,'rgba(175,195,255,.10)');g.addColorStop(1,'rgba(175,195,255,0)');x.fillStyle=g;x.beginPath();x.arc(px,py,p.r*2.2,0,6.283);x.fill();
-if(p.ring){x.strokeStyle='rgba(230,235,245,.35)';x.lineWidth=p.r*.06;x.beginPath();x.ellipse(px,py,p.r*1.9,p.r*.45,-.3,Math.PI,2*Math.PI);x.stroke()}
-var s=x.createRadialGradient(px-p.r*.45,py-p.r*.5,p.r*.05,px,py,p.r);s.addColorStop(0,p.c1);s.addColorStop(.55,p.c2);s.addColorStop(1,'#020205');x.fillStyle=s;x.beginPath();x.arc(px,py,p.r,0,6.283);x.fill();
-if(p.ring){x.strokeStyle='rgba(230,235,245,.45)';x.lineWidth=p.r*.06;x.beginPath();x.ellipse(px,py,p.r*1.9,p.r*.45,-.3,0,Math.PI);x.stroke()}
-if(p.moon){var ma=t*.4;x.fillStyle='#c9d2e6';x.beginPath();x.arc(px+Math.cos(ma)*p.r*2.4,py+Math.sin(ma)*p.r*.8,p.r*.18,0,6.283);x.fill()}}
-function f(now){var t=(now-t0)/1000,sy=scrollY;x.globalCompositeOperation='source-over';x.fillStyle='#000';x.fillRect(0,0,W,H);
-x.globalCompositeOperation='lighter';
-GX.forEach(function(g,i){var gy=Y(g.f,.3),gx=g.x*W,R=g.r;if(gy<-R*2||gy>H+R*2)return;var rot=t*.02*(i%2?-1:1)+g.a;var halo=x.createRadialGradient(gx,gy,0,gx,gy,R*1.2);halo.addColorStop(0,'rgba(200,210,240,.10)');halo.addColorStop(1,'rgba(200,210,240,0)');x.fillStyle=halo;x.beginPath();x.arc(gx,gy,R*1.2,0,6.283);x.fill();
-B[i].forEach(function(p){var a=p.a+rot,px=gx+Math.cos(a)*p.r*R,py=gy+Math.sin(a)*p.r*R*.42;x.fillStyle='rgba(225,232,250,'+((1-p.r)*.55*p.z+.05).toFixed(2)+')';x.fillRect(px,py,1.1,1.1)});
-var core=x.createRadialGradient(gx,gy,0,gx,gy,R*.2);core.addColorStop(0,'rgba(255,255,255,.8)');core.addColorStop(1,'rgba(200,210,240,0)');x.fillStyle=core;x.beginPath();x.ellipse(gx,gy,R*.2,R*.1,0,0,6.283);x.fill()});
-L.forEach(function(l,k){l.a.forEach(function(s){var yy=((s.y-sy*l.sp)%(H*3)+H*3)%(H*3);if(yy>H)return;var al=.3+.7*Math.pow((Math.sin(s.p+t*(1.2+k*.5))+1)/2,3);x.fillStyle='rgba('+s.c+','+al.toFixed(2)+')';x.beginPath();x.arc(s.x,yy,s.r,0,6.283);x.fill();if(s.r>1.4&&al>.85){x.fillRect(s.x-s.r*3,yy-.3,s.r*6,.6);x.fillRect(s.x-.3,yy-s.r*3,.6,s.r*6)}})});
-x.globalCompositeOperation='source-over';
-PL.forEach(function(p){var py=Y(p.f,p.sp),px=p.x*W;if(py<-p.r*3||py>H+p.r*3)return;planet(px,py,p,t)});
-x.globalCompositeOperation='lighter';
-if(!still&&now-t0>next){next=now-t0+1400+Math.random()*2800;shots.push({x:Math.random()*W*.8+W*.2,y:Math.random()*H*.5,vx:-(7+Math.random()*6),vy:4+Math.random()*3,l:1})}
-shots=shots.filter(function(s){s.x+=s.vx;s.y+=s.vy;s.l-=.011;if(s.l<=0)return false;var gr=x.createLinearGradient(s.x,s.y,s.x-s.vx*16,s.y-s.vy*16);gr.addColorStop(0,'rgba(255,255,255,'+s.l+')');gr.addColorStop(.3,'rgba(200,215,255,'+(s.l*.5)+')');gr.addColorStop(1,'rgba(150,170,255,0)');x.strokeStyle=gr;x.lineWidth=1.6;x.beginPath();x.moveTo(s.x,s.y);x.lineTo(s.x-s.vx*16,s.y-s.vy*16);x.stroke();x.fillStyle='rgba(255,255,255,'+s.l+')';x.beginPath();x.arc(s.x,s.y,1.6,0,6.283);x.fill();return true});
-x.globalCompositeOperation='source-over';requestAnimationFrame(f)}
-requestAnimationFrame(f)})();
-(function(){var Q=['Em t = τ, quanto o capacitor já carregou?','Quando o capacitor é considerado carregado?','Como a tensão cai na descarga?','Quanto vale τ com R = 10 kΩ e C = 100 µF?'];[].slice.call(document.querySelectorAll('.steps .step')).forEach(function(s,i){var intro=s.querySelector('.step__intro'),body=s.children[1];if(!intro||!body)return;var num=(intro.querySelector('.step__num')||{}).textContent||'',eb=(intro.querySelector('.step__eyebrow')||{}).textContent||'';var q=Q[i]||(body.querySelector('h3')||{}).textContent;s.classList.add('flash');s.setAttribute('tabindex','0');s.setAttribute('role','button');s.setAttribute('aria-label','Flash card '+num+': '+q+'. Toque para ver a resposta.');var inn=document.createElement('div');inn.className='flash__in';var fr=document.createElement('div');fr.className='flash__f';fr.innerHTML='<p class="flash__tag">'+num+' · '+eb+'</p><p class="flash__q"></p><p class="flash__hint">toque para virar ✦</p>';fr.querySelector('.flash__q').textContent=q;var bk=document.createElement('div');bk.className='flash__b';s.removeChild(intro);while(s.firstChild)bk.appendChild(s.firstChild);inn.appendChild(fr);inn.appendChild(bk);s.appendChild(inn);function tg(){s.classList.toggle('is-flipped')}s.addEventListener('click',tg);s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}})})})();</script>
+<script src="cosmos.js"></script>
+<script>(function(){var Q=['Em t = τ, quanto o capacitor já carregou?','Quando o capacitor é considerado carregado?','Como a tensão cai na descarga?','Quanto vale τ com R = 10 kΩ e C = 100 µF?'];[].slice.call(document.querySelectorAll('.steps .step')).forEach(function(s,i){var intro=s.querySelector('.step__intro'),body=s.children[1];if(!intro||!body)return;var num=(intro.querySelector('.step__num')||{}).textContent||'',eb=(intro.querySelector('.step__eyebrow')||{}).textContent||'';var q=Q[i]||(body.querySelector('h3')||{}).textContent;s.classList.add('flash');s.setAttribute('tabindex','0');s.setAttribute('role','button');s.setAttribute('aria-label','Flash card '+num+': '+q+'. Toque para ver a resposta.');var inn=document.createElement('div');inn.className='flash__in';var fr=document.createElement('div');fr.className='flash__f';fr.innerHTML='<p class="flash__tag">'+num+' · '+eb+'</p><p class="flash__q"></p><p class="flash__hint">toque para virar ✦</p>';fr.querySelector('.flash__q').textContent=q;var bk=document.createElement('div');bk.className='flash__b';s.removeChild(intro);while(s.firstChild)bk.appendChild(s.firstChild);inn.appendChild(fr);inn.appendChild(bk);s.appendChild(inn);function tg(){s.classList.toggle('is-flipped')}s.addEventListener('click',tg);s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}})})})();</script>
 <script>(function(){var f=document.querySelector(".floors__fill"),ol=document.querySelector(".floors ol");if(!f||!ol)return;function u(){var m=document.documentElement.scrollHeight-innerHeight,p=m>0?scrollY/m:0;f.style.height=Math.max(0,(ol.clientHeight-20)*p)+"px"}addEventListener("scroll",u,{passive:true});addEventListener("resize",u);u()})();</script>
+<script>(function(){[].slice.call(document.querySelectorAll('.ceu-grid .flash')).forEach(function(s){function tg(){s.classList.toggle('is-flipped')}s.addEventListener('click',tg);s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}})});
+var el=document.querySelector('.hero__sub[data-type]');if(!el)return;var full=el.textContent.trim(),txt=document.createElement('span'),car=document.createElement('span');car.className='caret';el.textContent='';el.setAttribute('aria-label',full);txt.setAttribute('aria-hidden','true');el.appendChild(txt);el.appendChild(car);el.style.minHeight='3.2em';
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){txt.textContent=full;return}
+var i=0,dir=1;function step(){txt.textContent=full.slice(0,i);if(dir>0){if(i<full.length){i++;setTimeout(step,45)}else{dir=-1;setTimeout(step,2600)}}else{if(i>0){i--;setTimeout(step,18)}else{dir=1;setTimeout(step,700)}}}step()})();</script>
 </body>
 </html>
