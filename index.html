@@ -924,12 +924,12 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
         el("rect", { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0 }, cp);
         $("ip-curve").setAttribute("clip-path", "url(#ip-clip)");
         var ipBg = el("linearGradient", { id: "ipBg", x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
-        el("stop", { offset: 0, "stop-color": "#0d1226" }, ipBg); el("stop", { offset: 1, "stop-color": "#070a16" }, ipBg);
+        el("stop", { offset: 0, "stop-color": "#ffffff", "stop-opacity": .035 }, ipBg); el("stop", { offset: 1, "stop-color": "#ffffff", "stop-opacity": .01 }, ipBg);
         var ipLine = el("linearGradient", { id: "ipLine", x1: 0, y1: 1, x2: 1, y2: 0 }, defs);
-        el("stop", { offset: 0, "stop-color": "#6fd3ff" }, ipLine); el("stop", { offset: .55, "stop-color": "#b493ff" }, ipLine); el("stop", { offset: 1, "stop-color": "#f3d27a" }, ipLine);
+        el("stop", { offset: 0, "stop-color": "#c9a96e" }, ipLine); el("stop", { offset: .6, "stop-color": "#f3d27a" }, ipLine); el("stop", { offset: 1, "stop-color": "#fff1c9" }, ipLine);
         var ipFill = el("linearGradient", { id: "ipFill", x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
-        el("stop", { offset: 0, "stop-color": "#b493ff", "stop-opacity": .22 }, ipFill); el("stop", { offset: 1, "stop-color": "#b493ff", "stop-opacity": 0 }, ipFill);
-        svg.insertBefore(el("rect", { x: 0, y: 0, width: 420, height: 280, rx: 14, fill: "url(#ipBg)" }, svg), $("ip-grid"));
+        el("stop", { offset: 0, "stop-color": "#f3d27a", "stop-opacity": .10 }, ipFill); el("stop", { offset: 1, "stop-color": "#f3d27a", "stop-opacity": 0 }, ipFill);
+        svg.insertBefore(el("rect", { x: 0, y: 0, width: 420, height: 280, rx: 14, fill: "url(#ipBg)", stroke: "rgba(255,255,255,.08)" }, svg), $("ip-grid"));
         var ipArea = el("path", { id: "ip-area", fill: "url(#ipFill)", "clip-path": "url(#ip-clip)" }, svg); svg.insertBefore(ipArea, $("ip-curve"));
         var grid = $("ip-grid");
         for (var gx = 0; gx <= XMAX; gx++) {
@@ -1228,7 +1228,7 @@ html{scroll-behavior:smooth}
 
 
 /* ===== Ajuste final: entrada limpa ===== */
-.hero{min-height:calc(100svh - 64px)!important}
+.hero{min-height:calc(100vh - 72px)!important;min-height:calc(100svh - 72px)!important}
 .floors{opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
 .floors.is-show{opacity:1;visibility:visible}
 @media (min-width:760px){
@@ -1239,7 +1239,6 @@ html{scroll-behavior:smooth}
 }
 /* ===== Entrada: mergulho no universo ===== */
 html,body{overflow-x:clip}
-.hero{min-height:clamp(480px,78vh,760px)!important}
 .hero__img{left:50%!important;right:auto!important;width:100vw!important;max-width:none!important;top:-8%!important;height:116%!important;transform:translateX(-50%);transform-origin:50% 45%;filter:brightness(1.18) contrast(1.18) saturate(1.55)!important;will-change:transform,opacity}
 .hero__warp{position:absolute;top:-8%;left:50%;width:100vw;height:116%;transform:translateX(-50%);pointer-events:none;z-index:1;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%)}
 .hero h1{text-shadow:0 0 28px rgba(150,170,255,.35)}
@@ -1257,16 +1256,16 @@ html,body{overflow-x:clip}
 .sis-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ===== Gráfico de interpolação elegante ===== */
-#ip-svg{border-radius:14px;box-shadow:0 14px 36px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.06)}
-#ip-svg .ip-grid{stroke:rgba(200,215,255,.07);stroke-width:1}
-#ip-svg .ip-axis{stroke:rgba(200,215,255,.32);stroke-width:1.2}
-#ip-svg .x-muted{fill:rgba(220,228,245,.55);font-size:11px}
-#ip-svg .x-curve{stroke:url(#ipLine);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(180,147,255,.55))}
-#ip-svg .ip-halo{fill:rgba(243,210,122,.14);stroke:rgba(243,210,122,.55);stroke-width:1.2;pointer-events:none}
-#ip-svg .ip-dot{fill:#fff;stroke:#f3d27a;stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(243,210,122,.8))}
-#ip-svg .ip-lab{fill:#f5f1e6;font-size:11.5px;font-weight:600;paint-order:stroke;stroke:#070a16;stroke-width:4px;stroke-linejoin:round}
-#ip-svg #ip-probe-text{fill:#f3d27a;font-size:12px;font-weight:600;paint-order:stroke;stroke:#070a16;stroke-width:4px}
-#ip-svg #ip-probe-line{stroke:rgba(243,210,122,.5)}
+#ip-svg{background:transparent!important;border:0!important;border-radius:14px;box-shadow:none}
+#ip-svg .ip-grid{stroke:rgba(255,255,255,.07);stroke-width:1;stroke-dasharray:2 5}
+#ip-svg .ip-axis{stroke:rgba(255,255,255,.28);stroke-width:1}
+#ip-svg .x-muted{fill:rgba(235,232,226,.45);font:500 10.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+#ip-svg .x-curve{stroke:url(#ipLine);stroke-width:2.4;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(243,210,122,.45))}
+#ip-svg .ip-halo{fill:rgba(243,210,122,.08);stroke:rgba(243,210,122,.28);stroke-width:1;pointer-events:none}
+#ip-svg .ip-dot{fill:#0b0d14;stroke:#f3d27a;stroke-width:2.2;filter:drop-shadow(0 0 5px rgba(243,210,122,.6))}
+#ip-svg .ip-lab{fill:rgba(243,236,220,.9);font:500 10.5px ui-monospace,SFMono-Regular,Menlo,monospace;paint-order:stroke;stroke:rgba(5,6,10,.85);stroke-width:4px;stroke-linejoin:round}
+#ip-svg #ip-probe-text{fill:#f3d27a;font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;paint-order:stroke;stroke:rgba(5,6,10,.85);stroke-width:4px}
+#ip-svg #ip-probe-line{stroke:rgba(243,210,122,.4)}
 
 /* ===== Código colorido (tema escuro de editor) ===== */
 .code-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#181b24;border:1px solid rgba(255,255,255,.08);border-bottom:0;border-radius:12px 12px 0 0}
