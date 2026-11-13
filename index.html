@@ -1226,6 +1226,17 @@ html{scroll-behavior:smooth}
 .tl-unit.is-on .tl-leds--g circle{fill:#d6ffe6}#tl-g.is-on .tl-glass{fill:#16d36a}
 #tl-dots circle{fill:#d9f1ff;filter:drop-shadow(0 0 5px #8fd3ff)}
 
+
+/* ===== Ajuste final: entrada limpa ===== */
+.hero{min-height:calc(100svh - 64px)!important}
+.floors{opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+.floors.is-show{opacity:1;visibility:visible}
+@media (min-width:760px){
+.hero>.callout{top:auto!important;right:auto!important;left:clamp(16px,2.4vw,24px)!important;bottom:14px!important;max-width:none!important;display:flex!important;align-items:center;gap:10px;padding:6px 6px 6px 14px!important;border-radius:999px!important;background:rgba(10,12,24,.35)!important;border:1px solid rgba(255,255,255,.12)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:none!important}
+.hero>.callout .callout__lead{display:none!important}
+.hero>.callout .callout__head{margin:0!important;font-size:12px!important;color:rgba(255,255,255,.7)!important}
+.hero>.callout .btn{min-height:30px!important;padding:5px 12px!important;font-size:12px!important;border-radius:999px!important}
+}
 /* ===== Entrada: mergulho no universo ===== */
 html,body{overflow-x:clip}
 .hero{min-height:clamp(480px,78vh,760px)!important}
@@ -1310,9 +1321,11 @@ var v=null;try{v=localStorage.getItem('av_visto')||sessionStorage.getItem('av_s'
 <script>(function(){var q=document.getElementById('qr'),b=document.getElementById('qr-btn'),a=document.getElementById('av-btn');if(!q||!b)return;
 function pos(){if(a&&a.offsetWidth)b.style.right=(16+a.offsetWidth+10)+'px'}pos();addEventListener('resize',pos);setTimeout(pos,800);
 b.onclick=function(){q.classList.add('on')};function f(){q.classList.remove('on')}q.querySelector('.av-x').onclick=f;q.onclick=function(e){if(e.target===q)f()};document.addEventListener('keydown',function(e){if(e.key==='Escape')f()})})();</script>
+<script>(function(){var f=document.querySelector('.floors'),h=document.querySelector('.hero');if(!f||!h)return;var tk=0;function u(){tk=0;f.classList.toggle('is-show',scrollY>h.offsetHeight*0.55)}addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(u)}},{passive:true});u()})();</script>
 <script>(function(){var p=document.querySelector('.hero__sub.tw');if(!p)return;var live=p.querySelector('.tw-live'),txt=p.querySelector('.tw-ghost').textContent,i=0;
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){live.textContent=txt;p.classList.add('done');return}
-function tick(){i++;live.textContent=txt.slice(0,i);if(i<txt.length){var c=txt.charAt(i-1);setTimeout(tick,/[.,:]/.test(c)?260:26+Math.random()*34)}else p.classList.add('done')}
+function tick(){i++;live.textContent=txt.slice(0,i);if(i<txt.length){var c=txt.charAt(i-1);setTimeout(tick,/[.,:]/.test(c)?260:26+Math.random()*34)}else setTimeout(apaga,4200)}
+function apaga(){i--;live.textContent=txt.slice(0,i);if(i>0)setTimeout(apaga,12);else setTimeout(tick,900)}
 setTimeout(tick,600)})();</script>
 <script src="cosmos.js?v=5" defer></script><script src="extras.js?v=1" defer></script>
 </body>
