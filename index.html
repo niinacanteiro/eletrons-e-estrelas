@@ -10,9 +10,9 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
     />
-    <link rel="stylesheet" href="hark.css" />
-    <link rel="stylesheet" href="hark-hero.css" />
-    <link rel="stylesheet" href="hark-charts.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="base-hero.css" />
+    <link rel="stylesheet" href="base-charts.css" />
     <style>
       .x-eq {
         background: var(--fill-tertiary);
@@ -124,30 +124,26 @@
 .hero__copy,.hero__credit,.hero>.callout{position:relative;z-index:2}
 .hero__img{z-index:0}
 @media (prefers-reduced-motion:reduce){.hero__img--drift{animation:none}}
-/* ===== Tema universo rosa e roxo ===== */
-html:root{--fill-primary-on:transparent;--text-primary:#FBEFFF;--text-secondary:#E6CCF7;--text-tertiary:#BFA2D8;--fill-primary:#F7C6FF;--text-primary-on:#1B0A2C;--fill-tertiary:rgba(200,120,255,.10);--fill-secondary:rgba(200,120,255,.16);--stroke-primary:rgba(244,180,255,.45);--stroke-secondary:rgba(230,160,255,.22);--fill-system-orange:#FF6FB5;--hover-wash:rgba(255,140,220,.10)}
-html{background:#0A0416}
+/* ===== Tema céu noturno preto ===== */
+html:root{--fill-primary-on:transparent;--text-primary:#F4F2EE;--text-secondary:#C9C6C0;--text-tertiary:#8F8B85;--fill-primary:#F1D99A;--text-primary-on:#0A0A0A;--fill-tertiary:rgba(255,255,255,.05);--fill-secondary:rgba(255,255,255,.08);--stroke-primary:rgba(241,217,154,.40);--stroke-secondary:rgba(255,255,255,.12);--fill-system-orange:#E8C27A;--hover-wash:rgba(255,255,255,.06)}
+html{background:#000}
 body{background:transparent!important}
 #cosmos{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block}
-.section,.x-lab,.step,.card,.chart,.callout,.stat{background:linear-gradient(145deg,rgba(60,20,90,.55),rgba(25,8,45,.55))!important;border:1px solid rgba(240,170,255,.18)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 0 0 1px rgba(255,255,255,.02),0 10px 40px rgba(120,40,200,.18)}
+.section,.x-lab,.step,.card,.chart,.callout,.stat{background:linear-gradient(160deg,rgba(18,18,22,.72),rgba(6,6,8,.72))!important;border:1px solid rgba(255,255,255,.08)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.02),0 20px 50px rgba(0,0,0,.6)}
 .section{border-radius:24px}
-h1,h2{background:linear-gradient(90deg,#FFD6F5,#F59BE6 40%,#B98CFF);-webkit-background-clip:text;background-clip:text;color:transparent!important}
-.btn{background:linear-gradient(90deg,#FF7BC8,#B46CFF)!important;color:#1B0A2C!important;border:0!important;box-shadow:0 0 18px rgba(255,110,200,.35)}
-a:not(.btn){color:#F7B2FF}
-.floors ol::before{background:linear-gradient(#FFB3E6,#C77DFF 50%,#7B3FE4)}
-.floors a{color:rgba(240,200,255,.55)}.floors__dot{border-color:#F59BE6;background:#120720}
-.floors a:hover,.floors a.is-on{color:#FFC6F0}
-.floors a.is-on .floors__dot{background:#FF9AD8;box-shadow:0 0 10px #FF7BC8,0 0 22px rgba(180,108,255,.7)}
+h1,h2{background:linear-gradient(90deg,#FFFFFF,#F1D99A 55%,#C9A35B);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+.btn{background:linear-gradient(90deg,#F6E3B0,#D4AF64)!important;color:#0A0A0A!important;border:0!important;box-shadow:0 0 18px rgba(241,217,154,.25)}
+a:not(.btn){color:#F1D99A}
 /* flash cards */
 .flash{perspective:1200px;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;padding:0!important;min-height:210px}
 .flash__in{position:relative;width:100%;height:100%;min-height:210px;transition:transform .8s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
 .flash.is-flipped .flash__in{transform:rotateY(180deg)}
-.flash__f,.flash__b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:10px;border:1px solid rgba(240,170,255,.25)}
-.flash__f{background:radial-gradient(120% 120% at 0% 0%,rgba(255,120,210,.35),rgba(110,40,190,.45) 55%,rgba(25,8,45,.85));box-shadow:0 0 30px rgba(255,110,200,.18)}
-.flash__b{background:linear-gradient(160deg,rgba(40,14,70,.95),rgba(20,6,38,.95));transform:rotateY(180deg)}
-.flash__q{font-size:1.15em;font-weight:600;color:#FFF0FB;margin:0}
-.flash__tag{font:600 11px/1 ui-monospace,monospace;letter-spacing:.2em;color:#FFB3E6;margin:0}
-.flash__hint{font-size:12px;color:#D9B8F2;margin:0}
+.flash__f,.flash__b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:10px;border:1px solid rgba(241,217,154,.22)}
+.flash__f{background:radial-gradient(120% 120% at 0% 0%,rgba(241,217,154,.16),rgba(30,30,36,.85) 55%,rgba(5,5,7,.95));box-shadow:0 0 30px rgba(241,217,154,.08)}
+.flash__b{background:linear-gradient(160deg,rgba(16,16,20,.97),rgba(4,4,6,.97));transform:rotateY(180deg)}
+.flash__q{font-size:1.15em;font-weight:600;color:#FFFFFF;margin:0}
+.flash__tag{font:600 11px/1 ui-monospace,monospace;letter-spacing:.2em;color:#F1D99A;margin:0}
+.flash__hint{font-size:12px;color:#A9A59E;margin:0}
 .flash__b h3{margin:0}
 .flash:hover .flash__in{box-shadow:0 0 0 0}
 @media (prefers-reduced-motion:reduce){.flash__in{transition:none}}
@@ -158,16 +154,23 @@ a:not(.btn){color:#F7B2FF}
 .flash__b p,.flash__b li{font-size:15px;line-height:1.55}
 
 
-.floors{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:50}
+.floors{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:50;padding:22px 20px 22px 18px;border-radius:22px;background:linear-gradient(160deg,rgba(20,20,24,.72),rgba(4,4,6,.72));border:1px solid rgba(241,217,154,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 20px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.05)}
+.floors__title{margin:0 0 16px 2px;font:600 10px/1 ui-monospace,SFMono-Regular,monospace;letter-spacing:.32em;color:#F1D99A;opacity:.85}
 .floors ol{list-style:none;margin:0;padding:0;position:relative}
-.floors ol::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:linear-gradient(#FFC531,#FF7A1A 50%,#8B4513);opacity:.45}
-.floors li{margin:0 0 14px}
-.floors a{display:flex;align-items:center;gap:10px;text-decoration:none;color:rgba(255,226,180,.55);font:500 12px/1.2 system-ui,sans-serif;letter-spacing:.04em;transition:color .25s}
-.floors__dot{width:11px;height:11px;border-radius:50%;border:1.5px solid #FF9F1C;background:#0b0705;flex:none;transition:all .25s;position:relative;z-index:1}
-.floors a:hover,.floors a.is-on{color:#FFC531}
-.floors a.is-on .floors__dot{background:#FFC531;box-shadow:0 0 10px #FF9F1C,0 0 22px rgba(255,122,26,.6);transform:scale(1.25)}
-.floors a.is-on .floors__lbl{font-weight:700}
-@media (max-width:1180px){.floors__lbl{display:none}}
+.floors ol::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:2px;border-radius:2px;background:rgba(255,255,255,.10)}
+.floors__fill{position:absolute;left:8px;top:10px;width:2px;border-radius:2px;height:0;background:linear-gradient(#FFFFFF,#F1D99A 60%,#C9A35B);box-shadow:0 0 10px rgba(241,217,154,.7);transition:height .25s ease-out}
+.floors li{margin:0 0 20px}.floors li:last-child{margin:0}
+.floors a{display:flex;align-items:center;gap:14px;text-decoration:none;color:rgba(235,232,226,.55);font:500 14px/1.2 system-ui,sans-serif;letter-spacing:.06em;transition:color .3s,transform .3s}
+.floors a:hover{color:#FFFFFF;transform:translateX(3px)}
+.floors__dot{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(241,217,154,.55);background:#050506;flex:none;transition:all .35s;position:relative;z-index:1;display:grid;place-items:center}
+.floors__dot::after{content:"";width:6px;height:6px;border-radius:50%;background:rgba(241,217,154,.35);transition:all .35s}
+.floors a.is-on{color:#F6E3B0}
+.floors a.is-on .floors__dot{border-color:#F6E3B0;box-shadow:0 0 12px rgba(241,217,154,.8),0 0 28px rgba(241,217,154,.35)}
+.floors a.is-on .floors__dot::after{width:8px;height:8px;background:#FFFFFF;box-shadow:0 0 8px #fff}
+.floors a.is-on .floors__lbl{font-weight:600}
+.floors__n{font:500 10px/1 ui-monospace,monospace;color:rgba(241,217,154,.55);margin-right:-6px;width:16px}
+.floors ol::before,.floors__fill{left:32px!important}
+@media (max-width:1280px){.floors__lbl,.floors__n,.floors__title{display:none}.floors{padding:18px 12px}.floors ol::before,.floors__fill{left:8px!important}}
 @media (max-width:760px){.floors{display:none}}
 
 @media (min-width:760px){.hero>.callout{position:absolute!important;top:clamp(16px,2.4vw,24px);right:clamp(16px,2.4vw,24px);margin:0!important;max-width:320px}.hero .hero__credit{position:absolute!important;right:14px;bottom:10px;margin:0;font-size:11px;padding:3px 9px;opacity:.75}}
@@ -178,7 +181,7 @@ a:not(.btn){color:#F7B2FF}
 </head>
   <body>
 <canvas id="cosmos" aria-hidden="true"></canvas>
-<nav class="floors" aria-label="Andares da página"><ol><li><a href="#top" data-floor="top"><span class="floors__dot"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__dot"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__dot"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__dot"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#python" data-floor="python"><span class="floors__dot"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__dot"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__dot"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#material" data-floor="material"><span class="floors__dot"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__dot"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
+<nav class="floors" aria-label="Andares da página"><p class="floors__title">ANDARES</p><ol><span class="floors__fill" aria-hidden="true"></span><li><a href="#top" data-floor="top"><span class="floors__n">01</span><span class="floors__dot"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__n">02</span><span class="floors__dot"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__n">03</span><span class="floors__dot"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__n">04</span><span class="floors__dot"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#python" data-floor="python"><span class="floors__n">05</span><span class="floors__dot"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__n">06</span><span class="floors__dot"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__n">07</span><span class="floors__dot"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#material" data-floor="material"><span class="floors__n">08</span><span class="floors__dot"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__n">09</span><span class="floors__dot"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
     <div class="page" id="top">
       <header class="nav glass" data-auto></header>
       <main class="main">
@@ -192,7 +195,7 @@ a:not(.btn){color:#F7B2FF}
             <p class="hero__meta">Por Nicoly Canteiro (Nina) · Bacharelado em Engenharia Elétrica · IFMT Campus Pontes e Lacerda</p>
           </div>
           <aside class="callout" aria-label="Próximo passo">
-            <p class="callout__head"><span class="hark-mark" data-size="16"></span> Por onde começar</p>
+            <p class="callout__head">✦ Por onde começar</p>
             <p class="callout__lead"><strong>Comece pelo circuito RC.</strong> A carga do capacitor em quatro passos curtos.</p>
             <a class="btn" href="#rc">Comece pelo circuito RC</a>
           </aside>
@@ -551,13 +554,12 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
       <footer class="foot">
         <p>Feito por Nicoly Canteiro · Conteúdo gratuito para estudo · <a class="link" href="https://github.com/niinacanteiro" target="_blank" rel="noopener">github.com/niinacanteiro</a></p>
         <nav aria-label="Voltar às seções" data-auto></nav>
-        <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
       </footer>
     </div>
-    <script src="hark.js"></script>
+    <script src="base.js"></script>
     <script src="chart.js"></script>
     <script src="datalabels.js"></script>
-    <script src="hark-charts.js"></script>
+    <script src="base-charts.js"></script>
     <script>
       (function () {
         var $ = function (id) { return document.getElementById(id); };
@@ -892,16 +894,17 @@ rs();addEventListener('resize',rs);f();})();
 </script>
 <script>(function(){var ls=[].slice.call(document.querySelectorAll('.floors a'));if(!ls.length||!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var f=e.target.getAttribute('data-floor-of');ls.forEach(function(a){a.classList.toggle('is-on',a.dataset.floor===f)})}})},{rootMargin:'-45% 0px -50% 0px'});ls.forEach(function(a){var id=a.dataset.floor,s=id==='top'?document.querySelector('.hero'):document.getElementById(id);if(s){s.setAttribute('data-floor-of',id);io.observe(s)}});})();</script>
 <script>(function(){var c=document.getElementById('cosmos');if(!c)return;var x=c.getContext('2d'),W,H,d=Math.min(2,window.devicePixelRatio||1),still=matchMedia('(prefers-reduced-motion: reduce)').matches;var L=[],shots=[],t0=performance.now(),next=1500;
-function rs(){W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);L=[];for(var k=0;k<3;k++){var a=[];for(var i=0;i<(k==0?160:k==1?90:40);i++)a.push({x:Math.random()*W,y:Math.random()*H,r:(k+1)*.5+Math.random()*.6,p:Math.random()*6.3,c:Math.random()<.5?'255,220,250':(Math.random()<.5?'210,170,255':'255,170,220')});L.push(a)}}
+function rs(){W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);L=[];for(var k=0;k<3;k++){var a=[];for(var i=0;i<(k==0?160:k==1?90:40);i++)a.push({x:Math.random()*W,y:Math.random()*H,r:(k+1)*.5+Math.random()*.6,p:Math.random()*6.3,c:Math.random()<.6?'255,255,255':(Math.random()<.5?'200,215,255':'255,236,200')});L.push(a)}}
 rs();addEventListener('resize',rs);
-var neb=[{x:.2,y:.25,r:.55,c:'255,90,190'},{x:.8,y:.35,r:.6,c:'140,70,255'},{x:.5,y:.8,r:.65,c:'200,60,220'},{x:.9,y:.85,r:.45,c:'255,120,200'}];
-function f(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);var g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0B0418');g.addColorStop(1,'#13062A');x.fillStyle=g;x.fillRect(0,0,W,H);
-x.globalCompositeOperation='lighter';neb.forEach(function(n,i){var cx=(n.x+Math.sin(t*.03+i)*.06)*W,cy=(n.y+Math.cos(t*.025+i*2)*.05)*H,R=n.r*Math.max(W,H);var rg=x.createRadialGradient(cx,cy,0,cx,cy,R);rg.addColorStop(0,'rgba('+n.c+',.20)');rg.addColorStop(.5,'rgba('+n.c+',.07)');rg.addColorStop(1,'rgba('+n.c+',0)');x.fillStyle=rg;x.fillRect(0,0,W,H)});
+var neb=[{x:.25,y:.3,r:.5,c:'60,70,110'},{x:.8,y:.75,r:.5,c:'90,80,60'}];
+function f(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);var g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#000000');g.addColorStop(1,'#04040A');x.fillStyle=g;x.fillRect(0,0,W,H);
+x.globalCompositeOperation='lighter';neb.forEach(function(n,i){var cx=(n.x+Math.sin(t*.03+i)*.06)*W,cy=(n.y+Math.cos(t*.025+i*2)*.05)*H,R=n.r*Math.max(W,H);var rg=x.createRadialGradient(cx,cy,0,cx,cy,R);rg.addColorStop(0,'rgba('+n.c+',.10)');rg.addColorStop(.5,'rgba('+n.c+',.03)');rg.addColorStop(1,'rgba('+n.c+',0)');x.fillStyle=rg;x.fillRect(0,0,W,H)});
 L.forEach(function(a,k){var sp=(k+1)*4;a.forEach(function(s){var yy=(s.y+ (still?0:t*sp))%H;var al=.35+.65*Math.pow((Math.sin(s.p+t*(1+k))+1)/2,2);x.fillStyle='rgba('+s.c+','+al.toFixed(2)+')';x.beginPath();x.arc(s.x,yy,s.r,0,6.283);x.fill()})});
 if(!still&&now-t0>next){next=now-t0+1200+Math.random()*2600;var sx=Math.random()*W*.9+W*.1,sy=Math.random()*H*.4;shots.push({x:sx,y:sy,vx:-(6+Math.random()*5),vy:3+Math.random()*3,l:1})}
-shots=shots.filter(function(s){s.x+=s.vx;s.y+=s.vy;s.l-=.012;if(s.l<=0)return false;var gr=x.createLinearGradient(s.x,s.y,s.x-s.vx*14,s.y-s.vy*14);gr.addColorStop(0,'rgba(255,240,255,'+s.l+')');gr.addColorStop(.3,'rgba(255,150,230,'+(s.l*.6)+')');gr.addColorStop(1,'rgba(180,110,255,0)');x.strokeStyle=gr;x.lineWidth=2;x.beginPath();x.moveTo(s.x,s.y);x.lineTo(s.x-s.vx*14,s.y-s.vy*14);x.stroke();return true});
+shots=shots.filter(function(s){s.x+=s.vx;s.y+=s.vy;s.l-=.012;if(s.l<=0)return false;var gr=x.createLinearGradient(s.x,s.y,s.x-s.vx*14,s.y-s.vy*14);gr.addColorStop(0,'rgba(255,255,255,'+s.l+')');gr.addColorStop(.3,'rgba(255,236,190,'+(s.l*.6)+')');gr.addColorStop(1,'rgba(241,217,154,0)');x.strokeStyle=gr;x.lineWidth=2;x.beginPath();x.moveTo(s.x,s.y);x.lineTo(s.x-s.vx*14,s.y-s.vy*14);x.stroke();return true});
 x.globalCompositeOperation='source-over';requestAnimationFrame(f)}
 requestAnimationFrame(f)})();
 (function(){var Q=['Em t = τ, quanto o capacitor já carregou?','Quando o capacitor é considerado carregado?','Como a tensão cai na descarga?','Quanto vale τ com R = 10 kΩ e C = 100 µF?'];[].slice.call(document.querySelectorAll('.steps .step')).forEach(function(s,i){var intro=s.querySelector('.step__intro'),body=s.children[1];if(!intro||!body)return;var num=(intro.querySelector('.step__num')||{}).textContent||'',eb=(intro.querySelector('.step__eyebrow')||{}).textContent||'';var q=Q[i]||(body.querySelector('h3')||{}).textContent;s.classList.add('flash');s.setAttribute('tabindex','0');s.setAttribute('role','button');s.setAttribute('aria-label','Flash card '+num+': '+q+'. Toque para ver a resposta.');var inn=document.createElement('div');inn.className='flash__in';var fr=document.createElement('div');fr.className='flash__f';fr.innerHTML='<p class="flash__tag">'+num+' · '+eb+'</p><p class="flash__q"></p><p class="flash__hint">toque para virar ✦</p>';fr.querySelector('.flash__q').textContent=q;var bk=document.createElement('div');bk.className='flash__b';s.removeChild(intro);while(s.firstChild)bk.appendChild(s.firstChild);inn.appendChild(fr);inn.appendChild(bk);s.appendChild(inn);function tg(){s.classList.toggle('is-flipped')}s.addEventListener('click',tg);s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}})})})();</script>
+<script>(function(){var f=document.querySelector(".floors__fill"),ol=document.querySelector(".floors ol");if(!f||!ol)return;function u(){var m=document.documentElement.scrollHeight-innerHeight,p=m>0?scrollY/m:0;f.style.height=Math.max(0,(ol.clientHeight-20)*p)+"px"}addEventListener("scroll",u,{passive:true});addEventListener("resize",u);u()})();</script>
 </body>
 </html>
