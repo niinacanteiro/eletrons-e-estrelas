@@ -197,7 +197,6 @@ a:not(.btn){color:#D6DEEC}
       <main class="main">
         <section class="hero">
           <img class="hero__img hero__img--drift" src="via-lactea-nebulosas.jpg" alt="Faixa da Via Láctea com nebulosas rosa, roxas e laranja" />
-          <canvas class="hero__stars" aria-hidden="true"></canvas>
           <div class="hero__copy">
             <p class="hero__eyebrow">Engenharia Elétrica e Física · gratuito</p>
             <h1>Elétrons e Estrelas</h1>
@@ -391,7 +390,7 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
             <p class="x-lab__title">Playground de interpolação</p>
             <div class="aside">
               <h3>Como usar</h3>
-              <p class="fineprint">Arraste os três pontos pretos; a parábola de Lagrange se redesenha na hora. Passe o mouse ou toque no gráfico para ler P(x) naquele x.</p>
+              <p class="fineprint">Arraste os três pontos brilhantes; a parábola de Lagrange se redesenha na hora. Passe o mouse ou toque no gráfico para ler P(x) naquele x.</p>
             </div>
             <svg class="x-svg x-pg" id="ip-svg" viewBox="0 0 420 280" role="img" aria-label="Gráfico com três pontos arrastáveis e a parábola que passa por eles">
               <g id="ip-grid"></g>
@@ -446,58 +445,62 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
             </div>
             <p class="x-status" id="tl-status" aria-live="polite">Desligado</p>
             <div class="x-two">
-              <svg class="x-svg x-scene" id="tl-svg" viewBox="0 0 520 300" role="img" aria-label="Placa Arduino Uno ligada por fios e resistores a um semáforo de três luzes">
+              <svg class="x-svg x-scene" id="tl-svg" viewBox="0 0 520 300" role="img" aria-label="Arduino Uno ligado a um semáforo de três luzes">
   <defs>
-    <linearGradient id="tlSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#141a2c"/></linearGradient>
-    <linearGradient id="unoPcb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1aa3b3"/><stop offset=".55" stop-color="#0b7f8f"/><stop offset="1" stop-color="#065866"/></linearGradient>
-    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f4f7"/><stop offset=".5" stop-color="#aab2bf"/><stop offset="1" stop-color="#6b7383"/></linearGradient>
-    <linearGradient id="housing" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1b1e24"/><stop offset=".45" stop-color="#2e333c"/><stop offset="1" stop-color="#111317"/></linearGradient>
-    <linearGradient id="pole" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a505b"/><stop offset=".5" stop-color="#9aa2ae"/><stop offset="1" stop-color="#3a3f48"/></linearGradient>
-    <radialGradient id="lensRoff" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#5a1a17"/><stop offset="1" stop-color="#1c0706"/></radialGradient>
-    <radialGradient id="lensYoff" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#5a4612"/><stop offset="1" stop-color="#1d1605"/></radialGradient>
-    <radialGradient id="lensGoff" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#17482a"/><stop offset="1" stop-color="#06180d"/></radialGradient>
-    <radialGradient id="lensRon" cx=".42" cy=".38" r=".65"><stop offset="0" stop-color="#fff2ee"/><stop offset=".25" stop-color="#ff7a6e"/><stop offset="1" stop-color="#d4140b"/></radialGradient>
-    <radialGradient id="lensYon" cx=".42" cy=".38" r=".65"><stop offset="0" stop-color="#fffbe6"/><stop offset=".25" stop-color="#ffd84a"/><stop offset="1" stop-color="#e59a00"/></radialGradient>
-    <radialGradient id="lensGon" cx=".42" cy=".38" r=".65"><stop offset="0" stop-color="#effff4"/><stop offset=".25" stop-color="#57f08e"/><stop offset="1" stop-color="#0aa646"/></radialGradient>
+    <radialGradient id="tlBg" cx=".7" cy=".35" r=".9"><stop offset="0" stop-color="#1a2140"/><stop offset=".6" stop-color="#0b0f1f"/><stop offset="1" stop-color="#05070f"/></radialGradient>
+    <linearGradient id="unoPcb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1fb1c2"/><stop offset=".6" stop-color="#0a7f90"/><stop offset="1" stop-color="#065a68"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5f7fa"/><stop offset=".5" stop-color="#b3bac6"/><stop offset="1" stop-color="#717a8a"/></linearGradient>
+    <linearGradient id="housing" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d0f14"/><stop offset=".18" stop-color="#2a2f39"/><stop offset=".5" stop-color="#1a1d24"/><stop offset=".85" stop-color="#2b303a"/><stop offset="1" stop-color="#0b0c10"/></linearGradient>
+    <linearGradient id="pole" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b414c"/><stop offset=".5" stop-color="#a3abb7"/><stop offset="1" stop-color="#2f343d"/></linearGradient>
+    <radialGradient id="glassR" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#4a1512"/><stop offset="1" stop-color="#170605"/></radialGradient>
+    <radialGradient id="glassY" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#4a3a10"/><stop offset="1" stop-color="#171204"/></radialGradient>
+    <radialGradient id="glassG" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#103d24"/><stop offset="1" stop-color="#04140a"/></radialGradient>
+    <radialGradient id="bloomR"><stop offset="0" stop-color="#ff4a3d" stop-opacity=".85"/><stop offset=".5" stop-color="#ff3b30" stop-opacity=".25"/><stop offset="1" stop-color="#ff3b30" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bloomY"><stop offset="0" stop-color="#ffc83d" stop-opacity=".85"/><stop offset=".5" stop-color="#ffb300" stop-opacity=".25"/><stop offset="1" stop-color="#ffb300" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bloomG"><stop offset="0" stop-color="#3dff8a" stop-opacity=".85"/><stop offset=".5" stop-color="#1fe070" stop-opacity=".25"/><stop offset="1" stop-color="#1fe070" stop-opacity="0"/></radialGradient>
+    <linearGradient id="refl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
   </defs>
-  <rect width="520" height="300" rx="14" fill="url(#tlSky)"/>
-  <rect y="272" width="520" height="28" fill="#1a1f2b"/><rect y="272" width="520" height="2" fill="#2a3142"/>
+  <rect width="520" height="300" rx="16" fill="url(#tlBg)"/>
+  <ellipse cx="260" cy="284" rx="250" ry="10" fill="#000" opacity=".5"/>
   <!-- Arduino Uno -->
-  <g>
-    <rect x="22" y="66" width="182" height="170" rx="10" fill="url(#unoPcb)" stroke="#05424c" stroke-width="1.5"/>
-    <rect x="10" y="84" width="38" height="34" rx="3" fill="url(#metal)"/><rect x="14" y="196" width="30" height="26" rx="4" fill="#15171b"/>
-    <circle cx="36" cy="76" r="4" fill="#0a2f36"/><circle cx="192" cy="226" r="4" fill="#0a2f36"/><circle cx="36" cy="226" r="4" fill="#0a2f36"/>
-    <rect x="80" y="150" width="88" height="22" rx="2" fill="#1b1d22"/>
-    <g fill="#c9ced6"><rect x="84" y="146" width="3" height="4"/><rect x="84" y="172" width="3" height="4"/><rect x="91" y="146" width="3" height="4"/><rect x="91" y="172" width="3" height="4"/><rect x="98" y="146" width="3" height="4"/><rect x="98" y="172" width="3" height="4"/><rect x="105" y="146" width="3" height="4"/><rect x="105" y="172" width="3" height="4"/><rect x="112" y="146" width="3" height="4"/><rect x="112" y="172" width="3" height="4"/><rect x="119" y="146" width="3" height="4"/><rect x="119" y="172" width="3" height="4"/><rect x="126" y="146" width="3" height="4"/><rect x="126" y="172" width="3" height="4"/><rect x="133" y="146" width="3" height="4"/><rect x="133" y="172" width="3" height="4"/><rect x="140" y="146" width="3" height="4"/><rect x="140" y="172" width="3" height="4"/><rect x="147" y="146" width="3" height="4"/><rect x="147" y="172" width="3" height="4"/><rect x="154" y="146" width="3" height="4"/><rect x="154" y="172" width="3" height="4"/><rect x="161" y="146" width="3" height="4"/><rect x="161" y="172" width="3" height="4"/></g>
-    <rect x="66" y="104" width="22" height="10" rx="2" fill="url(#metal)"/>
-    <text x="70" y="140" class="tl-brand">ARDUINO</text><text x="128" y="200" class="tl-uno">UNO</text>
-    <circle cx="160" cy="98" r="3" fill="#8affb0"/><text x="152" y="88" class="tl-pin">ON</text>
-    <rect x="190" y="88" width="14" height="140" rx="2" fill="#16181d"/>
-    <g fill="#d7c48a"><rect x="195" y="98" width="4" height="4"/><rect x="195" y="138" width="4" height="4"/><rect x="195" y="178" width="4" height="4"/><rect x="195" y="213" width="4" height="4"/></g>
-    <text x="186" y="104" text-anchor="end" class="tl-pin">11</text><text x="186" y="144" text-anchor="end" class="tl-pin">12</text><text x="186" y="184" text-anchor="end" class="tl-pin">13</text><text x="186" y="219" text-anchor="end" class="tl-pin">GND</text>
+  <g filter="drop-shadow(0 10px 14px rgba(0,0,0,.55))">
+    <rect x="30" y="78" width="168" height="150" rx="12" fill="url(#unoPcb)"/>
+    <rect x="30" y="78" width="168" height="150" rx="12" fill="none" stroke="#5fe3f0" stroke-opacity=".35"/>
+    <rect x="18" y="96" width="36" height="30" rx="4" fill="url(#metal)"/>
+    <rect x="22" y="190" width="28" height="24" rx="5" fill="#111317"/>
+    <rect x="86" y="160" width="80" height="20" rx="3" fill="#15171c"/>
+    <rect x="90" y="166" width="72" height="1" fill="#fff" opacity=".08"/>
+    <text x="72" y="140" class="tl-brand">ARDUINO</text><text x="74" y="156" class="tl-uno">UNO</text>
+    <circle cx="170" cy="98" r="3" class="tl-on"/>
+    <rect x="182" y="90" width="14" height="138" rx="3" fill="#121418"/>
+    <g fill="#e6cf8e"><rect x="187" y="98" width="4" height="4" rx="1"/><rect x="187" y="138" width="4" height="4" rx="1"/><rect x="187" y="178" width="4" height="4" rx="1"/><rect x="187" y="213" width="4" height="4" rx="1"/></g>
+    <text x="178" y="104" text-anchor="end" class="tl-pin">11</text><text x="178" y="144" text-anchor="end" class="tl-pin">12</text><text x="178" y="184" text-anchor="end" class="tl-pin">13</text><text x="178" y="219" text-anchor="end" class="tl-pin">GND</text>
   </g>
-  <!-- fio terra -->
-  <path d="M428 85 H452 V262 H214 V215 H199 M428 145 H452 M428 205 H452" fill="none" stroke="#2b2f38" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M428 85 H452 V262 H214 V215 H199 M428 145 H452 M428 205 H452" fill="none" stroke="#5a6070" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/>
-  <!-- fios de sinal -->
-  <path d="M199 100 H330 V85 H372" fill="none" stroke="#e5484d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M199 140 H330 V145 H372" fill="none" stroke="#f5b82e" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M199 180 H330 V205 H372" fill="none" stroke="#30c26b" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
-  <!-- resistores 220 Ω -->
-  <g class="tl-res"><g transform="translate(262 100)"><rect x="-20" y="-7" width="40" height="14" rx="7" fill="#e8d3a8" stroke="#a68a5a"/><rect x="-12" y="-7" width="4" height="14" fill="#c0392b"/><rect x="-5" y="-7" width="4" height="14" fill="#c0392b"/><rect x="2" y="-7" width="4" height="14" fill="#5b3a1e"/><rect x="11" y="-7" width="3" height="14" fill="#c9a227"/></g><g transform="translate(262 140)"><rect x="-20" y="-7" width="40" height="14" rx="7" fill="#e8d3a8" stroke="#a68a5a"/><rect x="-12" y="-7" width="4" height="14" fill="#c0392b"/><rect x="-5" y="-7" width="4" height="14" fill="#c0392b"/><rect x="2" y="-7" width="4" height="14" fill="#5b3a1e"/><rect x="11" y="-7" width="3" height="14" fill="#c9a227"/></g><g transform="translate(262 180)"><rect x="-20" y="-7" width="40" height="14" rx="7" fill="#e8d3a8" stroke="#a68a5a"/><rect x="-12" y="-7" width="4" height="14" fill="#c0392b"/><rect x="-5" y="-7" width="4" height="14" fill="#c0392b"/><rect x="2" y="-7" width="4" height="14" fill="#5b3a1e"/><rect x="11" y="-7" width="3" height="14" fill="#c9a227"/></g></g>
-  <text x="262" y="78" text-anchor="middle" class="tl-pin">220 Ω</text>
+  <!-- fios -->
+  <g fill="none" stroke-linecap="round" stroke-width="4.5">
+    <path d="M191 215 C250 215 260 262 330 262 C400 262 430 250 452 236" stroke="#2b2f38"/>
+    <path d="M191 100 C260 100 300 82 366 82" stroke="#ff5a52"/>
+    <path d="M191 140 C260 140 300 145 366 145" stroke="#ffc44a"/>
+    <path d="M191 180 C260 180 300 208 366 208" stroke="#34d27a"/>
+  </g>
+  <g fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.2" stroke-linecap="round">
+    <path d="M191 99 C260 99 300 81 366 81"/><path d="M191 139 C260 139 300 144 366 144"/><path d="M191 179 C260 179 300 207 366 207"/>
+  </g>
   <!-- semáforo -->
-  <rect x="392" y="250" width="16" height="24" fill="url(#pole)"/>
-  <rect x="370" y="40" width="60" height="212" rx="12" fill="url(#housing)" stroke="#000" stroke-width="1"/>
-  <rect x="374" y="44" width="52" height="204" rx="9" fill="none" stroke="#fff" stroke-opacity=".06"/>
-  <g class="tl-visor"><path d="M374 66 Q400 52 426 66 L426 60 Q400 46 374 60Z"/><path d="M374 126 Q400 112 426 126 L426 120 Q400 106 374 120Z"/><path d="M374 186 Q400 172 426 186 L426 180 Q400 166 374 180Z"/></g>
-  <circle class="tl-lens tl-lens--r" id="tl-r" cx="400" cy="85" r="21"/>
-  <circle class="tl-lens tl-lens--y" id="tl-y" cx="400" cy="145" r="21"/>
-  <circle class="tl-lens tl-lens--g" id="tl-g" cx="400" cy="205" r="21"/>
-  <g fill="#fff" opacity=".18"><ellipse cx="393" cy="77" rx="8" ry="4"/><ellipse cx="393" cy="137" rx="8" ry="4"/><ellipse cx="393" cy="197" rx="8" ry="4"/></g>
-  <path id="tl-p0" d="M199 180 H330 V205 H452 V262 H214 V215 H199" fill="none"/>
-  <path id="tl-p1" d="M199 140 H330 V145 H452 V262 H214 V215 H199" fill="none"/>
-  <path id="tl-p2" d="M199 100 H330 V85 H452 V262 H214 V215 H199" fill="none"/>
+  <rect x="402" y="250" width="16" height="34" fill="url(#pole)"/>
+  <rect x="396" y="246" width="28" height="8" rx="3" fill="#2a2f38"/>
+  <g filter="drop-shadow(0 16px 18px rgba(0,0,0,.6))">
+    <rect x="362" y="36" width="96" height="214" rx="26" fill="url(#housing)"/>
+    <rect x="362" y="36" width="96" height="214" rx="26" fill="none" stroke="#fff" stroke-opacity=".1"/>
+    <rect x="368" y="42" width="10" height="200" rx="5" fill="url(#refl)" opacity=".5"/>
+  </g>
+  <g class="tl-hood"><path d="M376 70 Q410 44 444 70 L444 60 Q410 36 376 60Z"/><path d="M376 133 Q410 107 444 133 L444 123 Q410 99 376 123Z"/><path d="M376 196 Q410 170 444 196 L444 186 Q410 162 376 186Z"/></g>
+  <g class="tl-unit" id="tl-r"><circle class="tl-bloom" cx="410" cy="82" r="54" fill="url(#bloomR)"/><circle class="tl-ring" cx="410" cy="82" r="24"/><circle class="tl-glass" cx="410" cy="82" r="21" fill="url(#glassR)"/><g class="tl-leds tl-leds--r"><circle cx="395.0" cy="82.0" r="1.9"/><circle cx="400.0" cy="72.0" r="1.9"/><circle cx="400.0" cy="77.0" r="1.9"/><circle cx="400.0" cy="82.0" r="1.9"/><circle cx="400.0" cy="87.0" r="1.9"/><circle cx="400.0" cy="92.0" r="1.9"/><circle cx="405.0" cy="72.0" r="1.9"/><circle cx="405.0" cy="77.0" r="1.9"/><circle cx="405.0" cy="82.0" r="1.9"/><circle cx="405.0" cy="87.0" r="1.9"/><circle cx="405.0" cy="92.0" r="1.9"/><circle cx="410.0" cy="67.0" r="1.9"/><circle cx="410.0" cy="72.0" r="1.9"/><circle cx="410.0" cy="77.0" r="1.9"/><circle cx="410.0" cy="82.0" r="1.9"/><circle cx="410.0" cy="87.0" r="1.9"/><circle cx="410.0" cy="92.0" r="1.9"/><circle cx="410.0" cy="97.0" r="1.9"/><circle cx="415.0" cy="72.0" r="1.9"/><circle cx="415.0" cy="77.0" r="1.9"/><circle cx="415.0" cy="82.0" r="1.9"/><circle cx="415.0" cy="87.0" r="1.9"/><circle cx="415.0" cy="92.0" r="1.9"/><circle cx="420.0" cy="72.0" r="1.9"/><circle cx="420.0" cy="77.0" r="1.9"/><circle cx="420.0" cy="82.0" r="1.9"/><circle cx="420.0" cy="87.0" r="1.9"/><circle cx="420.0" cy="92.0" r="1.9"/><circle cx="425.0" cy="82.0" r="1.9"/></g><ellipse cx="402" cy="73" rx="9" ry="4.5" fill="#fff" opacity=".14"/></g>
+  <g class="tl-unit" id="tl-y"><circle class="tl-bloom" cx="410" cy="145" r="54" fill="url(#bloomY)"/><circle class="tl-ring" cx="410" cy="145" r="24"/><circle class="tl-glass" cx="410" cy="145" r="21" fill="url(#glassY)"/><g class="tl-leds tl-leds--y"><circle cx="395.0" cy="145.0" r="1.9"/><circle cx="400.0" cy="135.0" r="1.9"/><circle cx="400.0" cy="140.0" r="1.9"/><circle cx="400.0" cy="145.0" r="1.9"/><circle cx="400.0" cy="150.0" r="1.9"/><circle cx="400.0" cy="155.0" r="1.9"/><circle cx="405.0" cy="135.0" r="1.9"/><circle cx="405.0" cy="140.0" r="1.9"/><circle cx="405.0" cy="145.0" r="1.9"/><circle cx="405.0" cy="150.0" r="1.9"/><circle cx="405.0" cy="155.0" r="1.9"/><circle cx="410.0" cy="130.0" r="1.9"/><circle cx="410.0" cy="135.0" r="1.9"/><circle cx="410.0" cy="140.0" r="1.9"/><circle cx="410.0" cy="145.0" r="1.9"/><circle cx="410.0" cy="150.0" r="1.9"/><circle cx="410.0" cy="155.0" r="1.9"/><circle cx="410.0" cy="160.0" r="1.9"/><circle cx="415.0" cy="135.0" r="1.9"/><circle cx="415.0" cy="140.0" r="1.9"/><circle cx="415.0" cy="145.0" r="1.9"/><circle cx="415.0" cy="150.0" r="1.9"/><circle cx="415.0" cy="155.0" r="1.9"/><circle cx="420.0" cy="135.0" r="1.9"/><circle cx="420.0" cy="140.0" r="1.9"/><circle cx="420.0" cy="145.0" r="1.9"/><circle cx="420.0" cy="150.0" r="1.9"/><circle cx="420.0" cy="155.0" r="1.9"/><circle cx="425.0" cy="145.0" r="1.9"/></g><ellipse cx="402" cy="136" rx="9" ry="4.5" fill="#fff" opacity=".14"/></g>
+  <g class="tl-unit" id="tl-g"><circle class="tl-bloom" cx="410" cy="208" r="54" fill="url(#bloomG)"/><circle class="tl-ring" cx="410" cy="208" r="24"/><circle class="tl-glass" cx="410" cy="208" r="21" fill="url(#glassG)"/><g class="tl-leds tl-leds--g"><circle cx="395.0" cy="208.0" r="1.9"/><circle cx="400.0" cy="198.0" r="1.9"/><circle cx="400.0" cy="203.0" r="1.9"/><circle cx="400.0" cy="208.0" r="1.9"/><circle cx="400.0" cy="213.0" r="1.9"/><circle cx="400.0" cy="218.0" r="1.9"/><circle cx="405.0" cy="198.0" r="1.9"/><circle cx="405.0" cy="203.0" r="1.9"/><circle cx="405.0" cy="208.0" r="1.9"/><circle cx="405.0" cy="213.0" r="1.9"/><circle cx="405.0" cy="218.0" r="1.9"/><circle cx="410.0" cy="193.0" r="1.9"/><circle cx="410.0" cy="198.0" r="1.9"/><circle cx="410.0" cy="203.0" r="1.9"/><circle cx="410.0" cy="208.0" r="1.9"/><circle cx="410.0" cy="213.0" r="1.9"/><circle cx="410.0" cy="218.0" r="1.9"/><circle cx="410.0" cy="223.0" r="1.9"/><circle cx="415.0" cy="198.0" r="1.9"/><circle cx="415.0" cy="203.0" r="1.9"/><circle cx="415.0" cy="208.0" r="1.9"/><circle cx="415.0" cy="213.0" r="1.9"/><circle cx="415.0" cy="218.0" r="1.9"/><circle cx="420.0" cy="198.0" r="1.9"/><circle cx="420.0" cy="203.0" r="1.9"/><circle cx="420.0" cy="208.0" r="1.9"/><circle cx="420.0" cy="213.0" r="1.9"/><circle cx="420.0" cy="218.0" r="1.9"/><circle cx="425.0" cy="208.0" r="1.9"/></g><ellipse cx="402" cy="199" rx="9" ry="4.5" fill="#fff" opacity=".14"/></g>
+  <path id="tl-p0" d="M191 180 C260 180 300 208 366 208 L452 208 L452 236 C430 250 400 262 330 262 C260 262 250 215 191 215" fill="none"/>
+  <path id="tl-p1" d="M191 140 C260 140 300 145 366 145 L452 145 L452 236 C430 250 400 262 330 262 C260 262 250 215 191 215" fill="none"/>
+  <path id="tl-p2" d="M191 100 C260 100 300 82 366 82 L452 82 L452 236 C430 250 400 262 330 262 C260 262 250 215 191 215" fill="none"/>
   <g id="tl-dots"></g>
 </svg>
               <pre class="x-code" id="tl-code"><code><span class="x-ln">void loop() {</span><span class="x-ln" data-l="0">  digitalWrite(VERDE, HIGH);</span><span class="x-ln" data-l="0">  delay(5000);  // verde 5 s</span><span class="x-ln">  digitalWrite(VERDE, LOW);</span><span class="x-ln" data-l="1">  digitalWrite(AMARELO, HIGH);</span><span class="x-ln" data-l="1">  delay(2000);  // amarelo 2 s</span><span class="x-ln">  digitalWrite(AMARELO, LOW);</span><span class="x-ln" data-l="2">  digitalWrite(VERMELHO, HIGH);</span><span class="x-ln" data-l="2">  delay(5000);  // vermelho 5 s</span><span class="x-ln">  digitalWrite(VERMELHO, LOW);</span><span class="x-ln">}</span></code></pre>
@@ -531,7 +534,7 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
   <rect y="176" width="520" height="8" fill="#3a4152"/>
   <rect y="184" width="520" height="46" fill="#22262f"/>
   <path d="M0 207 H520" stroke="#e8e8e8" stroke-width="3" stroke-dasharray="26 18" opacity=".7"/>
-<g id="gate-car"><g transform="translate(0 -37.2) scale(1.6)">
+<g id="gate-car"><g transform="translate(102.4 -37.2) scale(-1.6 1.6)">
                   <defs>
                     <linearGradient id="carBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F5FA"/><stop offset=".45" stop-color="#B8C2D3"/><stop offset="1" stop-color="#4A5466"/></linearGradient>
                     <linearGradient id="carGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9FB6D9"/><stop offset=".6" stop-color="#25324A"/><stop offset="1" stop-color="#0E1420"/></linearGradient>
@@ -599,15 +602,14 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
           <div class="head">
             <p class="head__eyebrow">Flash cards do universo</p>
             <h2>Toque em um planeta</h2>
-            <p>Cada astro abre um flash card. Vire o card para ver a resposta.</p>
+            <p>Gire o Sistema Solar com o mouse ou o dedo. Cada astro abre um flash card; vire o card para ver a resposta.</p>
           </div>
-          <div class="sis" aria-label="Sistema Solar interativo">
-            <button class="pl sol" data-k="Elétrons e estrelas" aria-label="Sol"><i style="background-image:url(tex-sun.jpg)"></i></button>
-            <div class="orb" style="--r:26%;--t:22s"><div class="slot"><div class="cr"><button class="pl" data-k="Terra" aria-label="Terra" style="--s:30px"><i style="background-image:url(tex-earth_daymap.jpg)"></i></button></div></div></div>
-            <div class="orb" style="--r:38%;--t:34s;--d:-9s"><div class="slot"><div class="cr"><button class="pl" data-k="Marte" aria-label="Marte" style="--s:24px"><i style="background-image:url(tex-mars.jpg)"></i></button></div></div></div>
-            <div class="orb" style="--r:52%;--t:52s;--d:-30s"><div class="slot"><div class="cr"><button class="pl" data-k="Júpiter" aria-label="Júpiter" style="--s:50px"><i style="background-image:url(tex-jupiter.jpg)"></i></button></div></div></div>
-            <div class="orb" style="--r:68%;--t:74s;--d:-15s"><div class="slot"><div class="cr"><button class="pl anel" data-k="Saturno" aria-label="Saturno" style="--s:42px"><i style="background-image:url(tex-saturn.jpg)"></i></button></div></div></div>
-            <div class="orb" style="--r:86%;--t:100s;--d:-62s"><div class="slot"><div class="cr"><button class="pl" data-k="Netuno" aria-label="Netuno" style="--s:30px"><i style="background-image:url(tex-neptune.jpg)"></i></button></div></div></div>
+          <div class="sis3d" aria-label="Sistema Solar em 3D: arraste para girar e toque num planeta">
+            <canvas></canvas>
+            <span class="sis-tip" aria-hidden="true"></span>
+            <div class="sis-ctl"><button type="button" data-zoom="out" aria-label="Afastar">−</button><button type="button" data-zoom="in" aria-label="Aproximar">+</button></div>
+            <p class="sis-hint">Arraste para girar · toque num planeta</p>
+            <div class="sis-sr"><button class="pl" data-k="Elétrons e estrelas">Sol</button><button class="pl" data-k="Terra">Terra</button><button class="pl" data-k="Marte">Marte</button><button class="pl" data-k="Júpiter">Júpiter</button><button class="pl" data-k="Saturno">Saturno</button><button class="pl" data-k="Netuno">Netuno</button></div>
           </div>
           <div class="sis-extra">
             <button class="chip" data-k="Galáxias">&#10022; Galáxias</button>
@@ -708,7 +710,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
       (function () {
         var $ = function (id) { return document.getElementById(id); };
         var NS = "http://www.w3.org/2000/svg";
-        function nf(v, d) { return v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+        function nf(v, d) { if (Math.abs(v) < 0.5 * Math.pow(10, -d)) v = 0; return v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }); }
         function trim0(s) { return s.replace(/,0+(?=\s|$)/, ""); }
         function sig2(x) { var p = Math.pow(10, Math.floor(Math.log10(x)) - 1); return Math.round(x / p) * p; }
         function fmtR(r) { return r >= 1000 ? trim0(nf(r / 1000, r >= 10000 ? 0 : 1)) + " kΩ" : nf(r, 0) + " Ω"; }
@@ -860,9 +862,17 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
 
         /* ---------- Laço de animação ---------- */
         var last = performance.now();
+        var labVis = { rc: true, tl: true };
+        if ("IntersectionObserver" in window) {
+          var lio = new IntersectionObserver(function (es) { es.forEach(function (e) { labVis[e.target.dataset.lv] = e.isIntersecting; }); }, { rootMargin: "200px" });
+          var rcBox = paths.charge.closest("svg"), tlBox = $("tl-svg");
+          if (rcBox) { rcBox.dataset.lv = "rc"; lio.observe(rcBox); }
+          if (tlBox) { tlBox.dataset.lv = "tl"; lio.observe(tlBox); }
+        }
         function frame(now) {
           var dt = Math.min(0.05, (now - last) / 1000);
           last = now;
+          if (!labVis.rc && !labVis.tl && S.mode === "idle" && !T.on) { requestAnimationFrame(frame); return; }
           // RC
           if (S.mode !== "idle" && !S.paused) {
             var ds = dt / S.k, target = S.mode === "charge" ? S.Vs : 0;
@@ -913,19 +923,28 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
         var defs = el("defs", {}, svg), cp = el("clipPath", { id: "ip-clip" }, defs);
         el("rect", { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0 }, cp);
         $("ip-curve").setAttribute("clip-path", "url(#ip-clip)");
+        var ipBg = el("linearGradient", { id: "ipBg", x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+        el("stop", { offset: 0, "stop-color": "#0d1226" }, ipBg); el("stop", { offset: 1, "stop-color": "#070a16" }, ipBg);
+        var ipLine = el("linearGradient", { id: "ipLine", x1: 0, y1: 1, x2: 1, y2: 0 }, defs);
+        el("stop", { offset: 0, "stop-color": "#6fd3ff" }, ipLine); el("stop", { offset: .55, "stop-color": "#b493ff" }, ipLine); el("stop", { offset: 1, "stop-color": "#f3d27a" }, ipLine);
+        var ipFill = el("linearGradient", { id: "ipFill", x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+        el("stop", { offset: 0, "stop-color": "#b493ff", "stop-opacity": .22 }, ipFill); el("stop", { offset: 1, "stop-color": "#b493ff", "stop-opacity": 0 }, ipFill);
+        svg.insertBefore(el("rect", { x: 0, y: 0, width: 420, height: 280, rx: 14, fill: "url(#ipBg)" }, svg), $("ip-grid"));
+        var ipArea = el("path", { id: "ip-area", fill: "url(#ipFill)", "clip-path": "url(#ip-clip)" }, svg); svg.insertBefore(ipArea, $("ip-curve"));
         var grid = $("ip-grid");
         for (var gx = 0; gx <= XMAX; gx++) {
-          el("line", { x1: sx(gx), x2: sx(gx), y1: Y0, y2: Y1, class: "x-faint", style: gx === 0 ? "stroke-width:2" : "" }, grid);
+          el("line", { x1: sx(gx), x2: sx(gx), y1: Y0, y2: Y1, class: gx === 0 ? "ip-axis" : "ip-grid" }, grid);
           el("text", { x: sx(gx), y: Y1 + 18, "text-anchor": "middle", class: "x-muted" }, grid).textContent = gx;
         }
         for (var gy = YMIN; gy <= YMAX; gy += 4) {
-          el("line", { x1: X0, x2: X1, y1: sy(gy), y2: sy(gy), class: "x-faint", style: gy === 0 ? "stroke-width:2" : "" }, grid);
+          el("line", { x1: X0, x2: X1, y1: sy(gy), y2: sy(gy), class: gy === 0 ? "ip-axis" : "ip-grid" }, grid);
           el("text", { x: X0 - 8, y: sy(gy) + 4, "text-anchor": "end", class: "x-muted" }, grid).textContent = gy;
         }
         var ptsG = $("ip-pts"), handles = pts.map(function (p, idx) {
           var g = el("g", { "aria-label": "Ponto " + (idx + 1) }, ptsG);
-          var lab = el("text", { "text-anchor": "middle", class: "x-muted" }, g);
-          el("circle", { r: 8, class: "x-handle" }, g);
+          var lab = el("text", { "text-anchor": "middle", class: "ip-lab" }, g);
+          el("circle", { r: 13, class: "ip-halo" }, g);
+          el("circle", { r: 6.5, class: "x-handle ip-dot" }, g);
           var hit = el("circle", { r: 22, class: "x-hit" }, g);
           hit.addEventListener("pointerdown", function (e) { drag = idx; svg.setPointerCapture(e.pointerId); e.preventDefault(); });
           return { g: g, lab: lab };
@@ -948,6 +967,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
             d += (s ? "L" : "M") + sx(x).toFixed(1) + " " + sy(y).toFixed(1);
           }
           $("ip-curve").setAttribute("d", d);
+          $("ip-area").setAttribute("d", d + "L" + sx(XMAX).toFixed(1) + " " + sy(0).toFixed(1) + "L" + sx(0).toFixed(1) + " " + sy(0).toFixed(1) + "Z");
           pts.forEach(function (p, i) {
             handles[i].g.setAttribute("transform", "translate(" + sx(p.x) + " " + sy(p.y) + ")");
             handles[i].lab.setAttribute("y", p.y > 16 ? 30 : -16);
@@ -1031,7 +1051,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
 
         /* ---------- Visitantes ---------- */
         var vc = $("visit-count");
-        fetch("https://eletronseestrelas.goatcounter.com/counter/TOTAL.json")
+        fetch("https://eletronseestrelas.goatcounter.com/counter/TOTAL.json?start=2026-01-01")
           .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
           .then(function (j) {
             var total = parseInt(String(j.count).replace(/\D/g, ""), 10);
@@ -1046,7 +1066,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
           .catch(function () { vc.textContent = "—"; });
       })();
     </script>
-    <script data-goatcounter="https://eletronseestrelas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <script data-goatcounter="https://eletronseestrelas.goatcounter.com/count" async src="contador.js"></script>
   <script>
 (function(){var c=document.querySelector('.hero__stars');if(!c)return;var x=c.getContext('2d'),s=[],W,H,d=window.devicePixelRatio||1;
 var cols=['255,214,170','255,170,120','220,170,255','255,255,255','190,150,255'];
@@ -1058,7 +1078,7 @@ rs();addEventListener('resize',rs);f();})();
 <script>(function(){var ls=[].slice.call(document.querySelectorAll('.floors a'));if(!ls.length||!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var f=e.target.getAttribute('data-floor-of');ls.forEach(function(a){a.classList.toggle('is-on',a.dataset.floor===f)})}})},{rootMargin:'-45% 0px -50% 0px'});ls.forEach(function(a){var id=a.dataset.floor,s=id==='top'?document.querySelector('.hero'):document.getElementById(id);if(s){s.setAttribute('data-floor-of',id);io.observe(s)}});})();</script>
 <script>
 (function(){var Q=['Em t = τ, quanto o capacitor já carregou?','Quando o capacitor é considerado carregado?','Como a tensão cai na descarga?','Quanto vale τ com R = 10 kΩ e C = 100 µF?'];[].slice.call(document.querySelectorAll('.steps .step')).forEach(function(s,i){var intro=s.querySelector('.step__intro'),body=s.children[1];if(!intro||!body)return;var num=(intro.querySelector('.step__num')||{}).textContent||'',eb=(intro.querySelector('.step__eyebrow')||{}).textContent||'';var q=Q[i]||(body.querySelector('h3')||{}).textContent;s.classList.add('flash');s.setAttribute('tabindex','0');s.setAttribute('role','button');s.setAttribute('aria-label','Flash card '+num+': '+q+'. Toque para ver a resposta.');var inn=document.createElement('div');inn.className='flash__in';var fr=document.createElement('div');fr.className='flash__f';fr.innerHTML='<p class="flash__tag">'+num+' · '+eb+'</p><p class="flash__q"></p><p class="flash__hint">toque para virar ✦</p>';fr.querySelector('.flash__q').textContent=q;var bk=document.createElement('div');bk.className='flash__b';s.removeChild(intro);while(s.firstChild)bk.appendChild(s.firstChild);inn.appendChild(fr);inn.appendChild(bk);s.appendChild(inn);function tg(){s.classList.toggle('is-flipped')}s.addEventListener('click',tg);s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}})})})();</script>
-<script>(function(){var f=document.querySelector(".floors__fill"),ol=document.querySelector(".floors ol");if(!f||!ol)return;function u(){var m=document.documentElement.scrollHeight-innerHeight,p=m>0?scrollY/m:0;f.style.height=Math.max(0,(ol.clientHeight-20)*p)+"px"}addEventListener("scroll",u,{passive:true});addEventListener("resize",u);u()})();</script>
+<script>(function(){var f=document.querySelector(".floors__fill"),ol=document.querySelector(".floors ol");if(!f||!ol)return;function u(){var m=document.documentElement.scrollHeight-innerHeight,p=m>0?scrollY/m:0;f.style.height=Math.max(0,ol.clientHeight-20)+"px";f.style.transformOrigin="top";f.style.transform="scaleY("+p.toFixed(4)+")"}var tk=0;addEventListener("scroll",function(){if(tk)return;tk=1;requestAnimationFrame(function(){u();tk=0})},{passive:true});addEventListener("resize",u);u()})();</script>
 
 <div id="av" aria-hidden="true">
  <div class="av-card" role="dialog" aria-modal="true" aria-label="Avalie o site">
@@ -1182,6 +1202,69 @@ section[id],h2,h3,.x-lab{scroll-margin-top:84px}
 .tw-live::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-.15em;background:#f3d27a;box-shadow:0 0 8px #f3d27a;animation:twblink 1s steps(1) infinite}
 .tw.done .tw-live::after{animation:twblink 1s steps(1) 3 forwards}
 @keyframes twblink{50%{opacity:0}}
+
+/* ===== Rolagem leve ===== */
+html{scroll-behavior:smooth}
+#cosmos{will-change:transform;transform:translateZ(0)}
+.hero__img--drift{animation:none!important;will-change:auto!important}
+
+/* ===== Semáforo elegante ===== */
+.tl-brand{fill:#fff;font-size:14px;font-weight:800;letter-spacing:.14em}
+.tl-uno{fill:#fff;font-size:11px;font-weight:700;letter-spacing:.3em;opacity:.75}
+.tl-pin{fill:#d8f3f7;font-size:10px;font-weight:600;opacity:.85}
+.tl-on{fill:#8affb0;filter:drop-shadow(0 0 4px #8affb0)}
+.tl-hood path{fill:#07080b}
+.tl-ring{fill:#050608;stroke:#3a404b;stroke-width:1.2}
+.tl-leds circle{transition:fill .3s,opacity .3s;opacity:.35}
+.tl-leds--r circle{fill:#7a2620}.tl-leds--y circle{fill:#7a5e1a}.tl-leds--g circle{fill:#1e6a3e}
+.tl-bloom{opacity:0;transition:opacity .35s}
+.tl-glass{transition:fill .3s}
+.tl-unit.is-on .tl-bloom{opacity:1}
+.tl-unit.is-on .tl-leds circle{opacity:1}
+.tl-unit.is-on .tl-leds--r circle{fill:#ffd9d4}#tl-r.is-on .tl-glass{fill:#ff3b30}
+.tl-unit.is-on .tl-leds--y circle{fill:#fff3c9}#tl-y.is-on .tl-glass{fill:#ffb300}
+.tl-unit.is-on .tl-leds--g circle{fill:#d6ffe6}#tl-g.is-on .tl-glass{fill:#16d36a}
+#tl-dots circle{fill:#d9f1ff;filter:drop-shadow(0 0 5px #8fd3ff)}
+
+/* ===== Entrada: mergulho no universo ===== */
+html,body{overflow-x:clip}
+.hero{min-height:clamp(480px,78vh,760px)!important}
+.hero__img{left:50%!important;right:auto!important;width:100vw!important;max-width:none!important;top:-8%!important;height:116%!important;transform:translateX(-50%);transform-origin:50% 45%;filter:brightness(1.18) contrast(1.18) saturate(1.55)!important;will-change:transform,opacity}
+.hero__warp{position:absolute;top:-8%;left:50%;width:100vw;height:116%;transform:translateX(-50%);pointer-events:none;z-index:1;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%)}
+.hero h1{text-shadow:0 0 28px rgba(150,170,255,.35)}
+
+/* ===== Sistema Solar 3D ===== */
+.sis3d{position:relative;width:100%;margin:8px auto 0;border-radius:20px;background:radial-gradient(ellipse at center,rgba(8,10,24,.75),rgba(4,5,12,0) 72%)}
+.sis3d canvas{display:block;width:100%;cursor:grab;touch-action:none}
+.sis3d canvas.is-drag{cursor:grabbing}
+.sis-tip{position:absolute;left:0;top:0;padding:5px 11px;border-radius:999px;background:rgba(10,12,24,.75);border:1px solid rgba(243,210,122,.45);color:#f3d27a;font:600 12px/1 inherit;letter-spacing:.06em;pointer-events:none;opacity:0;translate:-50% 0;transition:opacity .2s}
+.sis-tip.on{opacity:1}
+.sis-ctl{position:absolute;right:14px;bottom:14px;display:flex;gap:8px}
+.sis-ctl button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,12,24,.55);color:#eef1f7;font-size:18px;cursor:pointer}
+.sis-ctl button:hover{border-color:rgba(243,210,122,.6);color:#f3d27a}
+.sis-hint{position:absolute;left:16px;bottom:16px;margin:0;font-size:12px;color:rgba(238,241,247,.55)}
+.sis-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ===== Gráfico de interpolação elegante ===== */
+#ip-svg{border-radius:14px;box-shadow:0 14px 36px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.06)}
+#ip-svg .ip-grid{stroke:rgba(200,215,255,.07);stroke-width:1}
+#ip-svg .ip-axis{stroke:rgba(200,215,255,.32);stroke-width:1.2}
+#ip-svg .x-muted{fill:rgba(220,228,245,.55);font-size:11px}
+#ip-svg .x-curve{stroke:url(#ipLine);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(180,147,255,.55))}
+#ip-svg .ip-halo{fill:rgba(243,210,122,.14);stroke:rgba(243,210,122,.55);stroke-width:1.2;pointer-events:none}
+#ip-svg .ip-dot{fill:#fff;stroke:#f3d27a;stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(243,210,122,.8))}
+#ip-svg .ip-lab{fill:#f5f1e6;font-size:11.5px;font-weight:600;paint-order:stroke;stroke:#070a16;stroke-width:4px;stroke-linejoin:round}
+#ip-svg #ip-probe-text{fill:#f3d27a;font-size:12px;font-weight:600;paint-order:stroke;stroke:#070a16;stroke-width:4px}
+#ip-svg #ip-probe-line{stroke:rgba(243,210,122,.5)}
+
+/* ===== Código colorido (tema escuro de editor) ===== */
+.code-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#181b24;border:1px solid rgba(255,255,255,.08);border-bottom:0;border-radius:12px 12px 0 0}
+.code-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.code-bar i:nth-child(2){background:#febc2e}.code-bar i:nth-child(3){background:#28c840}
+.code-bar span{margin-left:8px;font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;color:rgba(230,235,245,.6)}
+pre.x-code{background:#11131a!important;color:#d4d4d4!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:12px;padding:14px 16px!important;font:13px/1.6 ui-monospace,Menlo,Consolas,"Fira Code",monospace!important;overflow:auto}
+pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
+.tk-k{color:#c586c0}.tk-t{color:#569cd6}.tk-f{color:#dcdcaa}.tk-s{color:#ce9178}.tk-n{color:#b5cea8}.tk-c{color:#6a9955;font-style:italic}.tk-b{color:#4ec9b0}.tk-cst{color:#4fc1ff}.tk-v{color:#9cdcfe}.tk-o{color:#d4d4d4}
+.x-code .is-active{background:rgba(243,210,122,.12)!important;color:inherit!important;box-shadow:inset 3px 0 0 #f3d27a}
 /* espaços de anúncio ocultos até ter domínio próprio aprovado no AdSense */
 .x-ad{display:none!important}
 
@@ -1231,6 +1314,6 @@ b.onclick=function(){q.classList.add('on')};function f(){q.classList.remove('on'
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){live.textContent=txt;p.classList.add('done');return}
 function tick(){i++;live.textContent=txt.slice(0,i);if(i<txt.length){var c=txt.charAt(i-1);setTimeout(tick,/[.,:]/.test(c)?260:26+Math.random()*34)}else p.classList.add('done')}
 setTimeout(tick,600)})();</script>
-<script src="cosmos.js?v=3" defer></script>
+<script src="cosmos.js?v=5" defer></script><script src="extras.js?v=1" defer></script>
 </body>
 </html>

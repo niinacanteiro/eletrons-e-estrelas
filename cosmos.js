@@ -10,8 +10,8 @@
   var ctx = cv.getContext('2d');
   var root = document.documentElement;
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var DPR = Math.min(2, window.devicePixelRatio || 1);
-  var W = 0, H = 0, D = 0, t0 = performance.now();
+  var DPR = Math.min(1.5, window.devicePixelRatio || 1);
+  var W = 0, H = 0, D = 0, t0 = performance.now(), SY = window.scrollY || 0;
   var TAU = Math.PI * 2;
 
   /* ---------- Paletas dos dois céus ---------- */
@@ -29,20 +29,27 @@
   /* ---------- Utilidades ---------- */
   function offscreen(w, h) { var c = document.createElement('canvas'); c.width = Math.max(1, Math.ceil(w)); c.height = Math.max(1, Math.ceil(h)); return c; }
   function rnd(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
-  function parallaxY(f, sp) { return H * 0.5 + (f * (D - H) - scrollY) * sp; }
+  function parallaxY(f, sp) { return H * 0.5 + (f * (D - H) - SY) * sp; }
 
   /* ---------- Estrelas (3 camadas de paralaxe) ---------- */
-  var layers = [];
+  var layers = [], twinklers = [];
   function buildStars() {
     var r = rnd(7), area = W * H / (1366 * 768);
-    layers = [[260, 0.08, 0.7], [140, 0.22, 1.05], [55, 0.45, 1.6]].map(function (k) {
-      var a = [];
-      for (var i = 0, n = Math.round(k[0] * Math.max(0.6, area)); i < n; i++)
-        a.push({ x: r() * W, y: r() * H * 3, r: r() * k[2] + 0.3, p: r() * TAU, c: r() < 0.7 ? 0 : (r() < 0.5 ? 1 : 2) });
-      return { a: a, sp: k[1] };
+    twinklers = [];
+    layers = [[95, 0.08, 0.7], [50, 0.22, 1.05], [22, 0.45, 1.6]].map(function (k, li) {
+      var c = offscreen(W, H), g = c.getContext('2d');
+      var cols = [];
+      for (var i = 0, n = Math.round(k[0] * Math.max(0.6, area)); i < n; i++) {
+        var st = { x: r() * W, y: r() * H, r: r() * k[2] + 0.3, p: r() * TAU, c: r() < 0.7 ? 0 : (r() < 0.5 ? 1 : 2), k: li, sp: k[1] };
+        if (st.r > 1.25 && twinklers.length < 30) { twinklers.push(st); continue; }
+        var hue = ['255,255,255', '170,200,255', '255,214,150', '255,160,215', '160,235,255'][(r() * 5) | 0], al = 0.6 + r() * 0.4;
+        if (st.r > 0.9) { var gl = g.createRadialGradient(st.x, st.y, 0, st.x, st.y, st.r * 4.5); gl.addColorStop(0, 'rgba(' + hue + ',' + (al * 0.55).toFixed(2) + ')'); gl.addColorStop(1, 'rgba(' + hue + ',0)'); g.fillStyle = gl; g.fillRect(st.x - st.r * 4.5, st.y - st.r * 4.5, st.r * 9, st.r * 9); }
+        g.fillStyle = 'rgba(' + hue + ',' + al.toFixed(2) + ')';
+        g.beginPath(); g.arc(st.x, st.y, st.r, 0, TAU); g.fill();
+      }
+      return { c: c, sp: k[1] };
     });
   }
-
   /* ---------- Galáxias espirais (sprites por paleta) ---------- */
   var GAL = [{ f: 0.15, x: 0.28, r: 170, a: 0.5, s: 11 }, { f: 0.5, x: 0.66, r: 230, a: -0.6, s: 23 }, { f: 0.85, x: 0.38, r: 190, a: 0.3, s: 37 }];
   function galaxySprite(R, pal, seed) {
@@ -103,7 +110,7 @@
 
   /* Esfera: a textura é projetada em colunas com longitude = asin(x), dando curvatura real. */
   function drawSphere(g, img, cx, cy, R, rot) {
-    var tw = img.naturalWidth, th = img.naturalHeight, N = Math.max(24, Math.round(R * 0.9)), colW = (2 * R) / N;
+    var tw = img.naturalWidth, th = img.naturalHeight, N = Math.max(48, Math.round(R * 1.6)), colW = (2 * R) / N;
     g.save(); g.beginPath(); g.arc(cx, cy, R, 0, TAU); g.clip();
     for (var k = 0; k < N; k++) {
       var x0 = -1 + (k * 2) / N, x1 = -1 + ((k + 1) * 2) / N;
@@ -111,7 +118,7 @@
       u0 -= Math.floor(u0); var du = u1 - Math.floor(u1) - u0; if (du < 0) du += 1;
       var sx = u0 * tw, sw = Math.max(0.5, du * tw);
       if (sx + sw > tw) sw = tw - sx;
-      g.drawImage(img, sx, 0, sw, th, cx - R + k * colW, cy - R, colW + 0.6, 2 * R);
+      g.drawImage(img, sx, 0, sw, th, cx - R + k * colW, cy - R, colW + 1, 2 * R);
     }
     /* volume: limbo escurecido + lado noturno */
     var lx = cx - R * 0.45, ly = cy - R * 0.35;
@@ -138,12 +145,6 @@
     if (p.ring) drawRing(g, c, c, p.r, p.tilt, false);
     drawSphere(g, p.img, c, c, p.r, still ? 0.2 : t * p.spin);
     if (p.ring) drawRing(g, c, c, p.r, p.tilt, true);
-    if (p.atm) { /* atmosfera fina no lado iluminado */
-      var a = g.createRadialGradient(c, c, p.r * 0.92, c, c, p.r * 1.18);
-      a.addColorStop(0, 'rgba(' + p.atm + ',.45)'); a.addColorStop(1, 'rgba(' + p.atm + ',0)');
-      g.save(); g.globalCompositeOperation = 'lighter'; g.fillStyle = a;
-      g.beginPath(); g.arc(c, c, p.r * 1.18, Math.PI * 0.55, Math.PI * 1.95); g.arc(c, c, p.r * 0.92, Math.PI * 1.95, Math.PI * 0.55, true); g.fill(); g.restore();
-    }
     return b;
   }
 
@@ -156,7 +157,7 @@
   }
 
   /* ---------- Estrelas cadentes ---------- */
-  var shots = [], nextShot = 1800;
+  var shots = [], nextShot = 1800, bgC = null;
 
   /* ---------- Quadro ---------- */
   function resize() {
@@ -166,14 +167,14 @@
   }
 
   function frame(now) {
-    var t = (now - t0) / 1000, sy = scrollY;
+    var t = (now - t0) / 1000; SY += (scrollY - SY) * (still ? 1 : 0.22); if (Math.abs(scrollY - SY) < 0.3) SY = scrollY; var sy = SY;
     mix += (mixTarget - mix) * (still ? 1 : 0.06); if (Math.abs(mixTarget - mix) < 0.002) mix = mixTarget;
     var A = SKY.galaxia, B = SKY.nebulosa;
 
     ctx.globalCompositeOperation = 'source-over';
-    var bg = ctx.createLinearGradient(0, 0, 0, H);
-    bg.addColorStop(0, lerpRGB(A.top, B.top, mix)); bg.addColorStop(1, lerpRGB(A.bot, B.bot, mix));
-    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    if (!bgC || bgC.m !== mix || bgC.h !== H) { var bg = ctx.createLinearGradient(0, 0, 0, H);
+      bg.addColorStop(0, lerpRGB(A.top, B.top, mix)); bg.addColorStop(1, lerpRGB(A.bot, B.bot, mix)); bgC = { g: bg, m: mix, h: H }; }
+    ctx.fillStyle = bgC.g; ctx.fillRect(0, 0, W, H);
 
     ctx.globalCompositeOperation = 'lighter';
     if (mix > 0.01 && nebula) { /* nebulosa com paralaxe lenta */
@@ -190,15 +191,19 @@
       });
     });
 
-    layers.forEach(function (l, k) {
-      l.a.forEach(function (s) {
-        var yy = ((s.y - sy * l.sp) % (H * 3) + H * 3) % (H * 3); if (yy > H) return;
-        var tw = still ? 0.8 : 0.3 + 0.7 * Math.pow((Math.sin(s.p + t * (1.2 + k * 0.5)) + 1) / 2, 3);
-        var col = mix < 0.5 ? A.star[s.c] : B.star[s.c];
-        ctx.fillStyle = 'rgba(' + col + ',' + tw.toFixed(2) + ')';
-        ctx.beginPath(); ctx.arc(s.x, yy, s.r, 0, TAU); ctx.fill();
-        if (s.r > 1.4 && tw > 0.85) { ctx.fillRect(s.x - s.r * 3, yy - 0.3, s.r * 6, 0.6); ctx.fillRect(s.x - 0.3, yy - s.r * 3, 0.6, s.r * 6); }
-      });
+    var H3 = H;
+    layers.forEach(function (l) {
+      var off = ((sy * l.sp) % H + H) % H, first = H - off;
+      if (first > 0.5) ctx.drawImage(l.c, 0, off, W, first, 0, 0, W, first);
+      if (off > 0.5) ctx.drawImage(l.c, 0, 0, W, off, 0, first, W, off);
+    });
+    twinklers.forEach(function (s) {
+      var yy = ((s.y - sy * s.sp) % H3 + H3) % H3; if (yy > H) return;
+      var tw = still ? 0.8 : 0.3 + 0.7 * Math.pow((Math.sin(s.p + t * (1.2 + s.k * 0.5)) + 1) / 2, 3);
+      ctx.fillStyle = 'rgba(' + (mix < 0.5 ? A.star[s.c] : B.star[s.c]) + ',' + tw.toFixed(2) + ')';
+      ctx.beginPath(); ctx.arc(s.x, yy, s.r, 0, TAU); ctx.fill();
+      ctx.globalCompositeOperation = 'lighter'; var hg = ctx.createRadialGradient(s.x, yy, 0, s.x, yy, s.r * 6); hg.addColorStop(0, 'rgba(' + (mix < 0.5 ? A.star[s.c] : B.star[s.c]) + ',' + (tw * 0.5).toFixed(2) + ')'); hg.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = hg; ctx.fillRect(s.x - s.r * 6, yy - s.r * 6, s.r * 12, s.r * 12); ctx.globalCompositeOperation = 'source-over';
+      if (s.r > 1.4 && tw > 0.85) { ctx.fillRect(s.x - s.r * 3, yy - 0.3, s.r * 6, 0.6); ctx.fillRect(s.x - 0.3, yy - s.r * 3, 0.6, s.r * 6); }
     });
 
     ctx.globalCompositeOperation = 'source-over';
@@ -207,7 +212,8 @@
       var py = parallaxY(p.f, p.sp), px = p.x * W, ext = p.r + p.pad; if (py < -ext * 2 || py > H + ext * 2) return;
       var moon = p.moon ? drawMoon(px, py, p, t) : null;
       if (moon && moon.behind) moon.draw();
-      ctx.drawImage(renderPlanet(p, t), px - ext, py - ext, ext * 2, ext * 2);
+      if (p.lt === undefined || t - p.lt > 0.1) { renderPlanet(p, t); p.lt = t; }
+      ctx.drawImage(p.buf, px - ext, py - ext, ext * 2, ext * 2);
       if (moon && !moon.behind) moon.draw();
     });
 
@@ -226,7 +232,7 @@
     }
   }
 
-  addEventListener('resize', resize);
+  var rzT; addEventListener('resize', function () { clearTimeout(rzT); rzT = setTimeout(resize, 150); });
   if (still) addEventListener('scroll', function () { frame(performance.now()); }, { passive: true });
   resize(); setTimeout(resize, 1500);
   if (!still) requestAnimationFrame(frame);
