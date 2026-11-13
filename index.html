@@ -536,6 +536,69 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
           </div>
         </section>
 
+
+        <section class="section" id="ceu" data-nav="Céu">
+          <div class="head">
+            <p class="head__eyebrow">Flash cards do universo</p>
+            <h2>Toque em um planeta</h2>
+            <p>Cada astro abre um flash card. Vire o card para ver a resposta.</p>
+          </div>
+          <div class="sis" aria-label="Sistema Solar interativo">
+            <button class="pl sol" data-k="Elétrons e estrelas" aria-label="Sol"><i style="background-image:url(tex-sun.jpg)"></i></button>
+            <div class="orb" style="--r:26%;--t:22s"><div class="slot"><div class="cr"><button class="pl" data-k="Terra" aria-label="Terra" style="--s:30px"><i style="background-image:url(tex-earth_daymap.jpg)"></i></button></div></div></div>
+            <div class="orb" style="--r:38%;--t:34s;--d:-9s"><div class="slot"><div class="cr"><button class="pl" data-k="Marte" aria-label="Marte" style="--s:24px"><i style="background-image:url(tex-mars.jpg)"></i></button></div></div></div>
+            <div class="orb" style="--r:52%;--t:52s;--d:-30s"><div class="slot"><div class="cr"><button class="pl" data-k="Júpiter" aria-label="Júpiter" style="--s:50px"><i style="background-image:url(tex-jupiter.jpg)"></i></button></div></div></div>
+            <div class="orb" style="--r:68%;--t:74s;--d:-15s"><div class="slot"><div class="cr"><button class="pl anel" data-k="Saturno" aria-label="Saturno" style="--s:42px"><i style="background-image:url(tex-saturn.jpg)"></i></button></div></div></div>
+            <div class="orb" style="--r:86%;--t:100s;--d:-62s"><div class="slot"><div class="cr"><button class="pl" data-k="Netuno" aria-label="Netuno" style="--s:30px"><i style="background-image:url(tex-neptune.jpg)"></i></button></div></div></div>
+          </div>
+          <div class="sis-extra">
+            <button class="chip" data-k="Galáxias">&#10022; Galáxias</button>
+            <button class="chip" data-k="Nebulosas">&#10022; Nebulosas</button>
+          </div>
+          <div id="fc" aria-hidden="true"><div class="fc-card" role="dialog" aria-modal="true"><button class="fc-x" aria-label="Fechar">&times;</button><div class="fc-in"><div class="fc-f"><p class="fc-tag"></p><p class="fc-q"></p><p class="fc-h">toque para virar &#10022;</p></div><div class="fc-b"><p class="fc-tag"></p><p class="fc-a"></p><p class="fc-h">toque para voltar</p></div></div></div></div>
+        </section>
+<style>
+.sis{position:relative;width:min(640px,100%);aspect-ratio:1;margin:8px auto 0}
+.orb{position:absolute;left:50%;top:50%;width:var(--r);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.09);transform:translate(-50%,-50%);animation:sis-o var(--t) linear infinite;animation-delay:var(--d,0s);pointer-events:none}
+.slot{position:absolute;left:50%;top:0;transform:translate(-50%,-50%)}
+.cr{animation:sis-c var(--t) linear infinite;animation-delay:var(--d,0s)}
+.sis:hover .orb,.sis:hover .cr{animation-play-state:paused}
+@keyframes sis-o{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes sis-c{to{transform:rotate(-360deg)}}
+.pl{--s:40px;position:relative;display:block;width:var(--s);height:var(--s);padding:0;border:0;border-radius:50%;background:none;cursor:pointer;pointer-events:auto;transition:transform .25s}
+.pl:hover,.pl:focus-visible{transform:scale(1.25);outline:none}
+.pl i{position:absolute;inset:0;border-radius:50%;background-size:200% 100%;background-repeat:repeat-x;animation:sis-spin 14s linear infinite;box-shadow:inset -7px -4px 12px rgba(0,0,0,.85),inset 2px 1px 6px rgba(255,255,255,.18),0 0 14px rgba(160,190,255,.15)}
+@keyframes sis-spin{to{background-position:-200% 0}}
+.pl.anel::before{content:"";position:absolute;left:50%;top:50%;width:230%;height:62%;border-radius:50%;transform:translate(-50%,-50%) rotate(-18deg);border:4px solid rgba(225,205,160,.55);box-shadow:0 0 0 3px rgba(225,205,160,.18);pointer-events:none}
+.sol{position:absolute;left:50%;top:50%;--s:74px;transform:translate(-50%,-50%);z-index:2}
+.sol:hover,.sol:focus-visible{transform:translate(-50%,-50%) scale(1.1)}
+.sol i{box-shadow:0 0 30px 8px rgba(255,170,60,.55),0 0 80px 20px rgba(255,120,30,.25);animation-duration:30s}
+.sis-extra{display:flex;justify-content:center;gap:10px;margin-top:14px}
+.chip{padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#e9ecf4;font:inherit;cursor:pointer}
+.chip:hover{background:rgba(255,255,255,.12)}
+#fc{position:fixed;inset:0;z-index:9990;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .35s}
+#fc.on{opacity:1;pointer-events:auto}
+.fc-card{position:relative;width:min(380px,100%);height:260px;perspective:1200px}
+.fc-in{position:absolute;inset:0;transition:transform .8s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;cursor:pointer}
+#fc.flip .fc-in{transform:rotateY(180deg)}
+.fc-f,.fc-b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:26px 24px;display:flex;flex-direction:column;justify-content:center;gap:12px;color:#eef1f7;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.fc-b{transform:rotateY(180deg)}
+.fc-tag{margin:0;font:600 11px/1 ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#f3d27a}
+.fc-q{margin:0;font-size:1.3rem;font-weight:600}
+.fc-a{margin:0;font-size:.98rem;line-height:1.55}
+.fc-h{margin:0;font-size:12px;opacity:.6}
+.fc-x{position:absolute;top:-38px;right:0;background:none;border:0;color:#fff;font-size:28px;cursor:pointer;z-index:3}
+@media (prefers-reduced-motion:reduce){.orb,.cr,.pl i{animation:none}}
+</style>
+<script>
+(function(){var D={"Saturno": {"q": "Por que Saturno tem anéis?", "a": "Os anéis são bilhões de pedaços de gelo e rocha, de grãos de poeira a blocos do tamanho de casas, girando em órbita. São largos (cerca de 280 mil km), mas finos: em geral menos de 1 km de espessura."}, "Marte": {"q": "Por que Marte é vermelho?", "a": "O solo tem muito óxido de ferro, a mesma ferrugem do dia a dia. A atmosfera é fina, quase toda de CO₂, e a gravidade é cerca de 38% da Terra."}, "Júpiter": {"q": "O que é a Grande Mancha Vermelha?", "a": "Uma tempestade gigante que gira há pelo menos 190 anos e é maior que a Terra. Júpiter é o maior planeta: caberiam mais de 1.300 Terras dentro dele."}, "Terra": {"q": "Por que a Terra tem campo magnético?", "a": "O ferro líquido em movimento no núcleo externo gera correntes elétricas, e essas correntes criam o campo. É o mesmo princípio de um eletroímã, e ele nos protege do vento solar."}, "Netuno": {"q": "Como Netuno tem ventos tão fortes?", "a": "Ele recebe pouca luz do Sol, mas o calor interno e a quase ausência de atrito na atmosfera deixam os ventos chegar a cerca de 2.100 km/h, os mais rápidos do Sistema Solar."}, "Galáxias": {"q": "O que forma os braços de uma galáxia espiral?", "a": "Ondas de densidade: regiões onde gás e estrelas se acumulam, como um engarrafamento. Ali nascem estrelas jovens e azuis, por isso os braços brilham mais."}, "Nebulosas": {"q": "O que é uma nebulosa?", "a": "Uma nuvem de gás (principalmente hidrogênio) e poeira. O gás aquecido por estrelas próximas brilha em cores: o rosa vem do hidrogênio e o azul é luz refletida pela poeira."}, "Elétrons e estrelas": {"q": "O que elétrons têm a ver com estrelas?", "a": "A luz das estrelas nasce quando elétrons dos átomos mudam de nível de energia. Cada salto libera um fóton de uma cor exata, e é assim que a espectroscopia descobre do que uma estrela é feita."}};var m=document.getElementById('fc');document.body.appendChild(m);
+function abre(k){var c=D[k];if(!c)return;m.querySelectorAll('.fc-tag').forEach(function(e){e.textContent=k});m.querySelector('.fc-q').textContent=c.q;m.querySelector('.fc-a').textContent=c.a;m.classList.remove('flip');m.classList.add('on')}
+document.querySelectorAll('#ceu [data-k]').forEach(function(b){b.addEventListener('click',function(){abre(b.dataset.k)})});
+m.querySelector('.fc-in').onclick=function(){m.classList.toggle('flip')};
+m.querySelector('.fc-x').onclick=function(){m.classList.remove('on')};m.onclick=function(e){if(e.target===m)m.classList.remove('on')};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.remove('on')});})();
+</script>
+
         <section class="section" id="material">
           <div class="head">
             <p class="head__eyebrow">Material recomendado</p>
