@@ -1016,13 +1016,7 @@ requestAnimationFrame(f)})();
   <div class="av-stars" role="radiogroup">
    <button data-v="1" aria-label="1 estrela">&#9733;</button><button data-v="2" aria-label="2 estrelas">&#9733;</button><button data-v="3" aria-label="3 estrelas">&#9733;</button><button data-v="4" aria-label="4 estrelas">&#9733;</button><button data-v="5" aria-label="5 estrelas">&#9733;</button>
   </div>
-  <div class="av-more">
-   <textarea id="av-gostou" rows="2" placeholder="O que você mais gostou?"></textarea>
-   <textarea id="av-melhorar" rows="2" placeholder="O que posso melhorar?"></textarea>
-   <div class="av-rec"><span>Recomendaria a um amigo?</span><label><input type="radio" name="avr" value="Sim">Sim</label><label><input type="radio" name="avr" value="Talvez">Talvez</label><label><input type="radio" name="avr" value="Não">Não</label></div>
-   <button class="av-send">Enviar avaliação</button>
-  </div>
-  <div class="av-ok">Obrigada pela avaliação! &#10024;</div>
+  <div class="av-ok">Obrigada pela avaliação! &#10024;<br><small>Ao fechar, tem mais duas perguntinhas rápidas.</small></div>
   <div class="av-share">
    <a target="_blank" rel="noopener" href="https://wa.me/?text=Olha%20esse%20site%20de%20f%C3%ADsica%20e%20astronomia%3A%20https%3A%2F%2Fniinacanteiro.github.io%2Feletrons-e-estrelas%2F">WhatsApp</a>
    <a target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fniinacanteiro.github.io%2Feletrons-e-estrelas%2F">LinkedIn</a>
@@ -1030,15 +1024,32 @@ requestAnimationFrame(f)})();
   </div>
  </div>
 </div>
+<div id="av2" aria-hidden="true">
+ <div class="av-card" role="dialog" aria-modal="true" aria-label="Me ajude a melhorar">
+  <button class="av-x" aria-label="Fechar">&times;</button>
+  <div class="av-ico">&#10022;</div>
+  <h3>Me ajuda a melhorar?</h3>
+  <p class="av-sub">Perguntinhas rápidas, leva 30 segundos</p>
+  <div class="av-more">
+   <label class="av-lb" for="av-gostou">O que você mais gostou no site?</label>
+   <textarea id="av-gostou" rows="2" placeholder="Ex.: o Sistema Solar, os flash cards..."></textarea>
+   <label class="av-lb" for="av-melhorar">Onde posso melhorar?</label>
+   <textarea id="av-melhorar" rows="2" placeholder="Algo confuso, faltando ou difícil de ler?"></textarea>
+   <div class="av-rec"><span>Recomendaria a um amigo?</span><label><input type="radio" name="avr" value="Sim">Sim</label><label><input type="radio" name="avr" value="Talvez">Talvez</label><label><input type="radio" name="avr" value="Não">Não</label></div>
+   <button class="av-send">Enviar respostas</button>
+  </div>
+  <div class="av-ok">Muito obrigada! Sua opinião me ajuda a crescer &#10024;</div>
+ </div>
+</div>
 <button id="av-btn" aria-label="Avaliar o site">&#9733; Avaliar</button>
 <style>
-#av{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
-#av.on{opacity:1;pointer-events:auto}
+#av,#av2{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
+#av.on,#av2.on{opacity:1;pointer-events:auto}
 .av-card{position:relative;width:min(400px,100%);padding:28px 24px 20px;border-radius:22px;text-align:center;color:#eef1f7;
 background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);
 backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
 box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15);transform:translateY(14px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-#av.on .av-card{transform:none}
+#av.on .av-card,#av2.on .av-card{transform:none}
 .av-x{position:absolute;top:10px;right:14px;background:none;border:0;color:rgba(255,255,255,.7);font-size:24px;cursor:pointer}
 .av-ico{font-size:26px;color:#f3d27a;text-shadow:0 0 16px rgba(243,210,122,.7)}
 .av-card h3{margin:6px 0 4px;font-size:1.35rem;font-weight:600;letter-spacing:.3px}
@@ -1047,30 +1058,37 @@ box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15);trans
 .av-stars button{background:none;border:0;font-size:36px;line-height:1;cursor:pointer;color:rgba(255,255,255,.22);transition:transform .15s,color .2s,text-shadow .2s}
 .av-stars button:hover{transform:scale(1.15)}
 .av-stars button.lit{color:#f3d27a;text-shadow:0 0 14px rgba(243,210,122,.8)}
-.av-more{display:none;margin-top:10px;text-align:left}
-#av.step2 .av-more{display:block}
+.av-more{margin-top:10px;text-align:left}
+.av-lb{display:block;margin:8px 0 2px;font-size:.86rem;opacity:.85}
 .av-more textarea{width:100%;box-sizing:border-box;margin:5px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:.9rem;resize:none}
 .av-more textarea::placeholder{color:rgba(255,255,255,.5)}
 .av-rec{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0;font-size:.88rem}
 .av-rec span{opacity:.8;width:100%}.av-rec label{display:flex;gap:4px;align-items:center;cursor:pointer}
 .av-send{width:100%;margin-top:6px;padding:11px;border-radius:12px;border:0;background:linear-gradient(90deg,#e9c46a,#f3d27a);color:#111;font:inherit;font-weight:600;cursor:pointer}
 .av-ok{display:none;margin:12px 0 4px;font-size:1rem}
-#av.done .av-ok{display:block}#av.done .av-more,#av.done .av-stars,#av.done .av-sub{display:none}
+#av.done .av-ok,#av2.done .av-ok{display:block}#av.done .av-stars,#av.done .av-sub,#av2.done .av-more,#av2.done .av-sub{display:none}
 .av-share{display:flex;gap:8px;margin-top:14px}
 .av-share a,.av-share button{flex:1;padding:9px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#eef1f7;text-decoration:none;font:inherit;font-size:.82rem;cursor:pointer}
 .av-share a:hover,.av-share button:hover{background:rgba(255,255,255,.12)}
+header.nav.glass{background:rgba(10,12,20,.62)!important;border-color:rgba(255,255,255,.14)!important}
+header.nav.glass a,header.nav.glass button{color:#eef1f7!important}
 #av-btn{position:fixed;right:16px;bottom:16px;z-index:9998;padding:9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#f3d27a;font:inherit;font-size:.9rem;cursor:pointer}
 </style>
 <script>
-(function(){var m=document.getElementById('av'),nota=0,bs=m.querySelectorAll('.av-stars button');
-function abre(){m.classList.add('on')}function fecha(){m.classList.remove('on');try{localStorage.setItem('av_visto','1')}catch(e){}}
+(function(){var m=document.getElementById('av'),m2=document.getElementById('av2'),nota=0,bs=m.querySelectorAll('.av-stars button');
+var URL="https://docs.google.com/forms/d/e/1FAIpQLSeKMQZeRLbxvEGqdb4HXKmP7lkpGeiVXSBQeEzD7by902nhDg/formResponse";
+function envia(f){fetch(URL,{method:'POST',mode:'no-cors',body:f}).catch(function(){})}
+function marca(){try{localStorage.setItem('av_visto','1')}catch(e){}}
+function abre(){m.classList.remove('done');nota=0;pinta(0);m.classList.add('on')}
+function fecha(){var tinha=m.classList.contains('done');m.classList.remove('on');marca();if(tinha&&!m2.classList.contains('done'))setTimeout(function(){m2.classList.add('on')},450)}
+function fecha2(){m2.classList.remove('on')}
 function pinta(n){bs.forEach(function(b){b.classList.toggle('lit',+b.dataset.v<=n)})}
-bs.forEach(function(b){b.onmouseenter=function(){pinta(+b.dataset.v)};b.onmouseleave=function(){pinta(nota)};b.onclick=function(){nota=+b.dataset.v;pinta(nota);m.classList.add('step2')}});
-m.querySelector('.av-send').onclick=function(){if(!nota)return;var f=new FormData();f.append('entry.1584365776',String(nota));
-var g=document.getElementById('av-gostou').value,me=document.getElementById('av-melhorar').value,r=m.querySelector('input[name=avr]:checked');
-if(g)f.append('entry.256832390',g);if(me)f.append('entry.1823658584',me);if(r)f.append('entry.214130862',r.value);
-fetch("https://docs.google.com/forms/d/e/1FAIpQLSeKMQZeRLbxvEGqdb4HXKmP7lkpGeiVXSBQeEzD7by902nhDg/formResponse",{method:'POST',mode:'no-cors',body:f}).catch(function(){});m.classList.add('done');try{localStorage.setItem('av_visto','1')}catch(e){}};
-m.querySelector('.av-x').onclick=fecha;m.onclick=function(e){if(e.target===m)fecha()};document.addEventListener('keydown',function(e){if(e.key==='Escape')fecha()});
+bs.forEach(function(b){b.onmouseenter=function(){pinta(+b.dataset.v)};b.onmouseleave=function(){pinta(nota)};b.onclick=function(){nota=+b.dataset.v;pinta(nota);var f=new FormData();f.append('entry.1584365776',String(nota));envia(f);setTimeout(function(){m.classList.add('done')},350);marca()}});
+m2.querySelector('.av-send').onclick=function(){var g=document.getElementById('av-gostou').value.trim(),me=document.getElementById('av-melhorar').value.trim(),r=m2.querySelector('input[name=avr]:checked');if(!g&&!me&&!r){fecha2();return}
+var f=new FormData();if(nota)f.append('entry.1584365776',String(nota));if(g)f.append('entry.256832390',g);if(me)f.append('entry.1823658584',me);if(r)f.append('entry.214130862',r.value);envia(f);m2.classList.add('done');setTimeout(fecha2,2200)};
+m.querySelector('.av-x').onclick=fecha;m.onclick=function(e){if(e.target===m)fecha()};
+m2.querySelector('.av-x').onclick=fecha2;m2.onclick=function(e){if(e.target===m2)fecha2()};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(m2.classList.contains('on'))fecha2();else if(m.classList.contains('on'))fecha()}});
 document.getElementById('av-btn').onclick=abre;
 m.querySelector('.av-copy').onclick=function(){var b=this;navigator.clipboard&&navigator.clipboard.writeText("https://niinacanteiro.github.io/eletrons-e-estrelas/").then(function(){b.textContent='Copiado!'})};
 var v=null;try{v=localStorage.getItem('av_visto')}catch(e){}if(!v)setTimeout(abre,8000);})();
