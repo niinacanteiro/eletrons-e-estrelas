@@ -1017,6 +1017,14 @@ rs();addEventListener('resize',rs);f();})();
   <div class="av-ok">Muito obrigada! Sua opinião me ajuda a crescer &#10024;</div>
  </div>
 </div>
+<button id="qr-btn" aria-label="Mostrar QR code do site"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 3h8v8H3zm2 2v4h4V5zm8-2h8v8h-8zm2 2v4h4V5zM3 13h8v8H3zm2 2v4h4v-4zm8-2h2v2h-2zm2 2h2v2h-2zm-2 2h2v2h-2zm4 0h2v2h-2zm2-4h2v2h-2zm0 4h2v4h-4v-2h2zm-4 2h2v2h-2z"/></svg> QR code</button>
+<div id="qr" aria-hidden="true"><div class="av-card qr-card" role="dialog" aria-modal="true" aria-label="QR code do site">
+ <button class="av-x" aria-label="Fechar">&times;</button>
+ <div class="av-ico">&#10022;</div>
+ <h3>Leve o site no celular</h3>
+ <p class="av-sub">Aponte a câmera para o código</p>
+ <img class="qr-img" src="qr-site.svg" alt="QR code para o Elétrons e Estrelas" width="200" height="200">
+</div></div>
 <button id="av-btn" aria-label="Avaliar o site">&#9733; Avaliar</button>
 <style>
 #av,#av2{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
@@ -1048,10 +1056,22 @@ box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15);trans
 .av-share a:hover,.av-share button:hover{background:rgba(255,255,255,.12)}
 header.nav.glass{background:rgba(10,12,20,.62)!important;border-color:rgba(255,255,255,.14)!important}
 header.nav.glass a,header.nav.glass button{color:#eef1f7!important}
+header.nav .seg{background:rgba(255,255,255,.06)!important}
+header.nav .seg a{color:#c9d0dc!important}
+header.nav .seg a:hover{color:#fff!important}
+header.nav .seg a[aria-current="true"]{background:rgba(243,210,122,.18)!important;color:#f3d27a!important}
+header.nav .theme-btn{background:rgba(255,255,255,.08)!important;color:#eef1f7!important}
 #av-btn{position:fixed;right:16px;bottom:16px;z-index:9998;padding:9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#f3d27a;font:inherit;font-size:.9rem;cursor:pointer}
 
 /* espaços de anúncio ocultos até ter domínio próprio aprovado no AdSense */
 .x-ad{display:none!important}
+
+#qr{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
+#qr.on{opacity:1;pointer-events:auto}#qr.on .av-card{transform:none}
+.qr-card{width:min(320px,100%)}
+.qr-img{display:block;width:200px;height:200px;margin:4px auto 6px;padding:10px;border-radius:16px;background:#fff;image-rendering:pixelated;box-shadow:0 0 0 1px rgba(243,210,122,.5),0 0 28px rgba(243,210,122,.25)}
+#qr-btn{position:fixed;right:140px;bottom:16px;z-index:9998;display:flex;align-items:center;gap:6px;padding:11px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#eef1f7;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.4);transition:transform .2s,border-color .2s}
+#qr-btn:hover{transform:translateY(-2px);border-color:rgba(243,210,122,.6)}
 /* botões da avaliação */
 .av-send{position:relative;overflow:hidden;padding:13px!important;border-radius:999px!important;background:linear-gradient(135deg,#fff1c1 0%,#f3d27a 35%,#d9a441 100%)!important;color:#1a1305!important;font-weight:700!important;letter-spacing:.04em;box-shadow:0 8px 24px rgba(243,210,122,.35),inset 0 1px 0 rgba(255,255,255,.7);transition:transform .2s,box-shadow .2s}
 .av-send::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
@@ -1085,6 +1105,9 @@ document.getElementById('av-btn').onclick=abre;
 m.querySelector('.av-copy').onclick=function(){var b=this;navigator.clipboard&&navigator.clipboard.writeText("https://niinacanteiro.github.io/eletrons-e-estrelas/").then(function(){b.textContent='Copiado!'})};
 var v=null;try{v=localStorage.getItem('av_visto')}catch(e){}if(!v)setTimeout(abre,8000);})();
 </script>
-<script src="cosmos.js?v=2" defer></script>
+<script>(function(){var q=document.getElementById('qr'),b=document.getElementById('qr-btn'),a=document.getElementById('av-btn');if(!q||!b)return;
+function pos(){if(a&&a.offsetWidth)b.style.right=(16+a.offsetWidth+10)+'px'}pos();addEventListener('resize',pos);setTimeout(pos,800);
+b.onclick=function(){q.classList.add('on')};function f(){q.classList.remove('on')}q.querySelector('.av-x').onclick=f;q.onclick=function(e){if(e.target===q)f()};document.addEventListener('keydown',function(e){if(e.key==='Escape')f()})})();</script>
+<script src="cosmos.js?v=3" defer></script>
 </body>
 </html>
