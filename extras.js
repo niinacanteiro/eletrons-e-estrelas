@@ -234,7 +234,8 @@
       if (!pre.previousElementSibling || !pre.previousElementSibling.classList.contains('code-bar')) {
         var bar = document.createElement('div'); bar.className = 'code-bar';
         bar.innerHTML = '<i></i><i></i><i></i><span>' + lang + '</span>';
-        pre.parentNode.insertBefore(bar, pre); pre.classList.add('has-bar');
+        var win = document.createElement('div'); win.className = 'code-win';
+        pre.parentNode.insertBefore(win, pre); win.appendChild(bar); win.appendChild(pre); pre.classList.add('has-bar');
       }
     });
   })();

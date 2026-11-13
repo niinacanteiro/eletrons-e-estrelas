@@ -1070,7 +1070,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
 
         /* ---------- Visitantes ---------- */
         var vc = $("visit-count");
-        fetch("https://eletronseestrelas.goatcounter.com/counter/TOTAL.json?start=2026-01-01")
+        var vEnd = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+        fetch("https://eletronseestrelas.goatcounter.com/counter/TOTAL.json?start=2025-01-01&end=" + vEnd + "&_=" + Date.now(), { cache: "no-store" })
           .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
           .then(function (j) {
             var total = parseInt(String(j.count).replace(/\D/g, ""), 10);
@@ -1295,6 +1296,8 @@ html,body{overflow-x:clip}
 #ip-svg #ip-probe-line{stroke:rgba(243,210,122,.4)}
 
 /* ===== Código colorido (tema escuro de editor) ===== */
+.code-win{display:flex;flex-direction:column;min-width:0;align-self:start}
+.code-win>pre.x-code{margin:0!important}
 .code-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#181b24;border:1px solid rgba(255,255,255,.08);border-bottom:0;border-radius:12px 12px 0 0}
 .code-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.code-bar i:nth-child(2){background:#febc2e}.code-bar i:nth-child(3){background:#28c840}
 .code-bar span{margin-left:8px;font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;color:rgba(230,235,245,.6)}
