@@ -548,8 +548,8 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
                   <line x1="38" y1="112" x2="38" y2="128" stroke="#2A3140" stroke-width=".5" opacity=".6"/>
                   <rect x="30" y="115" width="4" height="1.2" rx=".6" fill="#2A3140" opacity=".7"/>
                   <rect x="44" y="115" width="4" height="1.2" rx=".6" fill="#2A3140" opacity=".7"/>
-                  <path d="M59.5 114.5 L63 116 L62.8 118.5 L59 118 Z" fill="#FFF7D6"/>
-                  <path d="M2.4 116 L5 115.5 L5 119.5 L2.2 120 Z" fill="#E0303A"/>
+                  <path d="M59.5 114.5 L63 116 L62.8 118.5 L59 118 Z" fill="#E0303A"/>
+                  <path d="M1.6 115.6 L6 115.2 L6 119.8 L1.6 120.2 Z" fill="#FFF7D6"/><ellipse cx="-6" cy="118" rx="9" ry="3.2" fill="#FFF3C0" opacity=".28"/>
                   <g><circle cx="15" cy="130" r="7" fill="#111418"/><circle cx="15" cy="130" r="4.3" fill="url(#carRim)"/><circle cx="15" cy="130" r="1.2" fill="#2A3140"/></g>
                   <g><circle cx="49" cy="130" r="7" fill="#111418"/><circle cx="49" cy="130" r="4.3" fill="url(#carRim)"/><circle cx="49" cy="130" r="1.2" fill="#2A3140"/></g>
                 </g></g>
@@ -1131,7 +1131,7 @@ background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));b
 backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
 box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15);transform:translateY(14px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 #av.on .av-card,#av2.on .av-card{transform:none}
-.av-x{position:absolute;top:10px;right:14px;background:none;border:0;color:rgba(255,255,255,.7);font-size:24px;cursor:pointer}
+.av-x{z-index:5;width:40px;height:40px;line-height:40px;padding:0;position:absolute;top:6px;right:8px;background:none;border:0;color:rgba(255,255,255,.7);font-size:24px;cursor:pointer}
 .av-ico{font-size:26px;color:#f3d27a;text-shadow:0 0 16px rgba(243,210,122,.7)}
 .av-card h3{margin:6px 0 4px;font-size:1.35rem;font-weight:600;letter-spacing:.3px}
 .av-sub{margin:0 0 14px;font-size:.92rem;opacity:.75}
@@ -1293,7 +1293,7 @@ pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
 var URL="https://docs.google.com/forms/d/e/1FAIpQLSeKMQZeRLbxvEGqdb4HXKmP7lkpGeiVXSBQeEzD7by902nhDg/formResponse";
 function envia(f){fetch(URL,{method:'POST',mode:'no-cors',body:f}).catch(function(){})}
 function marca(){try{localStorage.setItem('av_visto','1')}catch(e){}}
-function abre(){m.classList.remove('done');nota=0;pinta(0);m.classList.add('on')}
+function abre(){try{sessionStorage.setItem('av_s','1')}catch(e){}m.classList.remove('done');nota=0;pinta(0);m.classList.add('on')}
 function fecha(){var tinha=m.classList.contains('done');m.classList.remove('on');marca();if(tinha&&!m2.classList.contains('done'))setTimeout(function(){m2.classList.add('on')},450)}
 function fecha2(){m2.classList.remove('on')}
 function pinta(n){bs.forEach(function(b){b.classList.toggle('lit',+b.dataset.v<=n)})}
@@ -1305,7 +1305,7 @@ m2.querySelector('.av-x').onclick=fecha2;m2.onclick=function(e){if(e.target===m2
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(m2.classList.contains('on'))fecha2();else if(m.classList.contains('on'))fecha()}});
 document.getElementById('av-btn').onclick=abre;
 m.querySelector('.av-copy').onclick=function(){var b=this;navigator.clipboard&&navigator.clipboard.writeText("https://niinacanteiro.github.io/eletrons-e-estrelas/").then(function(){b.textContent='Copiado!'})};
-var v=null;try{v=localStorage.getItem('av_visto')}catch(e){}if(!v)setTimeout(abre,8000);})();
+var v=null;try{v=localStorage.getItem('av_visto')||sessionStorage.getItem('av_s')}catch(e){}if(!v)setTimeout(function(){if(!document.querySelector('#av.on,#av2.on,#qr.on'))abre()},8000);})();
 </script>
 <script>(function(){var q=document.getElementById('qr'),b=document.getElementById('qr-btn'),a=document.getElementById('av-btn');if(!q||!b)return;
 function pos(){if(a&&a.offsetWidth)b.style.right=(16+a.offsetWidth+10)+'px'}pos();addEventListener('resize',pos);setTimeout(pos,800);
