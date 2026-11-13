@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Elétrons e Estrelas — Engenharia Elétrica e Física explicadas por uma estudante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      .x-eq {
+        background: var(--fill-tertiary);
+        border-radius: var(--r-m);
+        padding: 20px 24px;
+        margin: 0 0 24px;
+        display: grid;
+        gap: 8px;
+      }
+      .x-eq__line {
+        margin: 0;
+        font: var(--type-heading);
+        font-family: "Times New Roman", Georgia, serif;
+        font-style: italic;
+        color: var(--text-primary);
+        overflow-x: auto;
+      }
+      .x-eq__line .up { font-style: normal; }
+      .x-eq__label {
+        margin: 0;
+        font: var(--type-caption);
+        color: var(--text-secondary);
+      }
+      .x-code {
+        margin: 24px 0;
+        background: var(--fill-tertiary);
+        border: 1px solid var(--stroke-secondary);
+        border-radius: var(--r-m);
+        padding: 20px 24px;
+        overflow-x: auto;
+        font: var(--type-small);
+        font-family: "Geist Mono", ui-monospace, monospace;
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+      .x-code code { font: inherit; white-space: pre; }
+      .x-ad {
+        margin: 48px 0;
+        min-height: 120px;
+        border: 1px dashed var(--stroke-primary);
+        border-radius: var(--r-m);
+        display: flex;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      .x-ad span {
+        font: var(--type-caption);
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <header class="nav glass" data-auto></header>
+      <main class="main">
+        <section class="hero">
+          <img class="hero__img" src="stars_milky_way.jpg" alt="Céu estrelado com a Via Láctea" />
+          <div class="hero__copy">
+            <p class="hero__eyebrow">Engenharia Elétrica e Física · gratuito</p>
+            <h1>Elétrons e Estrelas</h1>
+            <p class="hero__sub">Engenharia Elétrica e Física explicadas por uma estudante: resumos, equações resolvidas e simulações de aulas de laboratório reais.</p>
+            <p class="hero__meta">Por Nicoly Canteiro (Nina) · Bacharelado em Engenharia Elétrica · IFMT Campus Pontes e Lacerda</p>
+          </div>
+          <aside class="callout" aria-label="Próximo passo">
+            <p class="callout__head"><span class="hark-mark" data-size="16"></span> Por onde começar</p>
+            <p class="callout__lead"><strong>Comece pelo circuito RC.</strong> A carga do capacitor em quatro passos curtos.</p>
+            <a class="btn" href="#rc">Comece pelo circuito RC</a>
+          </aside>
+          <p class="hero__credit">Foto: a Via Láctea</p>
+        </section>
+
+        <section class="section" id="sobre" data-nav="Sobre">
+          <div class="head">
+            <p class="head__eyebrow">Sobre</p>
+            <h2>Relatórios de laboratório viram resumos diretos.</h2>
+          </div>
+          <div class="prose">
+            <p>Sou a Nina, estudante de Engenharia Elétrica no IFMT. Aqui transformo meus relatórios de laboratório e estudos em resumos diretos, com as equações e simulações que eu mesma fiz.</p>
+          </div>
+          <p>
+            <span class="pill">Circuitos elétricos</span>
+            <span class="pill">Métodos numéricos em Python</span>
+            <span class="pill">LaTeX</span>
+            <span class="pill">Arduino</span>
+            <span class="pill">Astrofísica</span>
+          </p>
+        </section>
+
+        <section class="section" id="rc" data-nav="Circuito RC">
+          <div class="head">
+            <p class="head__eyebrow">Circuitos elétricos</p>
+            <h2>Circuito RC: como o capacitor carrega.</h2>
+            <p class="head__sub">A tensão sobe rápido no começo e desacelera, sempre no ritmo da constante de tempo τ.</p>
+          </div>
+          <div class="x-eq" role="math" aria-label="v C de t igual a V s vezes 1 menos e elevado a menos t sobre RC; tau igual a RC">
+            <p class="x-eq__label">Carga</p>
+            <p class="x-eq__line">v<sub>C</sub>(t) = V<sub>s</sub> <span class="up">(</span>1 − e<sup>−t/RC</sup><span class="up">)</span></p>
+            <p class="x-eq__label">Constante de tempo</p>
+            <p class="x-eq__line">τ = RC</p>
+          </div>
+          <figure class="band">
+            <img src="circuito-rc.png" alt="Esquema de um circuito RC com fonte, resistor e capacitor" />
+            <figcaption>Circuito RC: fonte Vₛ, resistor R e capacitor C</figcaption>
+          </figure>
+          <div class="steps">
+            <article class="step">
+              <div class="step__intro"><p class="step__num">01</p><p class="step__eyebrow">t = τ</p></div>
+              <div>
+                <h3>Uma constante de tempo: ~63,2%</h3>
+                <p>Em t = τ, o capacitor atinge cerca de 63,2% de V<sub>s</sub>, porque 1 − e<sup>−1</sup> ≈ 0,632.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">02</p><p class="step__eyebrow">t = 5τ</p></div>
+              <div>
+                <h3>Cinco constantes: carregado</h3>
+                <p>Em 5τ o capacitor é considerado carregado: cerca de 99,3% de V<sub>s</sub>.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">03</p><p class="step__eyebrow">Descarga</p></div>
+              <div>
+                <h3>A descarga segue a mesma τ</h3>
+                <p>Sem a fonte, a tensão cai a partir de V<sub>0</sub>: <em>v<sub>C</sub>(t) = V<sub>0</sub> e<sup>−t/RC</sup></em>.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">04</p><p class="step__eyebrow">Exemplo</p></div>
+              <div>
+                <h3>R = 10 kΩ, C = 100 µF → τ = 1 s</h3>
+                <ul class="step__pills"><li><b>1 s</b> até ~63,2%</li><li><b>5 s</b> até ~99,3%</li></ul>
+                <p>τ = 10 000 Ω × 0,0001 F = 1 s.</p>
+              </div>
+            </article>
+          </div>
+          <div class="links">
+            <a class="btn" href="https://github.com/niinacanteiro/relatorios-latex" target="_blank" rel="noopener">Fonte: relatorios-latex no GitHub</a>
+          </div>
+        </section>
+
+        <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
+
+        <section class="section" id="potencia" data-nav="Simulação">
+          <div class="head">
+            <p class="head__eyebrow">Eletrônica de potência</p>
+            <h2>Simular antes de montar poupa componentes.</h2>
+          </div>
+          <div class="prose">
+            <p>Uma simulação mostra tensões, correntes e a resposta do sistema antes de montar o circuito: dá para conferir se os valores batem com o cálculo, achar erros de ligação e testar outros componentes sem queimar nada.</p>
+          </div>
+          <figure class="band">
+            <img src="psim-simulacao.webp" alt="Tela do PSIM com um circuito de eletrônica de potência simulado" />
+            <figcaption>Simulação no PSIM feita para a disciplina</figcaption>
+          </figure>
+          <figure class="band">
+            <img src="grafico-motor.webp" alt="Gráfico com a resposta de um motor ao longo do tempo" />
+            <figcaption>Gráfico de resposta de um motor</figcaption>
+          </figure>
+        </section>
+
+        <section class="section" id="python" data-nav="Python">
+          <div class="head">
+            <p class="head__eyebrow">Métodos numéricos em Python</p>
+            <h2>Interpolação quadrática: uma parábola por três pontos.</h2>
+          </div>
+          <div class="prose">
+            <p>Dados três pontos (x<sub>0</sub>, y<sub>0</sub>), (x<sub>1</sub>, y<sub>1</sub>) e (x<sub>2</sub>, y<sub>2</sub>), o polinômio de Lagrange passa exatamente pelos três. Cada L<sub>i</sub>(x) vale 1 em x<sub>i</sub> e 0 nos outros pontos.</p>
+          </div>
+          <div class="x-eq" role="math" aria-label="P de x igual à soma de y i vezes L i de x">
+            <p class="x-eq__line">P(x) = Σ<sub>i=0</sub><sup>2</sup> y<sub>i</sub> L<sub>i</sub>(x)</p>
+            <p class="x-eq__line">L<sub>i</sub>(x) = Π<sub>j≠i</sub> (x − x<sub>j</sub>) / (x<sub>i</sub> − x<sub>j</sub>)</p>
+          </div>
+          <pre class="x-code"><code>import numpy as np
+def interp_quadratica(xs, ys, x):
+    total = 0
+    for i in range(3):
+        L = 1
+        for j in range(3):
+            if j != i:
+                L *= (x - xs[j]) / (xs[i] - xs[j])
+        total += ys[i] * L
+    return total
+print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
+          <p class="fineprint">Os pontos estão em y = x², então P(3) = 9,0.</p>
+          <div class="links">
+            <a class="btn" href="https://github.com/niinacanteiro/Metodos_Computacionais" target="_blank" rel="noopener">Fonte: Metodos_Computacionais no GitHub</a>
+          </div>
+        </section>
+
+        <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
+
+        <section class="section" id="arduino" data-nav="Arduino">
+          <div class="head">
+            <p class="head__eyebrow">Arduino e Tinkercad</p>
+            <h2>Projetos com Arduino, do manual à simulação.</h2>
+          </div>
+          <div class="cards">
+            <div>
+              <h3>Semáforo com Arduino</h3>
+              <p>Manual de instrução escrito em LaTeX, passo a passo.</p>
+              <p><a class="link" href="https://github.com/niinacanteiro/Manual-de-Instrucao-LaTex" target="_blank" rel="noopener">Manual-de-Instrucao-LaTex</a></p>
+            </div>
+            <div>
+              <h3>Simulações no Tinkercad</h3>
+              <p>Semáforo e cancela automática com sensor.</p>
+              <p><a class="link" href="https://github.com/niinacanteiro/tinkercad-circuitos" target="_blank" rel="noopener">tinkercad-circuitos</a></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="latex" data-nav="LaTeX">
+          <div class="head">
+            <p class="head__eyebrow">Escrever relatórios em LaTeX</p>
+            <h2>Três pacotes que uso em todo relatório.</h2>
+          </div>
+          <div class="pair">
+            <ul class="checklist">
+              <li><span class="checklist__item">circuitikz</span><span class="checklist__note">Desenhar circuitos</span></li>
+              <li><span class="checklist__item">pgfplots</span><span class="checklist__note">Gráficos</span></li>
+              <li><span class="checklist__item">tcolorbox</span><span class="checklist__note">Caixas de destaque</span></li>
+            </ul>
+            <aside class="callout" aria-label="Dica">
+              <p class="callout__head">Dica</p>
+              <p class="callout__lead"><strong>Use o Overleaf.</strong> Ele compila LaTeX online, de graça, sem instalar nada.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section" id="material" data-nav="Material">
+          <div class="head">
+            <p class="head__eyebrow">Material recomendado</p>
+            <h2>Material que eu recomendo</h2>
+          </div>
+          <div class="cards">
+            <div>
+              <h3>Livro de circuitos</h3>
+              <div class="links"><a class="btn" href="#">Ver oferta</a></div>
+            </div>
+            <div>
+              <h3>Kit Arduino para iniciantes</h3>
+              <div class="links"><a class="btn" href="#">Ver oferta</a></div>
+            </div>
+            <div>
+              <h3>Calculadora científica</h3>
+              <div class="links"><a class="btn" href="#">Ver oferta</a></div>
+            </div>
+          </div>
+          <p class="fineprint">Links de afiliado: posso ganhar uma comissão, sem custo extra para você.</p>
+        </section>
+
+        <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
+      </main>
+      <footer class="foot">
+        <p>Feito por Nicoly Canteiro · Conteúdo gratuito para estudo · <a class="link" href="https://github.com/niinacanteiro" target="_blank" rel="noopener">github.com/niinacanteiro</a></p>
+        <nav aria-label="Voltar às seções" data-auto></nav>
+        <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
+      </footer>
+    </div>
+    <script src="hark.js"></script>
+  <script data-goatcounter="https://eletronseestrelas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
