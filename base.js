@@ -1,3 +1,4 @@
+/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo */
 /* Page behaviors for Base's component library: the nav, the theme toggle, tables and images. style-gates: data */
 (function () {
   "use strict";

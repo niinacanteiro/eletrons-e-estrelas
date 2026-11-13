@@ -1,3 +1,4 @@
+/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo */
 /* Page behavior for Base's photo cards: photos to swipe or tap through, photos that fail to load taken out, and a sheet that opens a tile's whole card. style-gates: data */
 ;(function () {
   'use strict'

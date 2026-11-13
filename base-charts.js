@@ -1,3 +1,4 @@
+/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo */
 /* Themes Chart.js with the Base chart palette and adds Base.wash, Base.labels and Base.data. Load it after chart.js and datalabels.js. style-gates: data */
 (function () {
   "use strict";
