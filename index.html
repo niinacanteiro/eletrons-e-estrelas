@@ -178,8 +178,10 @@ a:not(.btn){color:#D6DEEC}
 .floors a.is-on .floors__lbl{font-weight:600}
 .floors__n{font:500 10px/1 ui-monospace,monospace;color:rgba(255,255,255,.4);margin-right:-6px;width:16px}
 .floors ol::before,.floors__fill{left:32px!important}
-@media (max-width:1280px){.floors__lbl,.floors__n,.floors__title{display:none}.floors{padding:18px 12px}.floors ol::before,.floors__fill{left:8px!important}}
-@media (max-width:760px){.floors{display:none}}
+@media (max-width:1599px){.floors{left:14px;padding:16px 10px;background:transparent!important;border-color:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:background .3s,border-color .3s,padding .3s}.floors__lbl,.floors__n,.floors__title{display:none}.floors ol::before,.floors__fill{left:8px!important}
+.floors:hover,.floors:focus-within{background:rgba(0,0,0,.88)!important;border-color:rgba(255,255,255,.12)!important;padding:18px 18px 18px 12px}.floors:hover .floors__lbl,.floors:focus-within .floors__lbl{display:inline}}
+@media (max-width:1100px){.floors{display:none}}
+
 
 @media (min-width:760px){.hero>.callout{position:absolute!important;top:clamp(16px,2.4vw,24px);right:clamp(16px,2.4vw,24px);margin:0!important;max-width:320px}.hero .hero__credit{position:absolute!important;right:14px;bottom:10px;margin:0;font-size:11px;padding:3px 9px;opacity:.75}}
 #rc-svg{width:100%;height:auto;max-width:820px;display:block;margin:12px auto;overflow:visible}
@@ -486,10 +488,23 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
                 <text x="190" y="90" text-anchor="middle" class="x-muted">sensor</text>
                 <line id="gate-beam" class="x-faint" x1="180" y1="104" x2="110" y2="104" style="stroke:var(--fill-system-orange);stroke-dasharray:4 4;stroke-width:2" />
                 <g id="gate-car">
-                  <rect x="0" y="104" width="60" height="22" rx="6" style="fill:var(--text-secondary)" />
-                  <rect x="10" y="92" width="34" height="16" rx="5" style="fill:var(--text-secondary)" />
-                  <circle cx="14" cy="130" r="7" style="fill:currentColor" />
-                  <circle cx="46" cy="130" r="7" style="fill:currentColor" />
+                  <defs>
+                    <linearGradient id="carBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F5FA"/><stop offset=".45" stop-color="#B8C2D3"/><stop offset="1" stop-color="#4A5466"/></linearGradient>
+                    <linearGradient id="carGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9FB6D9"/><stop offset=".6" stop-color="#25324A"/><stop offset="1" stop-color="#0E1420"/></linearGradient>
+                    <radialGradient id="carRim" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F4F6FA"/><stop offset=".6" stop-color="#9AA4B5"/><stop offset="1" stop-color="#3B4352"/></radialGradient>
+                  </defs>
+                  <ellipse cx="31" cy="137" rx="30" ry="2.4" fill="#000" opacity=".45"/>
+                  <path d="M2 125 C1 118 3 114 9 113 L17 111 C21 105 26 100 33 99 L45 99 C50 99 53 103 56 110 L60 112 C63 113 64 117 63 122 L62 127 C62 129 61 130 59 130 L4 130 C3 130 2 128 2 125 Z" fill="url(#carBody)" stroke="#2A3140" stroke-width=".6"/>
+                  <path d="M20 111 C23 106 27 102 32 101.5 L37 101.5 L37 111 Z" fill="url(#carGlass)"/>
+                  <path d="M39 101.5 L45 101.5 C48 101.5 50 105 52.5 111 L39 111 Z" fill="url(#carGlass)"/>
+                  <path d="M8 118 L60 118" stroke="#FFFFFF" stroke-opacity=".55" stroke-width=".7"/>
+                  <line x1="38" y1="112" x2="38" y2="128" stroke="#2A3140" stroke-width=".5" opacity=".6"/>
+                  <rect x="30" y="115" width="4" height="1.2" rx=".6" fill="#2A3140" opacity=".7"/>
+                  <rect x="44" y="115" width="4" height="1.2" rx=".6" fill="#2A3140" opacity=".7"/>
+                  <path d="M59.5 114.5 L63 116 L62.8 118.5 L59 118 Z" fill="#FFF7D6"/>
+                  <path d="M2.4 116 L5 115.5 L5 119.5 L2.2 120 Z" fill="#E0303A"/>
+                  <g><circle cx="15" cy="130" r="7" fill="#111418"/><circle cx="15" cy="130" r="4.3" fill="url(#carRim)"/><circle cx="15" cy="130" r="1.2" fill="#2A3140"/></g>
+                  <g><circle cx="49" cy="130" r="7" fill="#111418"/><circle cx="49" cy="130" r="4.3" fill="url(#carRim)"/><circle cx="49" cy="130" r="1.2" fill="#2A3140"/></g>
                 </g>
                 <rect x="314" y="72" width="12" height="66" rx="3" style="fill:currentColor" />
                 <g class="x-arm" id="gate-arm">
