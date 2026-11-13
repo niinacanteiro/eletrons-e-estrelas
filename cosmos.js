@@ -86,7 +86,7 @@
     { f: .97, x: .6, w: .9, hh: .6, cols: [[40, 50, 150], [200, 140, 255]], sp: .3 }
   ];
 
-  function lab(o, px, py, R) { x.globalCompositeOperation = 'source-over'; x.textAlign = 'center'; x.font = '600 12px system-ui,sans-serif'; x.fillStyle = 'rgba(255,255,255,.7)'; x.fillText(o.t, px, py + R + 22); x.font = '11px system-ui,sans-serif'; x.fillStyle = 'rgba(200,205,215,.5)'; x.fillText(o.d, px, py + R + 38) }
+  function lab(o, px, py, R) { return; x.globalCompositeOperation = 'source-over'; x.textAlign = 'center'; x.font = '600 12px system-ui,sans-serif'; x.fillStyle = 'rgba(255,255,255,.7)'; x.fillText(o.t, px, py + R + 22); x.font = '11px system-ui,sans-serif'; x.fillStyle = 'rgba(200,205,215,.5)'; x.fillText(o.d, px, py + R + 38) }
 
   var built = false;
   function build() {
