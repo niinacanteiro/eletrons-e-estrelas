@@ -576,11 +576,17 @@ pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
           </div>
         </section>
 
+        <script>
+/* chaves de anúncio por endereço do site (github.io ou domínio próprio) */
+window.EEAds=(function(){var d=location.hostname.indexOf('ninacanteiro.com.br')>-1;
+var k=d?{n:'70f1da02a30d83c2b2c8d321ba5cf127',b300:'7a2f16bf6807fe503d3426179770d6f9',b728:'5e760450fafcd7acfe5217344828ba9d'}
+       :{n:'f2e8efa4d2fd37ecc5c0f7f1d00db647',b300:'3840ce2c7eacdb9a120148efc2173ce1',b728:'5191a33a1497ef4aa496d8c2bec8d385'};
+return{native:function(){document.write('<scr'+'ipt async="async" data-cfasync="false" src="https://bauval.org/21/'+k.n+'"></scr'+'ipt><div id="container-'+k.n+'"></div>');},
+banner:function(wide){var big=wide&&window.innerWidth>=760;window.atOptions={'key':big?k.b728:k.b300,'format':'iframe','height':big?90:250,'width':big?728:300,'params':{}};
+document.write('<scr'+'ipt src="https://bauval.org/22/'+(big?k.b728:k.b300)+'"></scr'+'ipt>');}};})();
+</script>
         <aside class="x-ad" aria-label="Publicidade 1"><span>Publicidade</span>
-          <div class="x-ad__slot">
-            <script async="async" data-cfasync="false" src="https://bauval.org/21/f2e8efa4d2fd37ecc5c0f7f1d00db647"></script>
-            <div id="container-f2e8efa4d2fd37ecc5c0f7f1d00db647"></div>
-          </div>
+          <div class="x-ad__slot"><script>EEAds.native();</script></div>
         </aside>
 
         <section class="section" id="potencia">
@@ -665,10 +671,7 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
         </section>
 
         <aside class="x-ad" aria-label="Publicidade 2"><span>Publicidade</span>
-          <div class="x-ad__slot">
-            <script>atOptions = { 'key' : '3840ce2c7eacdb9a120148efc2173ce1', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };</script>
-            <script src="https://bauval.org/22/3840ce2c7eacdb9a120148efc2173ce1"></script>
-          </div>
+          <div class="x-ad__slot"><script>EEAds.banner(false);</script></div>
         </aside>
 
         <section class="section" id="arduino" data-nav="Arduino">
@@ -906,17 +909,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
         </section>
 
         <aside class="x-ad" aria-label="Publicidade 3"><span>Publicidade</span>
-          <div class="x-ad__slot">
-            <script>
-              if (window.innerWidth >= 760) {
-                atOptions = { 'key' : '5191a33a1497ef4aa496d8c2bec8d385', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
-                document.write('<scr' + 'ipt src="https://bauval.org/22/5191a33a1497ef4aa496d8c2bec8d385"></scr' + 'ipt>');
-              } else {
-                atOptions = { 'key' : '3840ce2c7eacdb9a120148efc2173ce1', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
-                document.write('<scr' + 'ipt src="https://bauval.org/22/3840ce2c7eacdb9a120148efc2173ce1"></scr' + 'ipt>');
-              }
-            </script>
-          </div>
+          <div class="x-ad__slot"><script>EEAds.banner(true);</script></div>
         </aside>
 
         <section class="section" id="visitantes" data-nav="Visitantes">
