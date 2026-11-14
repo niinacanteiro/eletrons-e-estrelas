@@ -9,7 +9,14 @@
   if (!cv) return;
   var ctx = cv.getContext('2d');
   var root = document.documentElement;
-  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Movimento: para quando o sistema pede menos movimento ou quando a pessoa usa "Pausar animações" */
+  function pedeParado() { return window.EEA11y ? window.EEA11y.parado() : matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  var still = pedeParado();
+  document.addEventListener('ee:movimento', function () {
+    var antes = still; still = pedeParado();
+    if (antes && !still && !laco) laco = requestAnimationFrame(frame);
+    else if (still) frame(performance.now());
+  });
   var DPR = Math.min(1.5, window.devicePixelRatio || 1);
   var W = 0, H = 0, D = 0, t0 = performance.now(), SY = window.scrollY || 0;
   var TAU = Math.PI * 2;
@@ -166,7 +173,9 @@
     buildStars(); buildNebula(); if (still) frame(performance.now());
   }
 
+  var laco = 0; /* id do quadro agendado: evita dois laços de animação ao mesmo tempo */
   function frame(now) {
+    laco = 0;
     var t = (now - t0) / 1000; SY += (scrollY - SY) * (still ? 1 : 0.22); if (Math.abs(scrollY - SY) < 0.3) SY = scrollY; var sy = SY;
     mix += (mixTarget - mix) * (still ? 1 : 0.06); if (Math.abs(mixTarget - mix) < 0.002) mix = mixTarget;
     var A = SKY.galaxia, B = SKY.nebulosa;
@@ -228,12 +237,12 @@
         return true;
       });
       ctx.globalCompositeOperation = 'source-over';
-      requestAnimationFrame(frame);
+      laco = requestAnimationFrame(frame);
     }
   }
 
   var rzT; addEventListener('resize', function () { clearTimeout(rzT); rzT = setTimeout(resize, 150); });
-  if (still) addEventListener('scroll', function () { frame(performance.now()); }, { passive: true });
+  addEventListener('scroll', function () { if (still) frame(performance.now()); }, { passive: true });
   resize(); setTimeout(resize, 1500);
-  if (!still) requestAnimationFrame(frame);
+  if (!still) laco = requestAnimationFrame(frame);
 })();

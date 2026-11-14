@@ -1,0 +1,581 @@
+/* Elétrons e Estrelas · Acessibilidade
+   © Nicoly Canteiro Araújo
+
+   Estilos de acessibilidade, carregados depois dos estilos do site:
+   1) Utilidades (texto só para leitor de tela, link "Pular para o conteúdo")
+   2) Foco visível forte e alvos de toque de no mínimo 24 px
+   3) Ajustes de contraste e de leitura em telas pequenas
+   4) Preferências do sistema: menos movimento, mais contraste, cores forçadas
+   5) Opções do painel (tamanho do texto, alto contraste, dislexia, links, espaçamento, pausa)
+   6) Botão flutuante e painel de acessibilidade
+   7) Declaração de acessibilidade no rodapé
+   Segue as WCAG 2.2, nível AA. */
+
+/* ============ 1) Utilidades ============ */
+
+/* Texto lido por leitores de tela, invisível na tela */
+.a11y-sr {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* "Pular para o conteúdo": escondido até receber foco pelo teclado */
+.a11y-pular {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100000;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #f3d27a;
+  color: #05060a !important;
+  font: 600 15px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform .2s ease;
+}
+.a11y-pular:focus,
+.a11y-pular:focus-visible {
+  transform: none;
+  outline: 3px solid #fff !important;
+  outline-offset: 3px !important;
+}
+
+/* O destino do "Pular" recebe foco por script; não precisa de contorno */
+#conteudo:focus { outline: none; }
+
+/* Elementos com foco não ficam escondidos atrás da barra fixa nem dos botões flutuantes (WCAG 2.4.11) */
+html {
+  scroll-padding-top: 88px;
+  scroll-padding-bottom: 96px;
+}
+
+/* ============ 2) Foco visível forte ============ */
+html :focus-visible {
+  outline: 3px solid #f3d27a !important;
+  outline-offset: 3px !important;
+  border-radius: 6px;
+}
+/* Itens que antes apagavam o contorno (planetas, cartões) */
+html .pl:focus-visible,
+html .flash:focus-visible,
+html .chip:focus-visible,
+html .btn:focus-visible {
+  outline: 3px solid #f3d27a !important;
+  outline-offset: 3px !important;
+}
+/* Diálogos recebem foco no contêiner: mostramos um contorno discreto só pelo teclado */
+[role="dialog"]:focus { outline: none; }
+[role="dialog"]:focus-visible { outline: 2px solid rgba(243, 210, 122, .7) !important; outline-offset: 2px !important; }
+
+/* Alvos de toque: mínimo 24 × 24 px (WCAG 2.5.8) */
+.floors a { min-height: 24px; }
+.fc-x { min-width: 44px; min-height: 44px; display: grid; place-items: center; }
+.av-rec label { min-height: 24px; padding: 2px 4px; }
+.av-rec input { width: 18px; height: 18px; margin: 0; }
+
+/* ============ 3) Ajustes de contraste e leitura ============ */
+
+/* Crédito da foto: estava claro demais sobre o fundo escuro */
+.hero__credit { color: rgba(255, 255, 255, .82) !important; opacity: 1 !important; }
+
+/* Placeholder das caixas de texto com contraste suficiente */
+.av-more textarea::placeholder { color: rgba(255, 255, 255, .68) !important; }
+
+/* Links dentro de texto corrido não dependem só da cor (WCAG 1.4.1) */
+.prose a, .foot p a, .cards p a.link, .a11y-declaracao a {
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+/* Seta "↗" dos links externos: decorativa (o aviso "abre em nova aba" vai em texto) */
+.btn[target="_blank"]::after { content: "\2197" / ""; }
+
+/* Botão "Em breve" (oferta ainda sem link): mesma forma do botão, sem parecer clicável */
+.btn.a11y-breve { cursor: default; opacity: .85; }
+.btn.a11y-breve:hover { background: transparent !important; color: #fff !important; }
+
+/* Andares no notebook: os nomes ficam escondidos na tela, mas continuam legíveis para leitores de tela */
+@media (max-width: 1599px) {
+  .floors:not(:hover):not(:focus-within) .floors__lbl {
+    display: inline !important;
+    position: absolute !important;
+    width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  }
+}
+
+/* Lista de astros do Sistema Solar: aparece quando alguém navega por ela com o teclado */
+.sis-sr:focus-within {
+  position: absolute !important;
+  left: 12px !important;
+  top: 12px !important;
+  width: auto !important;
+  height: auto !important;
+  clip: auto !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: calc(100% - 24px);
+  z-index: 3;
+}
+.sis-sr .pl {
+  width: auto !important;
+  height: auto !important;
+  min-height: 36px;
+  padding: 6px 14px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255, 255, 255, .3) !important;
+  background: rgba(10, 12, 24, .85) !important;
+  color: #eef1f7;
+  font: inherit;
+  font-size: 14px;
+  transform: none !important;
+}
+
+/* Botões "toque para virar" dos flash cards: parecem o texto de antes, mas são botões de verdade */
+.flash__virar, .fc-virar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  padding: 2px 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.flash__virar { font-size: 12px; color: #c9c5bd; }
+.fc-virar { font-size: 12px; opacity: .85; }
+
+/* Ajuste de pontos da interpolação pelo teclado (alternativa ao arrastar, WCAG 2.5.7) */
+.ip-teclado {
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 14px;
+  padding: 0 14px;
+}
+.ip-teclado > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  color: #eef1f7;
+}
+.ip-teclado[open] { padding-bottom: 14px; }
+.ip-teclado .ip-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+.ip-teclado fieldset {
+  margin: 0;
+  padding: 8px 12px 12px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+}
+.ip-teclado legend { padding: 0 4px; font-size: 14px; color: #d6deec; }
+.ip-teclado label { display: grid; gap: 4px; font-size: 13px; color: #d6deec; flex: 1; }
+.ip-teclado input {
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, .3);
+  background: rgba(255, 255, 255, .06);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+}
+.ip-teclado .ip-dica { margin: 10px 0 0; font-size: 13px; color: #c3cad6; }
+
+/* Formulário de avaliação: grupo de opções e mensagem de erro */
+fieldset.av-rec { border: 0; margin: 8px 0; padding: 0; min-width: 0; }
+fieldset.av-rec legend { padding: 0; margin-bottom: 4px; width: 100%; opacity: .9; }
+.av-erro { margin: 6px 0 0; min-height: 0; font-size: .88rem; color: #ffb4ab; }
+.av-erro:empty { display: none; }
+
+/* Seção sendo lida em voz alta */
+.a11y-lendo { outline: 2px dashed rgba(243, 210, 122, .8) !important; outline-offset: 6px; }
+
+/* ============ 4) Preferências do sistema ============ */
+
+/* Menos movimento: desliga animações e transições, e rolagem suave */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto !important; }
+}
+
+/* Mais contraste pedido pelo sistema */
+@media (prefers-contrast: more) {
+  html:root {
+    --text-secondary: #e6eaf0;
+    --text-tertiary: #c9ced8;
+    --stroke-primary: rgba(255, 255, 255, .7);
+    --stroke-secondary: rgba(255, 255, 255, .45);
+  }
+  .section, .x-lab, .card, .chart, .callout, .stat, .flash__f, .flash__b {
+    border-color: rgba(255, 255, 255, .55) !important;
+    background-color: rgba(0, 0, 0, .78) !important;
+  }
+  a:not(.btn) { text-decoration: underline; }
+  .btn { border-width: 2px !important; border-color: #fff !important; }
+  h1, h2 { background: none !important; color: #fff !important; -webkit-text-fill-color: #fff; }
+  .floors a, .sis-hint, .fc-h, .av-sub, .flash__hint { color: #fff !important; opacity: 1 !important; }
+}
+
+/* Cores forçadas (modo de alto contraste do Windows): contornos usam as cores do sistema */
+@media (forced-colors: active) {
+  html :focus-visible { outline-color: Highlight !important; }
+  .a11y-botao, .a11y-painel, .a11y-btn, .btn, #av-btn, #qr-btn { border: 2px solid ButtonText !important; }
+  .a11y-btn[aria-pressed="true"] { outline: 3px solid Highlight; }
+  h1, h2 { color: CanvasText !important; -webkit-text-fill-color: CanvasText; background: none !important; }
+}
+
+/* ============ 5) Opções do painel ============ */
+
+/* Tamanho do texto: multiplica os tamanhos do site pelo fator escolhido */
+html.a11y-escala { font-size: calc(100% * var(--a11y-escala, 1)); }
+html.a11y-escala:root {
+  --size-caption: calc(12px * var(--a11y-escala));
+  --size-meta: calc(13px * var(--a11y-escala));
+  --size-small: calc(14px * var(--a11y-escala));
+  --size-body: calc(15px * var(--a11y-escala));
+  --size-prose: calc(16px * var(--a11y-escala));
+  --size-heading: calc(20px * var(--a11y-escala));
+  --size-figure: calc(clamp(24px, 3vw, 32px) * var(--a11y-escala));
+  --size-title: calc(clamp(26px, 3vw, 32px) * var(--a11y-escala));
+  --size-display: calc(clamp(34px, 5vw, 48px) * var(--a11y-escala));
+  --size-lede: calc(clamp(16px, 1.7vw, 20px) * var(--a11y-escala));
+}
+html.a11y-escala .btn { font-size: calc(12px * var(--a11y-escala)) !important; }
+html.a11y-escala .flash__b p, html.a11y-escala .flash__b li { font-size: calc(15px * var(--a11y-escala)); }
+html.a11y-escala .flash__virar, html.a11y-escala .fc-virar, html.a11y-escala .sis-hint, html.a11y-escala .flash__tag { font-size: calc(12px * var(--a11y-escala)); }
+html.a11y-escala pre.x-code { font-size: calc(13px * var(--a11y-escala)) !important; }
+html.a11y-escala .floors a { font-size: calc(14px * var(--a11y-escala)); }
+html.a11y-escala header.nav .seg a { font-size: calc(14px * var(--a11y-escala)); }
+html.a11y-escala .hero__eyebrow, html.a11y-escala .head__eyebrow, html.a11y-escala .pill { font-size: calc(13px * var(--a11y-escala)); }
+/* Em zoom alto, os textos quebram linha em vez de vazar */
+html.a11y-escala h1, html.a11y-escala h2, html.a11y-escala h3, html.a11y-escala p, html.a11y-escala li { overflow-wrap: anywhere; }
+
+/* Alto contraste: fundo preto, texto branco, links amarelos */
+html.a11y-contraste,
+html.a11y-contraste body { background: #000 !important; }
+html.a11y-contraste #cosmos,
+html.a11y-contraste .hero__warp { display: none !important; }
+html.a11y-contraste .hero__img { opacity: .35 !important; filter: grayscale(.4) !important; }
+html.a11y-contraste body :where(p, li, span, h1, h2, h3, h4, label, legend, figcaption, small, strong, b, em, output, dt, dd, td, th, summary) {
+  color: #fff !important;
+  opacity: 1 !important;
+}
+html.a11y-contraste h1,
+html.a11y-contraste h2 {
+  background: none !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff;
+  text-shadow: none !important;
+}
+html.a11y-contraste a:not(.btn):not(.a11y-pular) {
+  color: #ffe94d !important;
+  text-decoration: underline !important;
+}
+html.a11y-contraste .section,
+html.a11y-contraste .x-lab,
+html.a11y-contraste .card,
+html.a11y-contraste .chart,
+html.a11y-contraste .callout,
+html.a11y-contraste .stat,
+html.a11y-contraste .flash__f,
+html.a11y-contraste .flash__b,
+html.a11y-contraste .fc-f,
+html.a11y-contraste .fc-b,
+html.a11y-contraste .av-card,
+html.a11y-contraste header.nav.glass,
+html.a11y-contraste .floors,
+html.a11y-contraste .hero > .callout {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+html.a11y-contraste .btn,
+html.a11y-contraste .chip,
+html.a11y-contraste #av-btn,
+html.a11y-contraste #qr-btn,
+html.a11y-contraste .sis-ctl button,
+html.a11y-contraste .av-share a,
+html.a11y-contraste .av-share button {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+html.a11y-contraste .btn:hover,
+html.a11y-contraste .chip:hover,
+html.a11y-contraste .av-share a:hover {
+  background: #ffe94d !important;
+  color: #000 !important;
+}
+html.a11y-contraste .av-send {
+  background: #ffe94d !important;
+  color: #000 !important;
+  box-shadow: none !important;
+}
+html.a11y-contraste header.nav .seg a { color: #fff !important; }
+html.a11y-contraste header.nav .seg a[aria-current="true"] { background: #ffe94d !important; color: #000 !important; }
+html.a11y-contraste pre.x-code { background: #000 !important; border: 2px solid #fff !important; }
+html.a11y-contraste :focus-visible { outline-color: #ffe94d !important; }
+html.a11y-contraste .x-svg { border: 2px solid #fff !important; }
+
+/* Fonte amigável para dislexia (Atkinson Hyperlegible, com alternativas do sistema) */
+html.a11y-dislexia body,
+html.a11y-dislexia body *:not(:is(pre, code, pre *, code *, .x-eq__line, .x-eq__line *, svg, svg *)) {
+  font-family: "Atkinson Hyperlegible", Verdana, Tahoma, "Segoe UI", system-ui, sans-serif !important;
+}
+html.a11y-dislexia body :where(p, li, a, span, label, h1, h2, h3, button, figcaption, summary) {
+  letter-spacing: .03em !important;
+  word-spacing: .1em !important;
+}
+html.a11y-dislexia h1, html.a11y-dislexia h2 { font-weight: 400 !important; }
+
+/* Sublinhar todos os links */
+html.a11y-sublinhar a:not(.a11y-pular) {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: .2em !important;
+}
+
+/* Espaçamento maior entre linhas, palavras e parágrafos (WCAG 1.4.12) */
+html.a11y-espaco body :where(p, li, a, span, label, dd, dt, td, th, figcaption, summary, legend, h1, h2, h3, h4) {
+  line-height: 1.8 !important;
+  letter-spacing: .06em !important;
+  word-spacing: .16em !important;
+}
+html.a11y-espaco body :where(p, li) { margin-bottom: .9em; }
+html.a11y-espaco .prose { gap: 1.4em !important; }
+
+/* Pausar animações: para tudo o que se move na página */
+html.a11y-pausar *,
+html.a11y-pausar *::before,
+html.a11y-pausar *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html.a11y-pausar { scroll-behavior: auto !important; }
+html.a11y-pausar .tw-live::after { display: none; }
+
+/* ============ 6) Botão flutuante e painel ============ */
+.a11y-botao {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 9997;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(243, 210, 122, .6);
+  background: rgba(10, 12, 24, .88);
+  color: #f3d27a;
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform .2s, border-color .2s;
+}
+.a11y-botao:hover { transform: translateY(-2px); border-color: #f3d27a; }
+.a11y-botao .a11y-ico { width: 26px; height: 26px; }
+.a11y-botao[aria-expanded="true"] { background: #f3d27a; color: #05060a; }
+
+.a11y-painel {
+  position: fixed;
+  left: 16px;
+  bottom: 76px;
+  z-index: 10000;
+  width: min(360px, calc(100vw - 32px));
+  max-height: calc(100vh - 100px);
+  max-height: calc(100dvh - 100px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px 18px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: #0b0d16;
+  color: #eef1f7;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .65);
+  font: 400 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  text-align: left;
+}
+.a11y-painel[hidden] { display: none !important; }
+.a11y-painel * { box-sizing: border-box; }
+.a11y-topo { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+/* O título do painel não herda o degradê dos títulos do site */
+.a11y-painel h2.a11y-titulo {
+  margin: 0;
+  font: 600 18px/1.2 inherit;
+  font-family: inherit;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  letter-spacing: .01em;
+  background: none !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff;
+}
+.a11y-desc { margin: 4px 0 12px; font-size: 13px; color: #c3cad6; }
+.a11y-grupo { margin: 0 0 14px; }
+.a11y-sub {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #f3d27a;
+}
+.a11y-linha { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.a11y-grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.a11y-grade .a11y-btn { min-width: 0; font-size: 13.5px; gap: 6px; padding-left: 10px; }
+.a11y-rotulo { min-width: 0; overflow-wrap: anywhere; }
+.a11y-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .06);
+  color: #eef1f7;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.a11y-btn:hover:not(:disabled) { background: rgba(255, 255, 255, .12); border-color: rgba(243, 210, 122, .6); }
+.a11y-btn:disabled { opacity: .5; cursor: not-allowed; }
+.a11y-btn .a11y-ico { flex: none; color: #f3d27a; }
+.a11y-btn--quadrado { width: 48px; justify-content: center; font-weight: 700; font-size: 16px; }
+.a11y-btn--secundario { background: transparent; }
+.a11y-escala { min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; }
+.a11y-alternar { position: relative; padding-right: 38px !important; line-height: 1.2; }
+/* Chave liga/desliga desenhada; o estado real vem do aria-pressed */
+.a11y-chave {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 22px;
+  height: 14px;
+  margin-top: -7px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, .55);
+}
+.a11y-chave::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .7);
+  transition: left .2s;
+}
+.a11y-alternar[aria-pressed="true"] { background: rgba(243, 210, 122, .16); border-color: #f3d27a; }
+.a11y-alternar[aria-pressed="true"] .a11y-chave { background: #f3d27a; border-color: #f3d27a; }
+.a11y-alternar[aria-pressed="true"] .a11y-chave::after { left: 11px; background: #05060a; }
+.a11y-dica { margin: 0 0 8px; font-size: 13px; color: #c3cad6; }
+.a11y-dica strong { color: #fff; }
+.a11y-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+.a11y-link { color: #d6deec !important; text-decoration: underline; text-underline-offset: .18em; font-size: 14px; min-height: 24px; display: inline-flex; align-items: center; }
+.a11y-fechar {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #eef1f7;
+  cursor: pointer;
+}
+.a11y-fechar:hover { background: rgba(255, 255, 255, .1); }
+
+/* Painel em alto contraste */
+html.a11y-contraste .a11y-painel { background: #000; border: 2px solid #fff; }
+html.a11y-contraste .a11y-btn { background: #000; border: 2px solid #fff; }
+html.a11y-contraste .a11y-alternar[aria-pressed="true"] { background: #ffe94d; color: #000; }
+html.a11y-contraste .a11y-alternar[aria-pressed="true"] .a11y-rotulo,
+html.a11y-contraste .a11y-alternar[aria-pressed="true"] .a11y-ico { color: #000 !important; }
+html.a11y-contraste .a11y-botao { background: #000; border: 2px solid #ffe94d; color: #ffe94d; }
+
+/* Em telas estreitas, as opções ficam uma por linha */
+@media (max-width: 359px) {
+  .a11y-grade { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* O widget do VLibras fica acima dos outros botões flutuantes */
+[vw] { z-index: 9996; }
+
+/* ============ 7) Declaração de acessibilidade (rodapé) ============ */
+.a11y-declaracao {
+  flex: 1 1 100%;
+  max-width: 70ch;
+  margin: 8px 0 20px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .02);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #d0d6e0;
+  text-align: left;
+}
+.a11y-declaracao:focus { outline: none; }
+.a11y-declaracao h2 {
+  margin: 0 0 8px;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: .02em;
+  background: none !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff;
+}
+.a11y-declaracao p { margin: 0 0 8px; }
+.a11y-declaracao ul { margin: 0 0 8px; padding-left: 1.2em; }
+.a11y-declaracao li { margin: 0 0 4px; }
+.a11y-declaracao a { color: #d6deec; }

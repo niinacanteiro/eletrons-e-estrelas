@@ -1,5 +1,5 @@
-/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo */
-/* Page behaviors for Base's component library: the nav, the theme toggle, tables and images. style-gates: data */
+/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo
+   Comportamentos da página: menu de seções, botão de tema, tabelas e imagens. */
 (function () {
   "use strict";
   var doc = document, root = doc.documentElement;
@@ -13,8 +13,6 @@
   }
   function each(a, f) { return (a || []).map(f).join(""); }
   function navLink(s) { return '<a href="#' + esc(s.id) + '" data-for="' + esc(s.id) + '">' + esc(s.getAttribute("data-nav")) + "</a>"; }
-  // A section the page hides (an owner-only one, until the app says who is reading) drops out of
-  // the nav, and comes back when the page shows it. The link's own display is set, since .seg a sets one.
   function syncNav() {
     [].slice.call(doc.querySelectorAll("a[data-for]")).forEach(function (a) {
       var s = doc.getElementById(a.getAttribute("data-for"));
@@ -25,11 +23,11 @@
     var sections = [].slice.call(doc.querySelectorAll("section[data-nav]"));
     var header = doc.querySelector("header.nav[data-auto]");
     if (header) {
-      header.innerHTML = '<nav class="seg" aria-label="Sections">' + each(sections, navLink) + "</nav>" +
-        '<button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark theme"></button>';
+      header.innerHTML = '<nav class="seg" aria-label="Seções da página">' + each(sections, navLink) + "</nav>" +
+        '<button class="theme-btn" id="theme-btn" type="button" aria-label="Mudar para o tema escuro"></button>';
     }
     [].slice.call(doc.querySelectorAll(".foot nav[data-auto]")).forEach(function (n) {
-      n.innerHTML = '<a href="#top">Top</a>' + each(sections, navLink);
+      n.innerHTML = '<a href="#top">Topo</a>' + each(sections, navLink);
     });
     syncNav();
     if (sections.length && window.MutationObserver) {
@@ -64,8 +62,6 @@
     [].slice.call(doc.querySelectorAll(".base-mark:empty")).forEach(function (m) { m.innerHTML = LOGO.replace(/SIZE/g, m.getAttribute("data-size") || "20"); });
   }
 
-  // Gives each day of plans a toggle and opens the first day. base-trip.css shows the toggle, and
-  // closes the other days, only on a phone.
   function dayToggles() {
     [].slice.call(doc.querySelectorAll(".timeline > li")).forEach(function (day, i) {
       var what = day.querySelector(".timeline__what");
@@ -75,7 +71,7 @@
       btn.className = "day__toggle";
       var label = function () {
         var open = day.classList.contains("is-open");
-        btn.textContent = open ? "Hide details" : "Show details";
+        btn.textContent = open ? "Ocultar detalhes" : "Mostrar detalhes";
         btn.setAttribute("aria-expanded", open ? "true" : "false");
       };
       if (i === 0) day.classList.add("is-open");
@@ -88,13 +84,13 @@
   function behaviors() {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var btn = doc.getElementById("theme-btn"), mq = window.matchMedia("(prefers-color-scheme: dark)");
-    try { var saved = localStorage.getItem("base-theme"); if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved); } catch (e) { /* storage blocked: follow the system theme */ }
+    try { var saved = localStorage.getItem("base-theme"); if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved); } catch (e) {  }
     function current() { var t = root.getAttribute("data-theme"); return t === "light" || t === "dark" ? t : (mq.matches ? "dark" : "light"); }
-    function label() { if (btn) btn.setAttribute("aria-label", current() === "dark" ? "Switch to light theme" : "Switch to dark theme"); }
+    function label() { if (btn) btn.setAttribute("aria-label", current() === "dark" ? "Mudar para o tema claro" : "Mudar para o tema escuro"); }
     if (btn) btn.addEventListener("click", function () {
       var next = current() === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
-      try { localStorage.setItem("base-theme", next); } catch (e) { /* storage blocked: the choice lasts this visit */ }
+      try { localStorage.setItem("base-theme", next); } catch (e) {  }
       label();
     });
     label();

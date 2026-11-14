@@ -1,12 +1,10 @@
-/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo */
-/* Page behavior for Base's photo cards: photos to swipe or tap through, photos that fail to load taken out, and a sheet that opens a tile's whole card. style-gates: data */
+/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo
+   Cartões com fotos: deslizar entre fotos, remover fotos que não carregam e abrir o cartão completo. */
 ;(function () {
   'use strict'
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-  // A card with one photo stays still; with several, the reader swipes between them, and a tap,
-  // Enter or Space shows the next one. The dots follow whichever photo is in view.
   function wire(photos) {
     var shots = [].slice.call(photos.querySelectorAll('img'))
     if (shots.length < 2 || photos.hasAttribute('data-turn')) return
@@ -54,8 +52,6 @@
     mark()
   }
 
-  // A photo that fails to load leaves the card. A card left with none loses its photo cell, and
-  // base-cards.css then lays it out as a card without a photo.
   function setUp(photos) {
     ;[].slice.call(photos.querySelectorAll('img')).forEach(function (img) {
       if (img.complete && !img.naturalWidth) img.remove()
@@ -68,7 +64,6 @@
     else wire(photos)
   }
 
-  // Rebuilds the photos without the failed one: a copy sheds the old handlers and dots.
   function drop(photos, img) {
     img.remove()
     var dots = photos.nextElementSibling
@@ -78,7 +73,6 @@
     setUp(fresh)
   }
 
-  // A copy of a card's photos without the attributes wire() added, ready to wire again.
   function bare(photos) {
     var copy = photos.cloneNode(true)
     ;['data-turn', 'role', 'tabindex', 'aria-label'].forEach(function (name) {
@@ -88,8 +82,6 @@
     return copy
   }
 
-  // A page's stylesheet shows a card as a tile by setting --photo-card-tile: 1 on it; a tile keeps
-  // only part of the card, so a tap opens the whole card in the sheet.
   function isTile(card) {
     return getComputedStyle(card).getPropertyValue('--photo-card-tile').trim() === '1'
   }
@@ -98,9 +90,6 @@
 
   var OPENER = ['tabindex', 'role', 'aria-label']
 
-  // A tile's name and price are its keyboard stop: a tile hides the card's text and links, so a
-  // keyboard reaches them through the sheet. Whether a card is a tile follows the page's width, so
-  // this runs again when the window resizes.
   function markTiles() {
     ;[].slice.call(document.querySelectorAll('.photo-card')).forEach(function (card) {
       var head = card.querySelector('.photo-card__head')
@@ -125,7 +114,6 @@
     return el.closest ? el.closest('.photo-card__head[role="button"]') : null
   }
 
-  // Enter or Space on a tile's name opens its sheet.
   function onKeyOpen(ev) {
     if (ev.key !== 'Enter' && ev.key !== ' ') return
     var head = tileHead(ev.target)
@@ -134,9 +122,6 @@
     openSheet(head.closest('.photo-card'), true)
   }
 
-  // The sheet holds a copy of the card inside the card's own section, so that section's styles
-  // still reach it, and the copy's photos are wired fresh. Focus moves to the close button, and back
-  // to the tile on close, only for a keyboard, since a moved focus draws a ring around a tapped tile.
   function openSheet(card, byKeyboard) {
     var sheet = document.createElement('div')
     sheet.className = 'photo-card-sheet'
@@ -151,7 +136,6 @@
     close.className = 'photo-card-sheet__close'
     close.type = 'button'
     close.setAttribute('aria-label', 'Close')
-    // The app's close glyph (IconClose) at its 16px size, as in its 48px round close buttons.
     close.innerHTML =
       '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="2" d="M13.66 13.658 2.347 2.345m0 11.32L13.66 2.352"/></svg>'
     var copy = card.cloneNode(true)
@@ -194,7 +178,6 @@
       if (byKey && opener) opener.focus({ preventScroll: true })
       else if (panel.contains(document.activeElement)) document.activeElement.blur()
     }
-    // While the sheet is open, Escape closes it and Tab stays inside it.
     function onKey(ev) {
       if (ev.key === 'Escape') return shut(true)
       if (ev.key !== 'Tab') return
@@ -213,8 +196,6 @@
     ;(byKeyboard ? close : panel).focus({ preventScroll: true })
   }
 
-  // Taps reach a tile before its photos or links do. Its Base button keeps its own action, and a
-  // link elsewhere on the page that names a tile opens that tile's sheet.
   function onTap(ev) {
     if (ev.target.closest('.photo-card-sheet')) return
     var named = ev.target.closest('a[href^="#"]')
@@ -232,7 +213,6 @@
     openSheet(card, isKeyPress(ev))
   }
 
-  // A click that Enter or Space made on a button carries no click count.
   function isKeyPress(ev) {
     return ev.detail === 0
   }

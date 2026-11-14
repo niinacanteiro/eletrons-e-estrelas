@@ -1,9 +1,5 @@
-/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo */
-/* Base's photo cards: cards that open with a photo, for items a reader picks between. They use base.css's tokens, so link this after base.css. style-gates: data */
-
-/* @component photo cards */
-/* The cards wrap into rows of as many as fit at --photo-card-min or wider. Every card in a row is as
-   tall as the tallest, so the links at their feet line up. */
+/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo
+   Cartões com fotos. */
 .photo-cards {
   --photo-card-min: 300px;
   display: grid;
@@ -21,7 +17,7 @@
 .photo-card__stage {
   position: relative;
   display: grid;
-  /* A wide photo must not widen the card past the screen. */
+
   grid-template-columns: minmax(0, 1fr);
   border-radius: var(--r-l) var(--r-l) 0 0;
 }
@@ -39,15 +35,14 @@
   backdrop-filter: var(--base-blur);
   font: var(--type-label);
 }
-/* A card without a photo puts its tag above the name, where it covers nothing. */
+
 .photo-card__stage:not(:has(.photo-card__photos)) .photo-card__rank {
   position: static;
   justify-self: start;
   max-width: calc(100% - 40px);
   margin: 20px 20px 0;
 }
-/* The photos sit in a row the reader swipes through, one per view, in a frame sized by the card's
-   width, never by a photo. base-cards.js adds the dots and a tap that shows the next photo. */
+
 .photo-card__photos {
   display: flex;
   aspect-ratio: 4 / 3;
@@ -92,9 +87,7 @@
 .photo-card__dots i.is-on {
   opacity: 1;
 }
-/* The kit owns the card's frame and the page owns its middle: the name and price always come first,
-   and the foot (the Base button, then the store link) always comes last, pushed to the bottom so a
-   row's feet line up. Every other part keeps the order the markup gives it. */
+
 .photo-card__body {
   position: relative;
   display: flex;
@@ -147,9 +140,6 @@
   margin-top: 0;
 }
 
-/* The store link is one part drawn two ways. Under a Base button it is a plain link centred under the
-   button; on a card without one it is the card's own full-width capsule. photo-card__link is the same
-   part under the name older pages use. */
 .photo-card__body:has(> .btn) > :is(.link, .photo-card__link) {
   align-self: center;
   text-align: center;
@@ -185,11 +175,6 @@
   color: var(--text-secondary-on);
 }
 
-/* @component photo card sheet */
-/* A card a page's stylesheet shows as a tile (it sets --photo-card-tile: 1) opens its whole card in this
-   sheet when tapped: the photos to swipe through, then the card's body. base-cards.js builds it. */
-/* On a tile, base-cards.js makes the name and price a button that opens the sheet: the tile's keyboard
-   stop. It shows a ring only for a keyboard. */
 .photo-card__head[role='button'] {
   cursor: pointer;
   border-radius: 6px;
@@ -227,13 +212,11 @@
 .photo-card-sheet.is-open .photo-card-sheet__panel {
   transform: none;
 }
-/* The panel takes focus when a tap opens the sheet, so a screen reader starts inside it; it draws no ring. */
+
 .photo-card-sheet__panel:focus {
   outline: none;
 }
-/* The close button sits over the photo's top-right corner, across from the card's tag, and stays in
-   view while the sheet scrolls. The bar that holds it takes no height, so the photo starts at the
-   sheet's top edge. */
+
 .photo-card-sheet__bar {
   position: sticky;
   top: 0;
@@ -242,7 +225,7 @@
   justify-content: flex-end;
   height: 0;
 }
-/* The close button's middle lines up with the tag's on the photo (14px down, 34px tall). */
+
 .photo-card-sheet__bar .photo-card-sheet__close {
   margin: 7px 12px 0 0;
 }

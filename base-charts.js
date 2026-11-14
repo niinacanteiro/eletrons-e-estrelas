@@ -1,5 +1,5 @@
-/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo */
-/* Themes Chart.js with the Base chart palette and adds Base.wash, Base.labels and Base.data. Load it after chart.js and datalabels.js. style-gates: data */
+/* Elétrons e Estrelas · © 2026 Nicoly Canteiro Araújo
+   Tema dos gráficos (Chart.js): cores, fontes e rótulos. Carregar depois de chart.js e datalabels.js. */
 (function () {
   "use strict";
   var Chart = window.Chart;
@@ -7,10 +7,9 @@
   var doc = document, root = doc.documentElement;
   var TOKEN = /^var\(--[\w-]+\)$/;
   var PER_POINT = { pie: true, doughnut: true, polarArea: true };
-  var LABEL_GAP_PX = 14; // the least vertical distance between two names drawn at line ends
-  var VALUE_LABELS_MAX = 6; // value axis labels, when the chart sets no step or limit of its own
+  var LABEL_GAP_PX = 14;
+  var VALUE_LABELS_MAX = 6;
 
-  // A canvas cannot read var(), so each token is read from the value a styled element gets.
   var cache = {};
   function computed(prop, value) {
     var probe = doc.createElement("span");
@@ -40,18 +39,17 @@
     d.font.family = sans; d.font.size = 12; d.font.weight = 400;
     d.color = resolve("var(--chart-ink-2)");
     d.borderColor = resolve("var(--chart-grid)");
-    // A chart copies its axis defaults when it is built, so axis colors are functions that read the theme at each draw.
     d.scale.ticks.color = d.scale.title.color = live("var(--chart-ink-2)");
     d.scale.grid.color = live("var(--chart-grid)");
     d.scale.grid.drawTicks = false;
     d.scale.ticks.padding = 8;
-    d.scale.ticks.maxRotation = 0; // labels that do not fit are thinned out, never tilted
-    d.scale.border.display = false; // the baseline is drawn by the plugin, at zero when the axis crosses it
+    d.scale.ticks.maxRotation = 0;
+    d.scale.border.display = false;
     d.scales.category.grid = Object.assign(d.scales.category.grid || {}, { display: false });
     d.scales.category.ticks = Object.assign(d.scales.category.ticks || {}, { font: categoryFont(sans, mono) });
     d.scales.linear.ticks = Object.assign(d.scales.linear.ticks || {}, { font: { family: mono, size: 12 } });
     if (d.scales.radialLinear) {
-      d.scales.radialLinear.ticks = Object.assign(d.scales.radialLinear.ticks || {}, { font: { family: mono, size: 12 }, showLabelBackdrop: false }); // no white boxes on the grey card
+      d.scales.radialLinear.ticks = Object.assign(d.scales.radialLinear.ticks || {}, { font: { family: mono, size: 12 }, showLabelBackdrop: false });
       d.scales.radialLinear.pointLabels = Object.assign(d.scales.radialLinear.pointLabels || {}, { font: { family: sans, size: 14 } });
     }
     d.maintainAspectRatio = false;
@@ -61,15 +59,15 @@
     legend.filter = function (item, data) { return !isReference(data.datasets[item.datasetIndex]); };
     tip.backgroundColor = resolve("var(--fill-primary)");
     tip.titleColor = tip.bodyColor = resolve("var(--text-primary-on)");
-    tip.titleFont = { family: sans, size: 12, weight: 500 }; // Base's weights stop at medium for labels
+    tip.titleFont = { family: sans, size: 12, weight: 500 };
     tip.bodyFont = { family: mono, size: 12, weight: 400 };
     tip.cornerRadius = 8; tip.padding = 10; tip.usePointStyle = true; tip.boxPadding = 4;
-    tip.callbacks.labelColor = outlinedSwatch; // a black series' dot would vanish on the dark tooltip
+    tip.callbacks.labelColor = outlinedSwatch;
     d.elements.line.borderWidth = 1.5;
     d.elements.line.borderCapStyle = "round"; d.elements.line.borderJoinStyle = "round";
-    d.datasets.line.cubicInterpolationMode = "monotone"; // smooth, but never past a real peak or dip
+    d.datasets.line.cubicInterpolationMode = "monotone";
     d.elements.point.hoverRadius = 4; d.elements.point.hitRadius = 8;
-    d.datasets.line.pointRadius = 0; // a line is the shape; a scatter keeps its points
+    d.datasets.line.pointRadius = 0;
     d.elements.bar.borderRadius = 3;
     applyLabelDefaults(sans, mono);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.animation = false;
@@ -79,8 +77,6 @@
   function indexAxis(chart) { return chart.config.options.indexAxis === "y" ? "y" : "x"; }
   function valueAxis(chart) { return indexAxis(chart) === "y" ? "x" : "y"; }
 
-  // Chart.js has already copied its defaults into each axis by now, so a setting still equal to the
-  // default counts as unset; one the chart changed stays.
   function applyChrome(chart) {
     if (!cartesian(chart)) return;
     var opts = chart.config.options, scales = opts.scales = opts.scales || {};
@@ -94,7 +90,7 @@
       var t = scales[id] && scales[id].ticks;
       if (scales[id].type !== "linear" || !t) return;
       if (t.stepSize === undefined && t.maxTicksLimit === undefined) t.maxTicksLimit = VALUE_LABELS_MAX;
-      var ownCallback = t.callback && t.callback !== Chart.Ticks.formatters.numeric; // the default counts as unset
+      var ownCallback = t.callback && t.callback !== Chart.Ticks.formatters.numeric;
       if (!ownCallback && id === "x" && yearAxis(chart)) t.callback = plainYear;
     });
     if (base === "y" && scales.y.type !== "linear" && scales.y.ticks.autoSkip !== false) scales.y.ticks.autoSkip = false;
@@ -105,7 +101,6 @@
     if (washed && v.min === undefined && v.suggestedMin === undefined && !v.beginAtZero) v.beginAtZero = true;
   }
 
-  // yearAxis reports an x axis whose values are all whole years, which a linear axis would write as "2,025".
   var FIRST_YEAR = 1000, LAST_YEAR = 2999;
   function isYear(v) { return typeof v === "number" && Number.isInteger(v) && v >= FIRST_YEAR && v <= LAST_YEAR; }
   function yearAxis(chart) {
@@ -119,7 +114,6 @@
     return isYear(value) ? String(value) : Chart.Ticks.formatters.numeric.call(this, value, index, ticks);
   }
 
-  // Headroom is the label's own size in pixels against the axis length. A bound the chart set stays.
   var LABEL_PAD_PX = 10, LABEL_HEIGHT_PX = 18, MAX_ROOM = 0.6;
   function roomAbove(chart, scale) {
     if (!chart.$baseRoom || scale.id !== valueAxis(chart)) return;
@@ -176,7 +170,6 @@
     });
   }
 
-  // The wash fades toward the zero line, so an area below zero is washed like one above it.
   function wash(token, opacity) {
     var edge = token ? withOpacity(token, opacity === undefined ? 1 : opacity) : function () { return resolve("var(--chart-muted)"); };
     return function (ctx) {
@@ -209,7 +202,6 @@
     var scales = chart.config.options.scales || {};
     return Object.keys(scales).some(function (id) { return scales[id] && scales[id].stacked; });
   }
-  // Area washes read lighter on a dark page, so they start stronger there.
   var FILL_OPACITY = { bubble: 0.35, radar: 0.2, area: function () { return darkTheme() ? 0.45 : 0.2; } };
   function darkTheme() {
     var theme = root.getAttribute("data-theme");
@@ -221,9 +213,7 @@
       return "rgba(" + c[0] + ", " + c[1] + ", " + c[2] + ", " + (c.length > 3 ? c[3] * a : a) + ")";
     };
   }
-  // It runs on every update, so datasets swapped in after the chart was built are colored too.
   function assignSeries(chart) {
-    // Only series left to the defaults are counted: a dashed target or a hand-colored dataset is not one.
     var datasets = chart.config.data.datasets, open = datasets.filter(function (ds) { return !colored(ds) && !ds.$baseColor; });
     var areas = open.filter(filled).length, next = 0, solidAreas = stacked(chart);
     var lines = palette(open.length, OVERLAPPING[chart.config.type] || areas > 0 || solidAreas);
@@ -232,13 +222,13 @@
       if (PER_POINT[type]) {
         var slices = palette((ds.data || []).length, true);
         if (!ds.backgroundColor) ds.backgroundColor = (ds.data || []).map(function (_, j) { return slices[j % slices.length]; });
-        if (!ds.borderColor) ds.borderColor = "var(--fill-tertiary)"; // the chart card's tint, so slices read as separate
+        if (!ds.borderColor) ds.borderColor = "var(--fill-tertiary)";
         return;
       }
-      if (isReference(ds) && ds.order === undefined) ds.order = -1; // drawn over bars, not hidden behind them
+      if (isReference(ds) && ds.order === undefined) ds.order = -1;
       if (ds.pointBackgroundColor && !ds.pointBorderColor) ds.pointBorderColor = ds.pointBackgroundColor;
       if (colored(ds) || ds.$baseColor) {
-        if (!ds.borderColor) ds.borderColor = ds.backgroundColor; // marks colored by their fill: the outline and dots match
+        if (!ds.borderColor) ds.borderColor = ds.backgroundColor;
         if (!ds.backgroundColor && !filled(ds)) ds.backgroundColor = ds.borderColor;
       } else {
         var color = lines[next++ % lines.length];
@@ -255,9 +245,8 @@
     if (FILL_OPACITY[type]) return withOpacity(color, FILL_OPACITY[type]);
     return color;
   }
-  // A dataset's data is values, not colors, so it is never scanned for tokens.
   function tokenSlots(node, slots) {
-    var proto = Object.getPrototypeOf(node); // Chart.js builds merged axis options with a null prototype
+    var proto = Object.getPrototypeOf(node);
     if (!Array.isArray(node) && proto !== Object.prototype && proto !== null) return slots;
     Object.keys(node).forEach(function (key) {
       var v = node[key];
@@ -427,7 +416,6 @@
   };
   var labels = {};
   Object.keys(LABELS).forEach(function (name) { Object.defineProperty(labels, name, { get: LABELS[name], enumerable: true }); });
-  // A chart that sets its own padding keeps it.
   var LAST_VALUE_ROOM_PX = 24;
   function roomForLabels(chart) {
     var opts = chart.config.options, dl = (opts.plugins && opts.plugins.datalabels) || {};
@@ -455,8 +443,6 @@
       return /^[\d$€£+\-−]/.test(label.trim()) ? { family: mono, size: 12 } : { family: sans, size: 14 };
     };
   }
-  // A canvas never asks the browser for a web font, so the chart fonts are loaded here and every chart is
-  // redrawn once they arrive; if they cannot load, the charts keep the fallback fonts they already drew in.
   function loadFonts() {
     if (!doc.fonts || !doc.fonts.load) return;
     var sans = cssVar("--sans"), mono = cssVar("--chart-mono");

@@ -5,7 +5,11 @@
    3) Código colorido (realce de sintaxe) */
 (function () {
   'use strict';
-  var TAU = Math.PI * 2, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TAU = Math.PI * 2;
+  /* Movimento: para quando o sistema pede menos movimento ou quando a pessoa usa "Pausar animações" */
+  function pedeParado() { return window.EEA11y ? window.EEA11y.parado() : matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  var still = pedeParado();
+  document.addEventListener('ee:movimento', function () { still = pedeParado(); });
   var DPR = Math.min(1.5, window.devicePixelRatio || 1);
   function vis(el, cb) {
     if (!('IntersectionObserver' in window)) { cb(true); return; }
@@ -54,7 +58,7 @@
           if (s.z <= 0.02) { S[i] = s = spawn(false); }
           var k = 1 / s.z, px = cx + s.x * F * k * 0.5, py = cy + s.y * F * k * 0.5;
           if (px < -40 || px > W + 40 || py < -40 || py > H + 40) { S[i] = spawn(false); continue; }
-          var near = 1 - s.z, tw = 0.75 + 0.25 * Math.sin(now / 420 + s.p);
+          var near = 1 - s.z, tw = still ? 0.9 : 0.75 + 0.25 * Math.sin(now / 420 + s.p);
           var r = (1.2 + near * near * 9) * s.b, a = Math.min(1, (0.25 + near * 1.1)) * tw;
           x.globalAlpha = a; x.drawImage(SPR[s.c], px - r * 2, py - r * 2, r * 4, r * 4);
           if (near > 0.55 && dive > 0.05) { /* rastro de velocidade ao mergulhar */

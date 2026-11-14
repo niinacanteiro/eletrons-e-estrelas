@@ -1,12 +1,18 @@
 <!doctype html>
 <html lang="pt-BR" data-theme="dark">
   <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5684430695830452" crossorigin="anonymous"></script>
     <meta name="lomadee" content="2324685" />
-    <meta name="google-site-verification" content="MHL9yTXpzzBWT_ZVFPidLEVv1pZMy-zlhARl7H9-MZk" />
-    <meta name="author" content="Nicoly Canteiro Araújo">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-site-verification" content="MHL9yTXpzzBWT_ZVFPidLEVv1pZMy-zlhARl7H9-MZk" />
+    <meta name="author" content="Nicoly Canteiro Araújo">
     <title>Elétrons e Estrelas — Engenharia Elétrica e Física explicadas por uma estudante</title>
+    <meta name="description" content="Engenharia Elétrica e Física explicadas por Nicoly Canteiro Araújo, estudante do IFMT: resumos de laboratório, equações resolvidas, simulações interativas de circuito RC, interpolação em Python, Arduino e um Sistema Solar em 3D." />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#000000" />
+    <!-- Acessibilidade: carregado cedo para aplicar as preferências salvas antes da página aparecer -->
+    <script src="acessibilidade.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -80,6 +86,8 @@
       .x-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 24px; }
       .x-field { display: grid; gap: 2px; }
       .x-field label { display: flex; justify-content: space-between; gap: 8px; font: var(--type-label); }
+      .x-field__top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font: var(--type-label); }
+      .x-field__top label { display: inline; }
       .x-field output { font: var(--type-small); font-family: "Geist Mono", ui-monospace, monospace; color: var(--text-secondary); }
       .x-field input[type="range"] { width: 100%; min-height: var(--tap); margin: 0; accent-color: var(--fill-primary); touch-action: pan-y; }
       .x-svg {
@@ -190,27 +198,251 @@ a:not(.btn){color:#D6DEEC}
 #rc-blade{transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
 #rc-fill{transition:opacity .3s}
 </style>
+
+<style>
+.sis{position:relative;width:min(640px,100%);aspect-ratio:1;margin:8px auto 0}
+.orb{position:absolute;left:50%;top:50%;width:var(--r);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.09);transform:translate(-50%,-50%);animation:sis-o var(--t) linear infinite;animation-delay:var(--d,0s);pointer-events:none}
+.slot{position:absolute;left:50%;top:0;transform:translate(-50%,-50%)}
+.cr{animation:sis-c var(--t) linear infinite;animation-delay:var(--d,0s)}
+.sis:hover .orb,.sis:hover .cr{animation-play-state:paused}
+@keyframes sis-o{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes sis-c{to{transform:rotate(-360deg)}}
+.pl{--s:40px;position:relative;display:block;width:var(--s);height:var(--s);padding:0;border:0;border-radius:50%;background:none;cursor:pointer;pointer-events:auto;transition:transform .25s}
+.pl:hover,.pl:focus-visible{transform:scale(1.25);outline:none}
+.pl i{position:absolute;inset:0;border-radius:50%;background-size:200% 100%;background-repeat:repeat-x;animation:sis-spin 14s linear infinite;box-shadow:inset -7px -4px 12px rgba(0,0,0,.85),inset 2px 1px 6px rgba(255,255,255,.18),0 0 14px rgba(160,190,255,.15)}
+@keyframes sis-spin{to{background-position:-200% 0}}
+.pl.anel::before{content:"";position:absolute;left:50%;top:50%;width:230%;height:62%;border-radius:50%;transform:translate(-50%,-50%) rotate(-18deg);border:4px solid rgba(225,205,160,.55);box-shadow:0 0 0 3px rgba(225,205,160,.18);pointer-events:none}
+.sol{position:absolute;left:50%;top:50%;--s:74px;transform:translate(-50%,-50%);z-index:2}
+.sol:hover,.sol:focus-visible{transform:translate(-50%,-50%) scale(1.1)}
+.sol i{box-shadow:0 0 30px 8px rgba(255,170,60,.55),0 0 80px 20px rgba(255,120,30,.25);animation-duration:30s}
+.sis-extra{display:flex;justify-content:center;gap:10px;margin-top:14px}
+.chip{padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#e9ecf4;font:inherit;cursor:pointer}
+.chip:hover{background:rgba(255,255,255,.12)}
+#fc{position:fixed;inset:0;z-index:9990;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .35s}
+#fc.on{opacity:1;pointer-events:auto}
+.fc-card{position:relative;width:min(380px,100%);height:260px;perspective:1200px}
+.fc-in{position:absolute;inset:0;transition:transform .8s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;cursor:pointer}
+#fc.flip .fc-in{transform:rotateY(180deg)}
+.fc-f,.fc-b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:26px 24px;display:flex;flex-direction:column;justify-content:center;gap:12px;color:#eef1f7;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.fc-b{transform:rotateY(180deg)}
+.fc-tag{margin:0;font:600 11px/1 ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#f3d27a}
+.fc-q{margin:0;font-size:1.3rem;font-weight:600}
+.fc-a{margin:0;font-size:.98rem;line-height:1.55}
+.fc-h{margin:0;font-size:12px;opacity:.6}
+.fc-x{position:absolute;top:-38px;right:0;background:none;border:0;color:#fff;font-size:28px;cursor:pointer;z-index:3}
+@media (prefers-reduced-motion:reduce){.orb,.cr,.pl i{animation:none}}
+</style>
+<style>
+#av,#av2{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
+#av.on,#av2.on{opacity:1;pointer-events:auto}
+.av-card{position:relative;width:min(400px,100%);padding:28px 24px 20px;border-radius:22px;text-align:center;color:#eef1f7;
+background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);
+backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15);transform:translateY(14px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+#av.on .av-card,#av2.on .av-card{transform:none}
+.av-x{z-index:5;width:40px;height:40px;line-height:40px;padding:0;position:absolute;top:6px;right:8px;background:none;border:0;color:rgba(255,255,255,.7);font-size:24px;cursor:pointer}
+.av-ico{font-size:26px;color:#f3d27a;text-shadow:0 0 16px rgba(243,210,122,.7)}
+.av-card h3{margin:6px 0 4px;font-size:1.35rem;font-weight:600;letter-spacing:.3px}
+.av-sub{margin:0 0 14px;font-size:.92rem;opacity:.75}
+.av-stars{display:flex;justify-content:center;gap:6px;margin-bottom:6px}
+.av-stars button{background:none;border:0;font-size:36px;line-height:1;cursor:pointer;color:rgba(255,255,255,.22);transition:transform .15s,color .2s,text-shadow .2s}
+.av-stars button:hover{transform:scale(1.15)}
+.av-stars button.lit{color:#f3d27a;text-shadow:0 0 14px rgba(243,210,122,.8)}
+.av-more{margin-top:10px;text-align:left}
+.av-lb{display:block;margin:8px 0 2px;font-size:.86rem;opacity:.85}
+.av-more textarea{width:100%;box-sizing:border-box;margin:5px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:.9rem;resize:none}
+.av-more textarea::placeholder{color:rgba(255,255,255,.5)}
+.av-rec{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0;font-size:.88rem}
+.av-rec span{opacity:.8;width:100%}.av-rec label{display:flex;gap:4px;align-items:center;cursor:pointer}
+.av-send{width:100%;margin-top:6px;padding:11px;border-radius:12px;border:0;background:linear-gradient(90deg,#e9c46a,#f3d27a);color:#111;font:inherit;font-weight:600;cursor:pointer}
+.av-ok{display:none;margin:12px 0 4px;font-size:1rem}
+#av.done .av-ok,#av2.done .av-ok{display:block}#av.done .av-stars,#av.done .av-sub,#av2.done .av-more,#av2.done .av-sub{display:none}
+.av-share{display:flex;gap:8px;margin-top:14px}
+.av-share a,.av-share button{flex:1;padding:9px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#eef1f7;text-decoration:none;font:inherit;font-size:.82rem;cursor:pointer}
+.av-share a:hover,.av-share button:hover{background:rgba(255,255,255,.12)}
+header.nav.glass{background:rgba(10,12,20,.62)!important;border-color:rgba(255,255,255,.14)!important}
+header.nav.glass a,header.nav.glass button{color:#eef1f7!important}
+header.nav .seg{background:rgba(255,255,255,.06)!important}
+header.nav .seg a{color:#c9d0dc!important}
+header.nav .seg a:hover{color:#fff!important}
+header.nav .seg a[aria-current="true"]{background:rgba(243,210,122,.18)!important;color:#f3d27a!important}
+header.nav .theme-btn{background:rgba(255,255,255,.08)!important;color:#eef1f7!important}
+#av-btn{position:fixed;right:16px;bottom:16px;z-index:9998;padding:9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#f3d27a;font:inherit;font-size:.9rem;cursor:pointer}
+
+
+/* ===== Cenas realistas: semáforo e cancela ===== */
+.x-scene{border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.06)}
+.x-scene text{font-family:inherit}
+.tl-brand{fill:#fff;font-size:15px;font-weight:700;letter-spacing:.12em}
+.tl-uno{fill:#fff;font-size:20px;font-weight:800;letter-spacing:.06em;opacity:.9}
+.tl-pin{fill:#cfe9ee;font-size:11px;font-weight:600}
+.tl-visor path{fill:#0c0d10}
+.tl-lens{stroke:#050608;stroke-width:2;transition:fill .25s,filter .25s}
+.tl-lens--r{fill:url(#lensRoff)}.tl-lens--y{fill:url(#lensYoff)}.tl-lens--g{fill:url(#lensGoff)}
+.tl-lens--r.is-on{fill:url(#lensRon);filter:drop-shadow(0 0 10px #ff3b30) drop-shadow(0 0 22px rgba(255,59,48,.6))}
+.tl-lens--y.is-on{fill:url(#lensYon);filter:drop-shadow(0 0 10px #ffc107) drop-shadow(0 0 22px rgba(255,193,7,.6))}
+.tl-lens--g.is-on{fill:url(#lensGon);filter:drop-shadow(0 0 10px #22e06b) drop-shadow(0 0 22px rgba(34,224,107,.6))}
+#tl-dots circle{fill:#bfe6ff;filter:drop-shadow(0 0 4px #7cc8ff)}
+.gt-tiny{fill:#dbe8ff;font-size:6px;font-weight:700;letter-spacing:.05em}
+.gt-lcd{fill:#5dff9a;font:700 12px ui-monospace,Menlo,Consolas,monospace;filter:drop-shadow(0 0 3px rgba(93,255,154,.7))}
+.gt-beam{stroke:#7cc8ff;stroke-width:1.5;stroke-dasharray:3 5;opacity:1;transition:opacity .3s;animation:gtdash .6s linear infinite}
+@keyframes gtdash{to{stroke-dashoffset:-8}}
+.gt-waves path{fill:none;stroke:#7cc8ff;stroke-width:2;stroke-linecap:round;opacity:0;transform-box:fill-box;transform-origin:right center;animation:gtwave 1.5s ease-out infinite}
+.gt-waves path:nth-child(2){animation-delay:.5s}.gt-waves path:nth-child(3){animation-delay:1s}
+@keyframes gtwave{0%{opacity:.95;transform:translateX(0) scale(.6)}100%{opacity:0;transform:translateX(-46px) scale(1.6)}}
+.gt-arm{transform-box:view-box;transform-origin:461px 122px;transition:transform .8s cubic-bezier(.3,.9,.3,1)}
+.gt-arm.is-open{transform:rotate(80deg)}
+.gt-led{fill:#ff3b30;filter:drop-shadow(0 0 6px #ff3b30);transition:fill .3s,filter .3s}
+.gt-led.is-open{fill:#22e06b;filter:drop-shadow(0 0 6px #22e06b)}
+#gate-sim{margin-top:8px}
+section[id],h2,h3,.x-lab{scroll-margin-top:84px}
+@media (prefers-reduced-motion:reduce){.gt-waves path,.gt-beam{animation:none}}
+
+/* ===== Entrada sem caixa, fundida ao céu ===== */
+.hero{border-radius:0!important;box-shadow:none!important;background:transparent!important;border:0!important;overflow:visible}
+.hero__img{-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 75%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 75%,transparent 100%);mask-composite:intersect;}
+.hero::after{background:radial-gradient(ellipse 60% 55% at 35% 75%,rgba(0,0,0,.45),transparent 70%)!important;-webkit-mask-image:none;mask-image:none}
+.hero__stars{display:none!important}
+.hero>.callout{border-color:rgba(255,255,255,.08)!important;background:rgba(10,12,24,.35)!important;backdrop-filter:blur(6px)}
+.hero__credit{opacity:.55}
+.tw{position:relative}
+.tw-ghost{visibility:hidden}
+.tw-live{position:absolute;inset:0}
+.tw-live::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-.15em;background:#f3d27a;box-shadow:0 0 8px #f3d27a;animation:twblink 1s steps(1) infinite}
+.tw.done .tw-live::after{animation:twblink 1s steps(1) 3 forwards}
+@keyframes twblink{50%{opacity:0}}
+
+/* ===== Rolagem leve ===== */
+html{scroll-behavior:smooth}
+#cosmos{will-change:transform;transform:translateZ(0)}
+.hero__img--drift{animation:none!important;will-change:auto!important}
+
+/* ===== Semáforo elegante ===== */
+.tl-brand{fill:#fff;font-size:14px;font-weight:800;letter-spacing:.14em}
+.tl-uno{fill:#fff;font-size:11px;font-weight:700;letter-spacing:.3em;opacity:.75}
+.tl-pin{fill:#d8f3f7;font-size:10px;font-weight:600;opacity:.85}
+.tl-on{fill:#8affb0;filter:drop-shadow(0 0 4px #8affb0)}
+.tl-hood path{fill:#07080b}
+.tl-ring{fill:#050608;stroke:#3a404b;stroke-width:1.2}
+.tl-leds circle{transition:fill .3s,opacity .3s;opacity:.35}
+.tl-leds--r circle{fill:#7a2620}.tl-leds--y circle{fill:#7a5e1a}.tl-leds--g circle{fill:#1e6a3e}
+.tl-bloom{opacity:0;transition:opacity .35s}
+.tl-glass{transition:fill .3s}
+.tl-unit.is-on .tl-bloom{opacity:1}
+.tl-unit.is-on .tl-leds circle{opacity:1}
+.tl-unit.is-on .tl-leds--r circle{fill:#ffd9d4}#tl-r.is-on .tl-glass{fill:#ff3b30}
+.tl-unit.is-on .tl-leds--y circle{fill:#fff3c9}#tl-y.is-on .tl-glass{fill:#ffb300}
+.tl-unit.is-on .tl-leds--g circle{fill:#d6ffe6}#tl-g.is-on .tl-glass{fill:#16d36a}
+#tl-dots circle{fill:#d9f1ff;filter:drop-shadow(0 0 5px #8fd3ff)}
+
+
+/* ===== Ajuste final: entrada limpa ===== */
+.hero{min-height:calc(100vh - 72px)!important;min-height:calc(100svh - 72px)!important}
+#sobre{margin-top:max(8vh,48px)!important;opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+#sobre.is-in{opacity:1;transform:none}
+.floors{opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+.floors.is-show{opacity:1;visibility:visible}
+@media (min-width:760px){
+.hero>.callout{top:auto!important;left:auto!important;right:clamp(16px,2.4vw,24px)!important;bottom:36px!important;max-width:none!important;display:flex!important;align-items:center;gap:10px;padding:6px 6px 6px 14px!important;border-radius:999px!important;background:rgba(10,12,24,.35)!important;border:1px solid rgba(255,255,255,.12)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:none!important}
+.hero>.callout .callout__lead{display:none!important}
+.hero>.callout .callout__head{margin:0!important;font-size:12px!important;color:rgba(255,255,255,.7)!important}
+.hero>.callout .btn{min-height:30px!important;padding:5px 12px!important;font-size:12px!important;border-radius:999px!important}
+}
+/* ===== Entrada: mergulho no universo ===== */
+html,body{overflow-x:clip}
+.hero__img{left:50%!important;right:auto!important;width:100vw!important;max-width:none!important;top:-8%!important;height:116%!important;transform:translateX(-50%);transform-origin:50% 45%;filter:brightness(1.18) contrast(1.18) saturate(1.55)!important;will-change:transform,opacity}
+.hero__warp{position:absolute;top:-8%;left:50%;width:100vw;height:116%;transform:translateX(-50%);pointer-events:none;z-index:1;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%)}
+.hero h1{text-shadow:0 0 28px rgba(150,170,255,.35)}
+
+/* ===== Sistema Solar 3D ===== */
+.sis3d{position:relative;width:100%;margin:8px auto 0;border-radius:20px;background:radial-gradient(ellipse at center,rgba(8,10,24,.75),rgba(4,5,12,0) 72%)}
+.sis3d canvas{display:block;width:100%;cursor:grab;touch-action:none}
+.sis3d canvas.is-drag{cursor:grabbing}
+.sis-tip{position:absolute;left:0;top:0;padding:5px 11px;border-radius:999px;background:rgba(10,12,24,.75);border:1px solid rgba(243,210,122,.45);color:#f3d27a;font:600 12px/1 inherit;letter-spacing:.06em;pointer-events:none;opacity:0;translate:-50% 0;transition:opacity .2s}
+.sis-tip.on{opacity:1}
+.sis-ctl{position:absolute;right:14px;bottom:14px;display:flex;gap:8px}
+.sis-ctl button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,12,24,.55);color:#eef1f7;font-size:18px;cursor:pointer}
+.sis-ctl button:hover{border-color:rgba(243,210,122,.6);color:#f3d27a}
+.sis-hint{position:absolute;left:16px;bottom:16px;margin:0;font-size:12px;color:rgba(238,241,247,.55)}
+.sis-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ===== Gráfico de interpolação elegante ===== */
+#ip-svg{background:transparent!important;border:0!important;border-radius:14px;box-shadow:none}
+#ip-svg .ip-gal{transform-box:fill-box;transform-origin:center;animation:ipspin 26s linear infinite;pointer-events:none}
+#ip-svg .ip-gal--rev{animation-duration:34s;animation-direction:reverse}
+#ip-svg .ip-gal image{filter:drop-shadow(0 0 6px rgba(243,210,122,.35))}
+#ip-svg .ip-core{fill:#fff;stroke:none;filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px rgba(243,210,122,.8))}
+@keyframes ipspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#ip-svg .ip-gal{animation:none}}
+#ip-svg .ip-grid{stroke:rgba(255,255,255,.07);stroke-width:1;stroke-dasharray:2 5}
+#ip-svg .ip-axis{stroke:rgba(255,255,255,.28);stroke-width:1}
+#ip-svg .x-muted{fill:rgba(235,232,226,.45);font:500 10.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+#ip-svg .x-curve{stroke:url(#ipLine);stroke-width:2.4;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(243,210,122,.45))}
+#ip-svg .ip-halo{fill:rgba(243,210,122,.08);stroke:rgba(243,210,122,.28);stroke-width:1;pointer-events:none}
+#ip-svg .ip-dot{fill:#0b0d14;stroke:#f3d27a;stroke-width:2.2;filter:drop-shadow(0 0 5px rgba(243,210,122,.6))}
+#ip-svg .ip-lab{fill:rgba(243,236,220,.9);font:500 10.5px ui-monospace,SFMono-Regular,Menlo,monospace;paint-order:stroke;stroke:rgba(5,6,10,.85);stroke-width:4px;stroke-linejoin:round}
+#ip-svg #ip-probe-text{fill:#f3d27a;font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;paint-order:stroke;stroke:rgba(5,6,10,.85);stroke-width:4px}
+#ip-svg #ip-probe-line{stroke:rgba(243,210,122,.4)}
+
+/* ===== Código colorido (tema escuro de editor) ===== */
+.code-win{display:flex;flex-direction:column;min-width:0;align-self:start}
+.code-win>pre.x-code{margin:0!important}
+.code-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#181b24;border:1px solid rgba(255,255,255,.08);border-bottom:0;border-radius:12px 12px 0 0}
+.code-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.code-bar i:nth-child(2){background:#febc2e}.code-bar i:nth-child(3){background:#28c840}
+.code-bar span{margin-left:8px;font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;color:rgba(230,235,245,.6)}
+pre.x-code{background:#11131a!important;color:#d4d4d4!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:12px;padding:14px 16px!important;font:13px/1.6 ui-monospace,Menlo,Consolas,"Fira Code",monospace!important;overflow:auto}
+pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
+.tk-k{color:#c586c0}.tk-t{color:#569cd6}.tk-f{color:#dcdcaa}.tk-s{color:#ce9178}.tk-n{color:#b5cea8}.tk-c{color:#86b874;font-style:italic}.tk-b{color:#4ec9b0}.tk-cst{color:#4fc1ff}.tk-v{color:#9cdcfe}.tk-o{color:#d4d4d4}
+.x-code .is-active{background:rgba(243,210,122,.12)!important;color:inherit!important;box-shadow:inset 3px 0 0 #f3d27a}
+/* espaços de anúncio discretos (Adsterra banner/native, sem pop-up) */
+.x-ad{display:flex!important;flex-direction:column;align-items:center;gap:8px;min-height:0;margin:40px auto;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(10,12,24,.35);max-width:760px}
+.x-ad>span{align-self:flex-start;font-size:11px;opacity:.7}
+.x-ad__slot{width:100%;display:flex;justify-content:center;overflow:hidden}
+.x-ad__slot iframe{max-width:100%;border:0}
+
+#qr{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
+#qr.on{opacity:1;pointer-events:auto}#qr.on .av-card{transform:none}
+.qr-card{width:min(320px,100%)}
+.qr-img{display:block;width:200px;height:200px;margin:4px auto 6px;padding:10px;border-radius:16px;background:#fff;image-rendering:pixelated;box-shadow:0 0 0 1px rgba(243,210,122,.5),0 0 28px rgba(243,210,122,.25)}
+#qr-btn{position:fixed;right:140px;bottom:16px;z-index:9998;display:flex;align-items:center;gap:6px;padding:11px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#eef1f7;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.4);transition:transform .2s,border-color .2s}
+#qr-btn:hover{transform:translateY(-2px);border-color:rgba(243,210,122,.6)}
+/* botões da avaliação */
+.av-send{position:relative;overflow:hidden;padding:13px!important;border-radius:999px!important;background:linear-gradient(135deg,#fff1c1 0%,#f3d27a 35%,#d9a441 100%)!important;color:#1a1305!important;font-weight:700!important;letter-spacing:.04em;box-shadow:0 8px 24px rgba(243,210,122,.35),inset 0 1px 0 rgba(255,255,255,.7);transition:transform .2s,box-shadow .2s}
+.av-send::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.av-send:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(243,210,122,.55),inset 0 1px 0 rgba(255,255,255,.7)}
+.av-send:hover::after{transform:translateX(120%)}
+.av-send:active{transform:translateY(0) scale(.98)}
+.av-share a,.av-share button{display:flex;align-items:center;justify-content:center;gap:6px;border-color:rgba(243,210,122,.28)!important;transition:background .2s,border-color .2s,transform .2s}
+.av-share a:hover,.av-share button:hover{border-color:rgba(243,210,122,.7)!important;transform:translateY(-1px)}
+#av-btn{padding:11px 18px!important;font-weight:600;letter-spacing:.03em;border:1px solid rgba(243,210,122,.45)!important;background:linear-gradient(135deg,rgba(243,210,122,.18),rgba(255,255,255,.05))!important;box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 18px rgba(243,210,122,.25);transition:transform .2s,box-shadow .2s;animation:avpulse 3.2s ease-in-out infinite}
+#av-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.45),0 0 26px rgba(243,210,122,.5)}
+@keyframes avpulse{0%,100%{box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 14px rgba(243,210,122,.2)}50%{box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 26px rgba(243,210,122,.45)}}
+.av-rec input{accent-color:#f3d27a}
+@media (prefers-reduced-motion:reduce){#av-btn{animation:none}}
+</style>
+    <link rel="stylesheet" href="acessibilidade.css" />
 </head>
   <body>
+<a class="a11y-pular" href="#conteudo">Pular para o conteúdo</a>
 <canvas id="cosmos" aria-hidden="true"></canvas>
-<nav class="floors" aria-label="Andares da página"><p class="floors__title">ANDARES</p><ol><span class="floors__fill" aria-hidden="true"></span><li><a href="#top" data-floor="top"><span class="floors__n">01</span><span class="floors__dot"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__n">02</span><span class="floors__dot"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__n">03</span><span class="floors__dot"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__n">04</span><span class="floors__dot"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#python" data-floor="python"><span class="floors__n">05</span><span class="floors__dot"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__n">06</span><span class="floors__dot"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__n">07</span><span class="floors__dot"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#material" data-floor="material"><span class="floors__n">08</span><span class="floors__dot"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__n">09</span><span class="floors__dot"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
+<nav class="floors" aria-label="Andares da página"><p class="floors__title" aria-hidden="true">ANDARES</p><ol><li class="floors__fill" role="none" aria-hidden="true"></li><li><a href="#top" data-floor="top"><span class="floors__n" aria-hidden="true">01</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__n" aria-hidden="true">02</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__n" aria-hidden="true">03</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__n" aria-hidden="true">04</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#python" data-floor="python"><span class="floors__n" aria-hidden="true">05</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__n" aria-hidden="true">06</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__n" aria-hidden="true">07</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#material" data-floor="material"><span class="floors__n" aria-hidden="true">08</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__n" aria-hidden="true">09</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
     <div class="page" id="top">
       <header class="nav glass" data-auto></header>
-      <main class="main">
+      <main class="main" id="conteudo" tabindex="-1">
         <section class="hero">
           <img class="hero__img hero__img--drift" src="via-lactea-nebulosas.jpg" alt="Faixa da Via Láctea com nebulosas rosa, roxas e laranja" />
           <div class="hero__copy">
             <p class="hero__eyebrow">Engenharia Elétrica e Física · gratuito</p>
             <h1>Elétrons e Estrelas</h1>
-            <p class="hero__sub tw" aria-label="Engenharia Elétrica e Física explicadas por uma estudante: resumos, equações resolvidas e simulações de aulas de laboratório reais."><span class="tw-ghost" aria-hidden="true">Engenharia Elétrica e Física explicadas por uma estudante: resumos, equações resolvidas e simulações de aulas de laboratório reais.</span><span class="tw-live" aria-hidden="true"></span></p>
+            <p class="hero__sub tw"><span class="a11y-sr">Engenharia Elétrica e Física explicadas por uma estudante: resumos, equações resolvidas e simulações de aulas de laboratório reais.</span><span class="tw-ghost" aria-hidden="true">Engenharia Elétrica e Física explicadas por uma estudante: resumos, equações resolvidas e simulações de aulas de laboratório reais.</span><span class="tw-live" aria-hidden="true"></span></p>
             <p class="hero__meta">Por Nicoly Canteiro (Nina) · Bacharelado em Engenharia Elétrica · Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso, Campus Pontes e Lacerda, Fronteira Oeste</p>
           </div>
           <aside class="callout" aria-label="Próximo passo">
-            <p class="callout__head">✦ Por onde começar</p>
+            <p class="callout__head"><span aria-hidden="true">✦ </span>Por onde começar</p>
             <p class="callout__lead"><strong>Comece pelo circuito RC.</strong> A carga do capacitor em quatro passos curtos.</p>
             <a class="btn" href="#rc">Comece pelo circuito RC</a>
           </aside>
-          <p class="hero__credit">Foto: ESO (CC BY 4.0)</p>
+          <p class="hero__credit">Foto: <abbr title="Observatório Europeu do Sul">ESO</abbr> (CC BY 4.0)</p>
         </section>
 
         <section class="section" id="sobre">
@@ -250,15 +482,15 @@ a:not(.btn){color:#D6DEEC}
             </div>
             <div class="x-controls">
               <div class="x-field">
-                <label for="rc-vs">Tensão V<sub>s</sub> <output id="rc-vs-out">12 V</output></label>
+                <div class="x-field__top"><label for="rc-vs">Tensão V<sub>s</sub></label> <output id="rc-vs-out" for="rc-vs">12 V</output></div>
                 <input type="range" id="rc-vs" min="1" max="24" step="0.5" value="12" />
               </div>
               <div class="x-field">
-                <label for="rc-r">Resistor R <output id="rc-r-out">10 kΩ</output></label>
+                <div class="x-field__top"><label for="rc-r">Resistor R</label> <output id="rc-r-out" for="rc-r">10 kΩ</output></div>
                 <input type="range" id="rc-r" min="0" max="1000" step="1" value="667" />
               </div>
               <div class="x-field">
-                <label for="rc-c">Capacitor C <output id="rc-c-out">100 µF</output></label>
+                <div class="x-field__top"><label for="rc-c">Capacitor C</label> <output id="rc-c-out" for="rc-c">100 µF</output></div>
                 <input type="range" id="rc-c" min="0" max="1000" step="1" value="667" />
               </div>
             </div>
@@ -295,7 +527,7 @@ a:not(.btn){color:#D6DEEC}
               <path id="rc-path-d" d="M132 180 V68 L160 40 H360 V180 Z" fill="none" />
               <g id="rc-dots"></g>
             </svg>
-            <section class="stats" aria-live="polite">
+            <section class="stats" aria-label="Medidas do circuito RC">
               <div class="stat"><span class="stat__fig" id="rc-tau">1 s</span><span class="stat__label">τ = RC</span></div>
               <div class="stat"><span class="stat__fig" id="rc-v">0,00 V</span><span class="stat__label">v<sub>C</sub></span></div>
               <div class="stat"><span class="stat__fig" id="rc-i">0 mA</span><span class="stat__label">Corrente i</span></div>
@@ -340,11 +572,16 @@ a:not(.btn){color:#D6DEEC}
           </div>
           
           <div class="links">
-            <a class="btn" href="https://github.com/niinacanteiro/relatorios-latex" target="_blank" rel="noopener">Fonte: relatorios-latex no GitHub</a>
+            <a class="btn" href="https://github.com/niinacanteiro/relatorios-latex" target="_blank" rel="noopener noreferrer">Fonte: relatorios-latex no GitHub<span class="a11y-sr"> (abre em nova aba)</span></a>
           </div>
         </section>
 
-        <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
+        <aside class="x-ad" aria-label="Publicidade 1"><span>Publicidade</span>
+          <div class="x-ad__slot">
+            <script async="async" data-cfasync="false" src="https://bauval.org/21/f2e8efa4d2fd37ecc5c0f7f1d00db647"></script>
+            <div id="container-f2e8efa4d2fd37ecc5c0f7f1d00db647"></div>
+          </div>
+        </aside>
 
         <section class="section" id="potencia">
           <div class="head">
@@ -376,7 +613,7 @@ a:not(.btn){color:#D6DEEC}
             <p class="x-eq__line">P(x) = Σ<sub>i=0</sub><sup>2</sup> y<sub>i</sub> L<sub>i</sub>(x)</p>
             <p class="x-eq__line">L<sub>i</sub>(x) = Π<sub>j≠i</sub> (x − x<sub>j</sub>) / (x<sub>i</sub> − x<sub>j</sub>)</p>
           </div>
-          <pre class="x-code"><code>import numpy as np
+          <pre class="x-code" tabindex="0" role="region" aria-label="Código Python: interpolação quadrática"><code>import numpy as np
 def interp_quadratica(xs, ys, x):
     total = 0
     for i in range(3):
@@ -394,7 +631,7 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
               <h3>Como usar</h3>
               <p class="fineprint">Arraste os três pontos brilhantes; a parábola de Lagrange se redesenha na hora. Passe o mouse ou toque no gráfico para ler P(x) naquele x.</p>
             </div>
-            <svg class="x-svg x-pg" id="ip-svg" viewBox="0 0 420 280" role="img" aria-label="Gráfico com três pontos arrastáveis e a parábola que passa por eles">
+            <svg class="x-svg x-pg" id="ip-svg" viewBox="0 0 420 280" role="img" aria-label="Gráfico com três pontos arrastáveis e a parábola que passa por eles. Para ajustar sem arrastar, use os campos logo abaixo.">
               <g id="ip-grid"></g>
               <path id="ip-curve" class="x-curve" d="" />
               <g id="ip-probe" style="display:none">
@@ -404,7 +641,17 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
               </g>
               <g id="ip-pts"></g>
             </svg>
-            <section class="stats" aria-live="polite">
+            <details class="ip-teclado">
+              <summary>Ajustar os pontos sem arrastar</summary>
+              <div class="ip-grade">
+                <fieldset><legend>Ponto 1</legend><label>x<input type="number" id="ip-p0x" step="0.1" min="0" max="6" inputmode="decimal" /></label><label>y<input type="number" id="ip-p0y" step="0.1" min="-4" max="20" inputmode="decimal" /></label></fieldset>
+                <fieldset><legend>Ponto 2</legend><label>x<input type="number" id="ip-p1x" step="0.1" min="0" max="6" inputmode="decimal" /></label><label>y<input type="number" id="ip-p1y" step="0.1" min="-4" max="20" inputmode="decimal" /></label></fieldset>
+                <fieldset><legend>Ponto 3</legend><label>x<input type="number" id="ip-p2x" step="0.1" min="0" max="6" inputmode="decimal" /></label><label>y<input type="number" id="ip-p2y" step="0.1" min="-4" max="20" inputmode="decimal" /></label></fieldset>
+                <fieldset><legend>Ler P(x)</legend><label>x<input type="number" id="ip-px-in" step="0.1" min="0" max="6" inputmode="decimal" /></label></fieldset>
+              </div>
+              <p class="ip-dica" id="ip-dica">Use as setas ↑ e ↓ para mudar 0,1 por vez. Os valores de x ficam em ordem (ponto 1 &lt; ponto 2 &lt; ponto 3).</p>
+            </details>
+            <section class="stats" aria-label="Coeficientes da parábola">
               <div class="stat"><span class="stat__fig" id="ip-a">1,00</span><span class="stat__label">a</span></div>
               <div class="stat"><span class="stat__fig" id="ip-b">0,00</span><span class="stat__label">b</span></div>
               <div class="stat"><span class="stat__fig" id="ip-c">0,00</span><span class="stat__label">c</span></div>
@@ -413,11 +660,16 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
             <p class="x-status" id="ip-eq">P(x) = 1,00x² + 0,00x + 0,00</p>
           </div>
           <div class="links">
-            <a class="btn" href="https://github.com/niinacanteiro/Metodos_Computacionais" target="_blank" rel="noopener">Fonte: Metodos_Computacionais no GitHub</a>
+            <a class="btn" href="https://github.com/niinacanteiro/Metodos_Computacionais" target="_blank" rel="noopener noreferrer">Fonte: Metodos_Computacionais no GitHub<span class="a11y-sr"> (abre em nova aba)</span></a>
           </div>
         </section>
 
-        <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
+        <aside class="x-ad" aria-label="Publicidade 2"><span>Publicidade</span>
+          <div class="x-ad__slot">
+            <script>atOptions = { 'key' : '3840ce2c7eacdb9a120148efc2173ce1', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };</script>
+            <script src="https://bauval.org/22/3840ce2c7eacdb9a120148efc2173ce1"></script>
+          </div>
+        </aside>
 
         <section class="section" id="arduino" data-nav="Arduino">
           <div class="head">
@@ -428,12 +680,12 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
             <div>
               <h3>Semáforo com Arduino</h3>
               <p>Manual de instrução escrito em LaTeX, passo a passo.</p>
-              <p><a class="link" href="https://github.com/niinacanteiro/Manual-de-Instrucao-LaTex" target="_blank" rel="noopener">Manual-de-Instrucao-LaTex</a></p>
+              <p><a class="link" href="https://github.com/niinacanteiro/Manual-de-Instrucao-LaTex" target="_blank" rel="noopener noreferrer">Manual-de-Instrucao-LaTex<span class="a11y-sr"> (abre em nova aba)</span></a></p>
             </div>
             <div>
               <h3>Simulações no Tinkercad</h3>
               <p>Semáforo e cancela automática com sensor.</p>
-              <p><a class="link" href="https://github.com/niinacanteiro/tinkercad-circuitos" target="_blank" rel="noopener">tinkercad-circuitos</a></p>
+              <p><a class="link" href="https://github.com/niinacanteiro/tinkercad-circuitos" target="_blank" rel="noopener noreferrer">tinkercad-circuitos<span class="a11y-sr"> (abre em nova aba)</span></a></p>
             </div>
           </div>
           <div class="x-lab" id="tl-lab">
@@ -505,7 +757,7 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
   <path id="tl-p2" d="M191 100 C260 100 300 82 366 82 L452 82 L452 236 C430 250 400 262 330 262 C260 262 250 215 191 215" fill="none"/>
   <g id="tl-dots"></g>
 </svg>
-              <pre class="x-code" id="tl-code"><code><span class="x-ln">void loop() {</span><span class="x-ln" data-l="0">  digitalWrite(VERDE, HIGH);</span><span class="x-ln" data-l="0">  delay(5000);  // verde 5 s</span><span class="x-ln">  digitalWrite(VERDE, LOW);</span><span class="x-ln" data-l="1">  digitalWrite(AMARELO, HIGH);</span><span class="x-ln" data-l="1">  delay(2000);  // amarelo 2 s</span><span class="x-ln">  digitalWrite(AMARELO, LOW);</span><span class="x-ln" data-l="2">  digitalWrite(VERMELHO, HIGH);</span><span class="x-ln" data-l="2">  delay(5000);  // vermelho 5 s</span><span class="x-ln">  digitalWrite(VERMELHO, LOW);</span><span class="x-ln">}</span></code></pre>
+              <pre class="x-code" id="tl-code" tabindex="0" role="region" aria-label="Código Arduino do semáforo"><code><span class="x-ln">void loop() {</span><span class="x-ln" data-l="0">  digitalWrite(VERDE, HIGH);</span><span class="x-ln" data-l="0">  delay(5000);  // verde 5 s</span><span class="x-ln">  digitalWrite(VERDE, LOW);</span><span class="x-ln" data-l="1">  digitalWrite(AMARELO, HIGH);</span><span class="x-ln" data-l="1">  delay(2000);  // amarelo 2 s</span><span class="x-ln">  digitalWrite(AMARELO, LOW);</span><span class="x-ln" data-l="2">  digitalWrite(VERMELHO, HIGH);</span><span class="x-ln" data-l="2">  delay(5000);  // vermelho 5 s</span><span class="x-ln">  digitalWrite(VERMELHO, LOW);</span><span class="x-ln">}</span></code></pre>
             </div>
           </div>
           <div class="x-lab" id="gate-lab">
@@ -516,10 +768,10 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
             </div>
             <div class="x-controls">
               <div class="x-field">
-                <label for="gate-d">Distância do carro <output id="gate-d-out">60 cm</output></label>
+                <div class="x-field__top"><label for="gate-d">Distância do carro</label> <output id="gate-d-out" for="gate-d">60 cm</output></div>
                 <input type="range" id="gate-d" min="0" max="100" step="1" value="60" />
               </div>
-              <button type="button" class="btn" id="gate-sim">▶ Simular passagem</button>
+              <button type="button" class="btn" id="gate-sim"><span aria-hidden="true">▶ </span>Simular passagem</button>
             </div>
             <p class="x-status" id="gate-status" aria-live="polite">Cancela fechada</p>
             <div class="x-two">
@@ -576,7 +828,7 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
   <circle id="gate-led" class="gt-led" cx="461" cy="102" r="5"/>
   
 </svg>
-              <pre class="x-code" id="gate-code"><code><span class="x-ln">long d = medirDistancia();  // cm</span><span class="x-ln" data-g="open">if (d &lt; 20) servo.write(90);  // abre</span><span class="x-ln" data-g="closed">else        servo.write(0);   // fecha</span></code></pre>
+              <pre class="x-code" id="gate-code" tabindex="0" role="region" aria-label="Código Arduino da cancela"><code><span class="x-ln">long d = medirDistancia();  // cm</span><span class="x-ln" data-g="open">if (d &lt; 20) servo.write(90);  // abre</span><span class="x-ln" data-g="closed">else        servo.write(0);   // fecha</span></code></pre>
             </div>
           </div>
         </section>
@@ -606,52 +858,19 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
             <h2>Toque em um planeta</h2>
             <p>Gire o Sistema Solar com o mouse ou o dedo. Cada astro abre um flash card; vire o card para ver a resposta.</p>
           </div>
-          <div class="sis3d" aria-label="Sistema Solar em 3D: arraste para girar e toque num planeta">
-            <canvas></canvas>
+          <div class="sis3d" role="group" aria-label="Sistema Solar em 3D: arraste para girar e toque num planeta">
+            <canvas aria-hidden="true"></canvas>
             <span class="sis-tip" aria-hidden="true"></span>
-            <div class="sis-ctl"><button type="button" data-zoom="out" aria-label="Afastar">−</button><button type="button" data-zoom="in" aria-label="Aproximar">+</button></div>
-            <p class="sis-hint">Arraste para girar · toque num planeta</p>
-            <div class="sis-sr"><button class="pl" data-k="Elétrons e estrelas">Sol</button><button class="pl" data-k="Terra">Terra</button><button class="pl" data-k="Marte">Marte</button><button class="pl" data-k="Júpiter">Júpiter</button><button class="pl" data-k="Saturno">Saturno</button><button class="pl" data-k="Netuno">Netuno</button></div>
+            <div class="sis-ctl"><button type="button" data-zoom="out" aria-label="Afastar o Sistema Solar">−</button><button type="button" data-zoom="in" aria-label="Aproximar o Sistema Solar">+</button></div>
+            <p class="sis-hint" aria-hidden="true">Arraste para girar · toque num planeta</p>
+            <div class="sis-sr" role="group" aria-label="Abrir o flash card de um astro"><button type="button" class="pl" data-k="Elétrons e estrelas" aria-haspopup="dialog">Sol</button><button type="button" class="pl" data-k="Terra" aria-haspopup="dialog">Terra</button><button type="button" class="pl" data-k="Marte" aria-haspopup="dialog">Marte</button><button type="button" class="pl" data-k="Júpiter" aria-haspopup="dialog">Júpiter</button><button type="button" class="pl" data-k="Saturno" aria-haspopup="dialog">Saturno</button><button type="button" class="pl" data-k="Netuno" aria-haspopup="dialog">Netuno</button></div>
           </div>
           <div class="sis-extra">
-            <button class="chip" data-k="Galáxias">&#10022; Galáxias</button>
-            <button class="chip" data-k="Nebulosas">&#10022; Nebulosas</button>
+            <button type="button" class="chip" data-k="Galáxias" aria-haspopup="dialog"><span aria-hidden="true">&#10022; </span>Galáxias</button>
+            <button type="button" class="chip" data-k="Nebulosas" aria-haspopup="dialog"><span aria-hidden="true">&#10022; </span>Nebulosas</button>
           </div>
-          <div id="fc" aria-hidden="true"><div class="fc-card" role="dialog" aria-modal="true"><button class="fc-x" aria-label="Fechar">&times;</button><div class="fc-in"><div class="fc-f"><p class="fc-tag"></p><p class="fc-q"></p><p class="fc-h">toque para virar &#10022;</p></div><div class="fc-b"><p class="fc-tag"></p><p class="fc-a"></p><p class="fc-h">toque para voltar</p></div></div></div></div>
+          <div id="fc" aria-hidden="true" inert><div class="fc-card" role="dialog" aria-modal="true" aria-labelledby="fc-titulo"><button type="button" class="fc-x" aria-label="Fechar flash card"><span aria-hidden="true">&times;</span></button><div class="fc-in"><div class="fc-f"><p class="fc-tag"></p><p class="fc-q" id="fc-titulo"></p><button type="button" class="fc-h fc-virar" aria-label="toque para virar e ver a resposta">toque para virar <span aria-hidden="true">&#10022;</span></button></div><div class="fc-b"><p class="fc-tag"></p><p class="fc-a"></p><button type="button" class="fc-h fc-virar" aria-label="toque para voltar à pergunta">toque para voltar</button></div></div></div></div>
         </section>
-<style>
-.sis{position:relative;width:min(640px,100%);aspect-ratio:1;margin:8px auto 0}
-.orb{position:absolute;left:50%;top:50%;width:var(--r);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.09);transform:translate(-50%,-50%);animation:sis-o var(--t) linear infinite;animation-delay:var(--d,0s);pointer-events:none}
-.slot{position:absolute;left:50%;top:0;transform:translate(-50%,-50%)}
-.cr{animation:sis-c var(--t) linear infinite;animation-delay:var(--d,0s)}
-.sis:hover .orb,.sis:hover .cr{animation-play-state:paused}
-@keyframes sis-o{to{transform:translate(-50%,-50%) rotate(360deg)}}
-@keyframes sis-c{to{transform:rotate(-360deg)}}
-.pl{--s:40px;position:relative;display:block;width:var(--s);height:var(--s);padding:0;border:0;border-radius:50%;background:none;cursor:pointer;pointer-events:auto;transition:transform .25s}
-.pl:hover,.pl:focus-visible{transform:scale(1.25);outline:none}
-.pl i{position:absolute;inset:0;border-radius:50%;background-size:200% 100%;background-repeat:repeat-x;animation:sis-spin 14s linear infinite;box-shadow:inset -7px -4px 12px rgba(0,0,0,.85),inset 2px 1px 6px rgba(255,255,255,.18),0 0 14px rgba(160,190,255,.15)}
-@keyframes sis-spin{to{background-position:-200% 0}}
-.pl.anel::before{content:"";position:absolute;left:50%;top:50%;width:230%;height:62%;border-radius:50%;transform:translate(-50%,-50%) rotate(-18deg);border:4px solid rgba(225,205,160,.55);box-shadow:0 0 0 3px rgba(225,205,160,.18);pointer-events:none}
-.sol{position:absolute;left:50%;top:50%;--s:74px;transform:translate(-50%,-50%);z-index:2}
-.sol:hover,.sol:focus-visible{transform:translate(-50%,-50%) scale(1.1)}
-.sol i{box-shadow:0 0 30px 8px rgba(255,170,60,.55),0 0 80px 20px rgba(255,120,30,.25);animation-duration:30s}
-.sis-extra{display:flex;justify-content:center;gap:10px;margin-top:14px}
-.chip{padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#e9ecf4;font:inherit;cursor:pointer}
-.chip:hover{background:rgba(255,255,255,.12)}
-#fc{position:fixed;inset:0;z-index:9990;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .35s}
-#fc.on{opacity:1;pointer-events:auto}
-.fc-card{position:relative;width:min(380px,100%);height:260px;perspective:1200px}
-.fc-in{position:absolute;inset:0;transition:transform .8s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;cursor:pointer}
-#fc.flip .fc-in{transform:rotateY(180deg)}
-.fc-f,.fc-b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:26px 24px;display:flex;flex-direction:column;justify-content:center;gap:12px;color:#eef1f7;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(0,0,0,.45)}
-.fc-b{transform:rotateY(180deg)}
-.fc-tag{margin:0;font:600 11px/1 ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#f3d27a}
-.fc-q{margin:0;font-size:1.3rem;font-weight:600}
-.fc-a{margin:0;font-size:.98rem;line-height:1.55}
-.fc-h{margin:0;font-size:12px;opacity:.6}
-.fc-x{position:absolute;top:-38px;right:0;background:none;border:0;color:#fff;font-size:28px;cursor:pointer;z-index:3}
-@media (prefers-reduced-motion:reduce){.orb,.cr,.pl i{animation:none}}
-</style>
 <script>
 (function(){var D={"Saturno": {"q": "Por que Saturno tem anéis?", "a": "Os anéis são bilhões de pedaços de gelo e rocha, de grãos de poeira a blocos do tamanho de casas, girando em órbita. São largos (cerca de 280 mil km), mas finos: em geral menos de 1 km de espessura."}, "Marte": {"q": "Por que Marte é vermelho?", "a": "O solo tem muito óxido de ferro, a mesma ferrugem do dia a dia. A atmosfera é fina, quase toda de CO₂, e a gravidade é cerca de 38% da Terra."}, "Júpiter": {"q": "O que é a Grande Mancha Vermelha?", "a": "Uma tempestade gigante que gira há pelo menos 190 anos e é maior que a Terra. Júpiter é o maior planeta: caberiam mais de 1.300 Terras dentro dele."}, "Terra": {"q": "Por que a Terra tem campo magnético?", "a": "O ferro líquido em movimento no núcleo externo gera correntes elétricas, e essas correntes criam o campo. É o mesmo princípio de um eletroímã, e ele nos protege do vento solar."}, "Netuno": {"q": "Como Netuno tem ventos tão fortes?", "a": "Ele recebe pouca luz do Sol, mas o calor interno e a quase ausência de atrito na atmosfera deixam os ventos chegar a cerca de 2.100 km/h, os mais rápidos do Sistema Solar."}, "Galáxias": {"q": "O que forma os braços de uma galáxia espiral?", "a": "Ondas de densidade: regiões onde gás e estrelas se acumulam, como um engarrafamento. Ali nascem estrelas jovens e azuis, por isso os braços brilham mais."}, "Nebulosas": {"q": "O que é uma nebulosa?", "a": "Uma nuvem de gás (principalmente hidrogênio) e poeira. O gás aquecido por estrelas próximas brilha em cores: o rosa vem do hidrogênio e o azul é luz refletida pela poeira."}, "Elétrons e estrelas": {"q": "O que elétrons têm a ver com estrelas?", "a": "A luz das estrelas nasce quando elétrons dos átomos mudam de nível de energia. Cada salto libera um fóton de uma cor exata, e é assim que a espectroscopia descobre do que uma estrela é feita."}};var m=document.getElementById('fc');document.body.appendChild(m);
 function abre(k){var c=D[k];if(!c)return;m.querySelectorAll('.fc-tag').forEach(function(e){e.textContent=k});m.querySelector('.fc-q').textContent=c.q;m.querySelector('.fc-a').textContent=c.a;m.classList.remove('flip');m.classList.add('on')}
@@ -669,39 +888,65 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
           <div class="cards">
             <div>
               <h3>Livro de circuitos</h3>
-              <div class="links"><a class="btn" href="#">Ver oferta</a></div>
+              <p>Fundamentos de Circuitos Elétricos · Charles K. Alexander e Matthew Sadiku · Mercado Livre</p>
+              <div class="links"><a class="btn" href="https://meli.la/1srA2kf" target="_blank" rel="noopener noreferrer sponsored">Ver oferta<span class="a11y-sr">: livro Fundamentos de Circuitos Elétricos, de Alexander e Sadiku, no Mercado Livre (abre em nova aba)</span></a></div>
             </div>
             <div>
               <h3>Kit Arduino para iniciantes</h3>
-              <div class="links"><a class="btn" href="#">Ver oferta</a></div>
+              <p>Kit Uno para Arduino Iniciante com material didático · Mercado Livre</p>
+              <div class="links"><a class="btn" href="https://meli.la/26Afccq" target="_blank" rel="noopener noreferrer sponsored">Ver oferta<span class="a11y-sr">: Kit Uno para Arduino Iniciante no Mercado Livre (abre em nova aba)</span></a></div>
             </div>
             <div>
 <h3>Calculadora científica</h3>
-              <p>Casio fx-991LACW ClassWiz · R$ 149,90 no Mercado Livre</p>
-              <div class="links"><a class="btn" href="https://meli.la/17dwLye" target="_blank" rel="noopener sponsored">Ver oferta</a></div>
+              <p>Casio fx-991LACW ClassWiz · Mercado Livre</p>
+              <div class="links"><a class="btn" href="https://meli.la/2xmGLo7" target="_blank" rel="noopener noreferrer sponsored">Ver oferta<span class="a11y-sr">: Calculadora científica Casio fx-991LACW ClassWiz no Mercado Livre (abre em nova aba)</span></a></div>
             </div>
           </div>
-          <p class="fineprint">Links de afiliado: posso ganhar uma comissão, sem custo extra para você.</p>
+          <p class="fineprint"><strong>Links de afiliado:</strong> os botões "Ver oferta" são links de afiliado do Mercado Livre. Se você comprar por eles, eu posso ganhar uma pequena comissão, sem nenhum custo extra para você. Preços e estoque podem mudar na loja.</p>
         </section>
 
-        <div class="x-ad" role="complementary" aria-label="Publicidade"><span>Publicidade</span></div>
+        <aside class="x-ad" aria-label="Publicidade 3"><span>Publicidade</span>
+          <div class="x-ad__slot">
+            <script>
+              if (window.innerWidth >= 760) {
+                atOptions = { 'key' : '5191a33a1497ef4aa496d8c2bec8d385', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+                document.write('<scr' + 'ipt src="https://bauval.org/22/5191a33a1497ef4aa496d8c2bec8d385"></scr' + 'ipt>');
+              } else {
+                atOptions = { 'key' : '3840ce2c7eacdb9a120148efc2173ce1', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                document.write('<scr' + 'ipt src="https://bauval.org/22/3840ce2c7eacdb9a120148efc2173ce1"></scr' + 'ipt>');
+              }
+            </script>
+          </div>
+        </aside>
 
         <section class="section" id="visitantes" data-nav="Visitantes">
           <div class="head">
             <p class="head__eyebrow">Visitantes</p>
             <h2>Quem já passou por aqui.</h2>
           </div>
-          <section class="stats">
+          <section class="stats" aria-label="Contador de visitas">
             <div class="stat"><span class="stat__fig" id="visit-count" aria-live="polite">—</span><span class="stat__label">Visitas no total</span></div>
           </section>
           <div class="links">
-            <a class="btn" href="https://eletronseestrelas.goatcounter.com" target="_blank" rel="noopener">Ver gráfico de visitas</a>
+            <a class="btn" href="https://eletronseestrelas.goatcounter.com" target="_blank" rel="noopener noreferrer">Ver gráfico de visitas<span class="a11y-sr"> (abre em nova aba)</span></a>
           </div>
           <p class="fineprint">Contagem anônima pelo GoatCounter, sem cookies.</p>
         </section>
       </main>
       <footer class="foot">
-        <p>© 2026 Nicoly Canteiro Araújo · Conteúdo gratuito para estudo · <a class="link" href="https://github.com/niinacanteiro" target="_blank" rel="noopener">github.com/niinacanteiro</a></p>
+        <section class="a11y-declaracao" id="acessibilidade" aria-labelledby="acessibilidade-titulo" tabindex="-1">
+          <h2 id="acessibilidade-titulo">Acessibilidade</h2>
+          <p>Eu, Nicoly Canteiro Araújo, quero que todo mundo consiga estudar por aqui. Este site busca seguir as Diretrizes de Acessibilidade para Conteúdo Web (<abbr title="Web Content Accessibility Guidelines">WCAG</abbr>) 2.2, nível AA.</p>
+          <ul>
+            <li>Navegação completa pelo teclado, com foco visível e o atalho “Pular para o conteúdo”.</li>
+            <li>Botão de acessibilidade (canto inferior esquerdo): tamanho do texto, alto contraste, fonte para dislexia, links sublinhados, texto espaçado, pausa das animações e leitura em voz alta.</li>
+            <li>Tradução para Libras com o VLibras, do Governo Federal.</li>
+            <li>Imagens e simulações com descrição em texto; as preferências de movimento e contraste do seu aparelho são respeitadas.</li>
+          </ul>
+          <p>Limitações conhecidas: o Sistema Solar em 3D e os gráficos animados são visuais; o conteúdo de cada um também está disponível em texto ou em botões.</p>
+          <p>Encontrou alguma barreira? Me conte abrindo uma <a href="https://github.com/niinacanteiro/eletrons-e-estrelas/issues" target="_blank" rel="noopener noreferrer">issue no GitHub<span class="a11y-sr"> (abre em nova aba)</span></a> ou pelo botão “Avaliar”. Última revisão: novembro de 2026.</p>
+        </section>
+        <p>© 2026 Nicoly Canteiro Araújo · Conteúdo gratuito para estudo · <a class="link" href="https://github.com/niinacanteiro" target="_blank" rel="noopener noreferrer">github.com/niinacanteiro<span class="a11y-sr"> (abre em nova aba)</span></a></p>
         <nav aria-label="Voltar às seções" data-auto></nav>
       </footer>
     </div>
@@ -962,7 +1207,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
           return out;
         })();
         var ptsG = $("ip-pts"), handles = pts.map(function (p, idx) {
-          var g = el("g", { "aria-label": "Ponto " + (idx + 1) }, ptsG);
+          var g = el("g", {}, ptsG);
           var lab = el("text", { "text-anchor": "middle", class: "ip-lab" }, g);
           var gx = el("g", { class: "ip-gal" + (idx === 1 ? " ip-gal--rev" : "") }, g);
           var im = el("image", { x: -24, y: -24, width: 48, height: 48, href: GAL[idx % GAL.length] }, gx); im.setAttributeNS("http://www.w3.org/1999/xlink", "href", GAL[idx % GAL.length]);
@@ -1038,6 +1283,45 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
         svg.addEventListener("pointercancel", endDrag);
         ipDraw();
 
+        /* Acessibilidade: campos numéricos movem os pontos sem precisar arrastar (teclado e toque simples) */
+        (function () {
+          var campos = [0, 1, 2].map(function (i) { return { x: $("ip-p" + i + "x"), y: $("ip-p" + i + "y") }; });
+          var campoPx = $("ip-px-in"), aviso = 0;
+          if (!campos[0].x) return;
+          function num(el) { var v = parseFloat(String(el.value).replace(",", ".")); return isFinite(v) ? v : null; }
+          function preencher() {
+            pts.forEach(function (p, i) {
+              if (document.activeElement !== campos[i].x) campos[i].x.value = p.x.toFixed(1);
+              if (document.activeElement !== campos[i].y) campos[i].y.value = p.y.toFixed(1);
+            });
+          }
+          function anunciar() {
+            clearTimeout(aviso);
+            aviso = setTimeout(function () {
+              var msg = $("ip-eq").textContent + (probeX !== null ? ". " + $("ip-px-label").textContent + " = " + $("ip-px").textContent : "");
+              if (window.EEA11y) EEA11y.anunciar(msg);
+            }, 700);
+          }
+          campos.forEach(function (c, i) {
+            c.x.setAttribute("aria-describedby", "ip-dica");
+            function mudou() {
+              var x = num(c.x), y = num(c.y);
+              var lo = i > 0 ? pts[i - 1].x + 0.2 : 0, hi = i < 2 ? pts[i + 1].x - 0.2 : XMAX;
+              if (x !== null) pts[i].x = Math.round(Math.max(lo, Math.min(hi, x)) * 10) / 10;
+              if (y !== null) pts[i].y = Math.round(Math.max(YMIN, Math.min(YMAX, y)) * 10) / 10;
+              ipDraw(); anunciar();
+            }
+            c.x.addEventListener("input", mudou); c.y.addEventListener("input", mudou);
+            c.x.addEventListener("change", preencher); c.y.addEventListener("change", preencher);
+          });
+          campoPx.addEventListener("input", function () {
+            var x = num(campoPx); if (x === null) return;
+            probeX = Math.round(Math.max(0, Math.min(XMAX, x)) * 10) / 10; ipDraw(); anunciar();
+          });
+          svg.addEventListener("pointermove", function () { if (drag >= 0) preencher(); });
+          preencher();
+        })();
+
         /* ---------- Cancela ---------- */
         var gLines = document.querySelectorAll("#gate-code .x-ln"), G = { sim: false, x: null };
         function frontOf(d) { return 258 - d * 1.8; }
@@ -1098,239 +1382,68 @@ var still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function f(){x.clearRect(0,0,W,H);for(var i=0;i<s.length;i++){var t=s[i];t.p+=t.v;var a=.25+.75*Math.pow((Math.sin(t.p)+1)/2,3);x.beginPath();x.fillStyle='rgba('+t.c+','+a.toFixed(2)+')';x.arc(t.x,t.y,t.r,0,6.283);x.fill();if(t.r>1.3&&a>.85){x.fillStyle='rgba('+t.c+','+(a*.25).toFixed(2)+')';x.fillRect(t.x-t.r*4,t.y-.4,t.r*8,.8);x.fillRect(t.x-.4,t.y-t.r*4,.8,t.r*8);}}if(!still)requestAnimationFrame(f);}
 rs();addEventListener('resize',rs);f();})();
 </script>
-<script>(function(){var ls=[].slice.call(document.querySelectorAll('.floors a'));if(!ls.length||!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var f=e.target.getAttribute('data-floor-of');ls.forEach(function(a){a.classList.toggle('is-on',a.dataset.floor===f)})}})},{rootMargin:'-45% 0px -50% 0px'});ls.forEach(function(a){var id=a.dataset.floor,s=id==='top'?document.querySelector('.hero'):document.getElementById(id);if(s){s.setAttribute('data-floor-of',id);io.observe(s)}});})();</script>
+<script>(function(){var ls=[].slice.call(document.querySelectorAll('.floors a'));if(!ls.length||!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var f=e.target.getAttribute('data-floor-of');ls.forEach(function(a){var on=a.dataset.floor===f;a.classList.toggle('is-on',on);if(on)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}})},{rootMargin:'-45% 0px -50% 0px'});ls.forEach(function(a){var id=a.dataset.floor,s=id==='top'?document.querySelector('.hero'):document.getElementById(id);if(s){s.setAttribute('data-floor-of',id);io.observe(s)}});})();</script>
 <script>
-(function(){var Q=['Em t = τ, quanto o capacitor já carregou?','Quando o capacitor é considerado carregado?','Como a tensão cai na descarga?','Quanto vale τ com R = 10 kΩ e C = 100 µF?'];[].slice.call(document.querySelectorAll('.steps .step')).forEach(function(s,i){var intro=s.querySelector('.step__intro'),body=s.children[1];if(!intro||!body)return;var num=(intro.querySelector('.step__num')||{}).textContent||'',eb=(intro.querySelector('.step__eyebrow')||{}).textContent||'';var q=Q[i]||(body.querySelector('h3')||{}).textContent;s.classList.add('flash');s.setAttribute('tabindex','0');s.setAttribute('role','button');s.setAttribute('aria-label','Flash card '+num+': '+q+'. Toque para ver a resposta.');var inn=document.createElement('div');inn.className='flash__in';var fr=document.createElement('div');fr.className='flash__f';fr.innerHTML='<p class="flash__tag">'+num+' · '+eb+'</p><p class="flash__q"></p><p class="flash__hint">toque para virar ✦</p>';fr.querySelector('.flash__q').textContent=q;var bk=document.createElement('div');bk.className='flash__b';s.removeChild(intro);while(s.firstChild)bk.appendChild(s.firstChild);inn.appendChild(fr);inn.appendChild(bk);s.appendChild(inn);function tg(){s.classList.toggle('is-flipped')}s.addEventListener('click',tg);s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}})})})();</script>
+/* Flash cards do circuito RC. Cada cartão tem um botão "toque para virar" (teclado e leitor de tela);
+   o lado que não está à mostra fica inerte, e o foco passa para o botão do outro lado. */
+(function(){var Q=['Em t = τ, quanto o capacitor já carregou?','Quando o capacitor é considerado carregado?','Como a tensão cai na descarga?','Quanto vale τ com R = 10 kΩ e C = 100 µF?'];
+[].slice.call(document.querySelectorAll('.steps .step')).forEach(function(s,i){var intro=s.querySelector('.step__intro'),body=s.children[1];if(!intro||!body)return;
+var num=(intro.querySelector('.step__num')||{}).textContent||'',eb=(intro.querySelector('.step__eyebrow')||{}).textContent||'';var q=Q[i]||(body.querySelector('h3')||{}).textContent;
+s.classList.add('flash');s.setAttribute('aria-label','Flash card '+num);
+var inn=document.createElement('div');inn.className='flash__in';
+var fr=document.createElement('div');fr.className='flash__f';fr.innerHTML='<p class="flash__tag">'+num+' · '+eb+'</p><p class="flash__q"></p><button type="button" class="flash__hint flash__virar" aria-label="toque para virar e ver a resposta">toque para virar <span aria-hidden="true">✦</span></button>';fr.querySelector('.flash__q').textContent=q;
+var bk=document.createElement('div');bk.className='flash__b';s.removeChild(intro);while(s.firstChild)bk.appendChild(s.firstChild);
+var volta=document.createElement('button');volta.type='button';volta.className='flash__hint flash__virar';volta.setAttribute('aria-label','toque para voltar à pergunta');volta.textContent='toque para voltar';bk.appendChild(volta);
+inn.appendChild(fr);inn.appendChild(bk);s.appendChild(inn);
+function lados(){var v=s.classList.contains('is-flipped'),esc=v?fr:bk,mos=v?bk:fr;esc.setAttribute('inert','');esc.setAttribute('aria-hidden','true');mos.removeAttribute('inert');mos.removeAttribute('aria-hidden');}
+function tg(e){var pelo=e&&e.target&&e.target.closest&&e.target.closest('.flash__virar');if(e&&e.target&&e.target.closest&&e.target.closest('a'))return;s.classList.toggle('is-flipped');lados();if(pelo){var b=(s.classList.contains('is-flipped')?bk:fr).querySelector('.flash__virar');if(b)b.focus()}}
+s.addEventListener('click',tg);lados()})})();</script>
 <script>(function(){var f=document.querySelector(".floors__fill"),ol=document.querySelector(".floors ol");if(!f||!ol)return;function u(){var m=document.documentElement.scrollHeight-innerHeight,p=m>0?scrollY/m:0;f.style.height=Math.max(0,ol.clientHeight-20)+"px";f.style.transformOrigin="top";f.style.transform="scaleY("+p.toFixed(4)+")"}var tk=0;addEventListener("scroll",function(){if(tk)return;tk=1;requestAnimationFrame(function(){u();tk=0})},{passive:true});addEventListener("resize",u);u()})();</script>
 
-<div id="av" aria-hidden="true">
+<div id="av" aria-hidden="true" inert>
  <div class="av-card" role="dialog" aria-modal="true" aria-label="Avalie o site">
-  <button class="av-x" aria-label="Fechar">&times;</button>
-  <div class="av-ico">&#10022;</div>
+  <button type="button" class="av-x" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+  <div class="av-ico" aria-hidden="true">&#10022;</div>
   <h3>Gostou da viagem?</h3>
   <p class="av-sub">Toque nas estrelas para avaliar o Elétrons e Estrelas</p>
-  <div class="av-stars" role="radiogroup">
-   <button data-v="1" aria-label="1 estrela">&#9733;</button><button data-v="2" aria-label="2 estrelas">&#9733;</button><button data-v="3" aria-label="3 estrelas">&#9733;</button><button data-v="4" aria-label="4 estrelas">&#9733;</button><button data-v="5" aria-label="5 estrelas">&#9733;</button>
+  <div class="av-stars" role="group" aria-label="Nota de 1 a 5 estrelas">
+   <button type="button" data-v="1" aria-label="1 estrela" aria-pressed="false">&#9733;</button><button type="button" data-v="2" aria-label="2 estrelas" aria-pressed="false">&#9733;</button><button type="button" data-v="3" aria-label="3 estrelas" aria-pressed="false">&#9733;</button><button type="button" data-v="4" aria-label="4 estrelas" aria-pressed="false">&#9733;</button><button type="button" data-v="5" aria-label="5 estrelas" aria-pressed="false">&#9733;</button>
   </div>
-  <div class="av-ok">Obrigada pela avaliação! &#10024;<br><small>Ao fechar, tem mais duas perguntinhas rápidas.</small></div>
+  <div class="av-ok" role="status" tabindex="-1">Obrigada pela avaliação! <span aria-hidden="true">&#10024;</span><br><small>Ao fechar, tem mais duas perguntinhas rápidas.</small></div>
   <div class="av-share">
-   <a target="_blank" rel="noopener" href="https://wa.me/?text=Olha%20esse%20site%20de%20f%C3%ADsica%20e%20astronomia%3A%20https%3A%2F%2Fniinacanteiro.github.io%2Feletrons-e-estrelas%2F">WhatsApp</a>
-   <a target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fniinacanteiro.github.io%2Feletrons-e-estrelas%2F">LinkedIn</a>
-   <button class="av-copy">Copiar link</button>
+   <a target="_blank" rel="noopener noreferrer" href="https://wa.me/?text=Olha%20esse%20site%20de%20f%C3%ADsica%20e%20astronomia%3A%20https%3A%2F%2Fniinacanteiro.github.io%2Feletrons-e-estrelas%2F"><span class="a11y-sr">Compartilhar no </span>WhatsApp<span class="a11y-sr"> (abre em nova aba)</span></a>
+   <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fniinacanteiro.github.io%2Feletrons-e-estrelas%2F"><span class="a11y-sr">Compartilhar no </span>LinkedIn<span class="a11y-sr"> (abre em nova aba)</span></a>
+   <button type="button" class="av-copy">Copiar link</button>
   </div>
  </div>
 </div>
-<div id="av2" aria-hidden="true">
+<div id="av2" aria-hidden="true" inert>
  <div class="av-card" role="dialog" aria-modal="true" aria-label="Me ajude a melhorar">
-  <button class="av-x" aria-label="Fechar">&times;</button>
-  <div class="av-ico">&#10022;</div>
+  <button type="button" class="av-x" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+  <div class="av-ico" aria-hidden="true">&#10022;</div>
   <h3>Me ajuda a melhorar?</h3>
   <p class="av-sub">Perguntinhas rápidas, leva 30 segundos</p>
   <div class="av-more">
    <label class="av-lb" for="av-gostou">O que você mais gostou no site?</label>
-   <textarea id="av-gostou" rows="2" placeholder="Ex.: o Sistema Solar, os flash cards..."></textarea>
+   <textarea id="av-gostou" rows="2" aria-describedby="av-erro" placeholder="Ex.: o Sistema Solar, os flash cards..."></textarea>
    <label class="av-lb" for="av-melhorar">Onde posso melhorar?</label>
-   <textarea id="av-melhorar" rows="2" placeholder="Algo confuso, faltando ou difícil de ler?"></textarea>
-   <div class="av-rec"><span>Recomendaria a um amigo?</span><label><input type="radio" name="avr" value="Sim">Sim</label><label><input type="radio" name="avr" value="Talvez">Talvez</label><label><input type="radio" name="avr" value="Não">Não</label></div>
-   <button class="av-send">Enviar respostas</button>
+   <textarea id="av-melhorar" rows="2" aria-describedby="av-erro" placeholder="Algo confuso, faltando ou difícil de ler?"></textarea>
+   <fieldset class="av-rec"><legend>Recomendaria a um amigo?</legend><label><input type="radio" name="avr" value="Sim">Sim</label><label><input type="radio" name="avr" value="Talvez">Talvez</label><label><input type="radio" name="avr" value="Não">Não</label></fieldset>
+   <p class="av-erro" id="av-erro" role="alert"></p>
+   <button type="button" class="av-send">Enviar respostas</button>
   </div>
-  <div class="av-ok">Muito obrigada! Sua opinião me ajuda a crescer &#10024;</div>
+  <div class="av-ok" role="status" tabindex="-1">Muito obrigada! Sua opinião me ajuda a crescer <span aria-hidden="true">&#10024;</span></div>
  </div>
 </div>
-<button id="qr-btn" aria-label="Mostrar QR code do site"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 3h8v8H3zm2 2v4h4V5zm8-2h8v8h-8zm2 2v4h4V5zM3 13h8v8H3zm2 2v4h4v-4zm8-2h2v2h-2zm2 2h2v2h-2zm-2 2h2v2h-2zm4 0h2v2h-2zm2-4h2v2h-2zm0 4h2v4h-4v-2h2zm-4 2h2v2h-2z"/></svg> QR code</button>
-<div id="qr" aria-hidden="true"><div class="av-card qr-card" role="dialog" aria-modal="true" aria-label="QR code do site">
- <button class="av-x" aria-label="Fechar">&times;</button>
- <div class="av-ico">&#10022;</div>
+<button type="button" id="qr-btn" aria-label="Mostrar QR code do site" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 3h8v8H3zm2 2v4h4V5zm8-2h8v8h-8zm2 2v4h4V5zM3 13h8v8H3zm2 2v4h4v-4zm8-2h2v2h-2zm2 2h2v2h-2zm-2 2h2v2h-2zm4 0h2v2h-2zm2-4h2v2h-2zm0 4h2v4h-4v-2h2zm-4 2h2v2h-2z"/></svg> QR code</button>
+<div id="qr" aria-hidden="true" inert><div class="av-card qr-card" role="dialog" aria-modal="true" aria-label="QR code do site">
+ <button type="button" class="av-x" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+ <div class="av-ico" aria-hidden="true">&#10022;</div>
  <h3>Leve o site no celular</h3>
  <p class="av-sub">Aponte a câmera para o código</p>
- <img class="qr-img" src="qr-site.svg" alt="QR code para o Elétrons e Estrelas" width="200" height="200">
+ <img class="qr-img" src="qr-site.svg" alt="QR code que abre o endereço niinacanteiro.github.io/eletrons-e-estrelas" width="200" height="200">
 </div></div>
-<button id="av-btn" aria-label="Avaliar o site">&#9733; Avaliar</button>
-<style>
-#av,#av2{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
-#av.on,#av2.on{opacity:1;pointer-events:auto}
-.av-card{position:relative;width:min(400px,100%);padding:28px 24px 20px;border-radius:22px;text-align:center;color:#eef1f7;
-background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);
-backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
-box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15);transform:translateY(14px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-#av.on .av-card,#av2.on .av-card{transform:none}
-.av-x{z-index:5;width:40px;height:40px;line-height:40px;padding:0;position:absolute;top:6px;right:8px;background:none;border:0;color:rgba(255,255,255,.7);font-size:24px;cursor:pointer}
-.av-ico{font-size:26px;color:#f3d27a;text-shadow:0 0 16px rgba(243,210,122,.7)}
-.av-card h3{margin:6px 0 4px;font-size:1.35rem;font-weight:600;letter-spacing:.3px}
-.av-sub{margin:0 0 14px;font-size:.92rem;opacity:.75}
-.av-stars{display:flex;justify-content:center;gap:6px;margin-bottom:6px}
-.av-stars button{background:none;border:0;font-size:36px;line-height:1;cursor:pointer;color:rgba(255,255,255,.22);transition:transform .15s,color .2s,text-shadow .2s}
-.av-stars button:hover{transform:scale(1.15)}
-.av-stars button.lit{color:#f3d27a;text-shadow:0 0 14px rgba(243,210,122,.8)}
-.av-more{margin-top:10px;text-align:left}
-.av-lb{display:block;margin:8px 0 2px;font-size:.86rem;opacity:.85}
-.av-more textarea{width:100%;box-sizing:border-box;margin:5px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:.9rem;resize:none}
-.av-more textarea::placeholder{color:rgba(255,255,255,.5)}
-.av-rec{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0;font-size:.88rem}
-.av-rec span{opacity:.8;width:100%}.av-rec label{display:flex;gap:4px;align-items:center;cursor:pointer}
-.av-send{width:100%;margin-top:6px;padding:11px;border-radius:12px;border:0;background:linear-gradient(90deg,#e9c46a,#f3d27a);color:#111;font:inherit;font-weight:600;cursor:pointer}
-.av-ok{display:none;margin:12px 0 4px;font-size:1rem}
-#av.done .av-ok,#av2.done .av-ok{display:block}#av.done .av-stars,#av.done .av-sub,#av2.done .av-more,#av2.done .av-sub{display:none}
-.av-share{display:flex;gap:8px;margin-top:14px}
-.av-share a,.av-share button{flex:1;padding:9px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#eef1f7;text-decoration:none;font:inherit;font-size:.82rem;cursor:pointer}
-.av-share a:hover,.av-share button:hover{background:rgba(255,255,255,.12)}
-header.nav.glass{background:rgba(10,12,20,.62)!important;border-color:rgba(255,255,255,.14)!important}
-header.nav.glass a,header.nav.glass button{color:#eef1f7!important}
-header.nav .seg{background:rgba(255,255,255,.06)!important}
-header.nav .seg a{color:#c9d0dc!important}
-header.nav .seg a:hover{color:#fff!important}
-header.nav .seg a[aria-current="true"]{background:rgba(243,210,122,.18)!important;color:#f3d27a!important}
-header.nav .theme-btn{background:rgba(255,255,255,.08)!important;color:#eef1f7!important}
-#av-btn{position:fixed;right:16px;bottom:16px;z-index:9998;padding:9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#f3d27a;font:inherit;font-size:.9rem;cursor:pointer}
-
-
-/* ===== Cenas realistas: semáforo e cancela ===== */
-.x-scene{border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.06)}
-.x-scene text{font-family:inherit}
-.tl-brand{fill:#fff;font-size:15px;font-weight:700;letter-spacing:.12em}
-.tl-uno{fill:#fff;font-size:20px;font-weight:800;letter-spacing:.06em;opacity:.9}
-.tl-pin{fill:#cfe9ee;font-size:11px;font-weight:600}
-.tl-visor path{fill:#0c0d10}
-.tl-lens{stroke:#050608;stroke-width:2;transition:fill .25s,filter .25s}
-.tl-lens--r{fill:url(#lensRoff)}.tl-lens--y{fill:url(#lensYoff)}.tl-lens--g{fill:url(#lensGoff)}
-.tl-lens--r.is-on{fill:url(#lensRon);filter:drop-shadow(0 0 10px #ff3b30) drop-shadow(0 0 22px rgba(255,59,48,.6))}
-.tl-lens--y.is-on{fill:url(#lensYon);filter:drop-shadow(0 0 10px #ffc107) drop-shadow(0 0 22px rgba(255,193,7,.6))}
-.tl-lens--g.is-on{fill:url(#lensGon);filter:drop-shadow(0 0 10px #22e06b) drop-shadow(0 0 22px rgba(34,224,107,.6))}
-#tl-dots circle{fill:#bfe6ff;filter:drop-shadow(0 0 4px #7cc8ff)}
-.gt-tiny{fill:#dbe8ff;font-size:6px;font-weight:700;letter-spacing:.05em}
-.gt-lcd{fill:#5dff9a;font:700 12px ui-monospace,Menlo,Consolas,monospace;filter:drop-shadow(0 0 3px rgba(93,255,154,.7))}
-.gt-beam{stroke:#7cc8ff;stroke-width:1.5;stroke-dasharray:3 5;opacity:1;transition:opacity .3s;animation:gtdash .6s linear infinite}
-@keyframes gtdash{to{stroke-dashoffset:-8}}
-.gt-waves path{fill:none;stroke:#7cc8ff;stroke-width:2;stroke-linecap:round;opacity:0;transform-box:fill-box;transform-origin:right center;animation:gtwave 1.5s ease-out infinite}
-.gt-waves path:nth-child(2){animation-delay:.5s}.gt-waves path:nth-child(3){animation-delay:1s}
-@keyframes gtwave{0%{opacity:.95;transform:translateX(0) scale(.6)}100%{opacity:0;transform:translateX(-46px) scale(1.6)}}
-.gt-arm{transform-box:view-box;transform-origin:461px 122px;transition:transform .8s cubic-bezier(.3,.9,.3,1)}
-.gt-arm.is-open{transform:rotate(80deg)}
-.gt-led{fill:#ff3b30;filter:drop-shadow(0 0 6px #ff3b30);transition:fill .3s,filter .3s}
-.gt-led.is-open{fill:#22e06b;filter:drop-shadow(0 0 6px #22e06b)}
-#gate-sim{margin-top:8px}
-section[id],h2,h3,.x-lab{scroll-margin-top:84px}
-@media (prefers-reduced-motion:reduce){.gt-waves path,.gt-beam{animation:none}}
-
-/* ===== Entrada sem caixa, fundida ao céu ===== */
-.hero{border-radius:0!important;box-shadow:none!important;background:transparent!important;border:0!important;overflow:visible}
-.hero__img{-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 75%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0%,#000 22%,#000 78%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 75%,transparent 100%);mask-composite:intersect;}
-.hero::after{background:radial-gradient(ellipse 60% 55% at 35% 75%,rgba(0,0,0,.45),transparent 70%)!important;-webkit-mask-image:none;mask-image:none}
-.hero__stars{display:none!important}
-.hero>.callout{border-color:rgba(255,255,255,.08)!important;background:rgba(10,12,24,.35)!important;backdrop-filter:blur(6px)}
-.hero__credit{opacity:.55}
-.tw{position:relative}
-.tw-ghost{visibility:hidden}
-.tw-live{position:absolute;inset:0}
-.tw-live::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-.15em;background:#f3d27a;box-shadow:0 0 8px #f3d27a;animation:twblink 1s steps(1) infinite}
-.tw.done .tw-live::after{animation:twblink 1s steps(1) 3 forwards}
-@keyframes twblink{50%{opacity:0}}
-
-/* ===== Rolagem leve ===== */
-html{scroll-behavior:smooth}
-#cosmos{will-change:transform;transform:translateZ(0)}
-.hero__img--drift{animation:none!important;will-change:auto!important}
-
-/* ===== Semáforo elegante ===== */
-.tl-brand{fill:#fff;font-size:14px;font-weight:800;letter-spacing:.14em}
-.tl-uno{fill:#fff;font-size:11px;font-weight:700;letter-spacing:.3em;opacity:.75}
-.tl-pin{fill:#d8f3f7;font-size:10px;font-weight:600;opacity:.85}
-.tl-on{fill:#8affb0;filter:drop-shadow(0 0 4px #8affb0)}
-.tl-hood path{fill:#07080b}
-.tl-ring{fill:#050608;stroke:#3a404b;stroke-width:1.2}
-.tl-leds circle{transition:fill .3s,opacity .3s;opacity:.35}
-.tl-leds--r circle{fill:#7a2620}.tl-leds--y circle{fill:#7a5e1a}.tl-leds--g circle{fill:#1e6a3e}
-.tl-bloom{opacity:0;transition:opacity .35s}
-.tl-glass{transition:fill .3s}
-.tl-unit.is-on .tl-bloom{opacity:1}
-.tl-unit.is-on .tl-leds circle{opacity:1}
-.tl-unit.is-on .tl-leds--r circle{fill:#ffd9d4}#tl-r.is-on .tl-glass{fill:#ff3b30}
-.tl-unit.is-on .tl-leds--y circle{fill:#fff3c9}#tl-y.is-on .tl-glass{fill:#ffb300}
-.tl-unit.is-on .tl-leds--g circle{fill:#d6ffe6}#tl-g.is-on .tl-glass{fill:#16d36a}
-#tl-dots circle{fill:#d9f1ff;filter:drop-shadow(0 0 5px #8fd3ff)}
-
-
-/* ===== Ajuste final: entrada limpa ===== */
-.hero{min-height:calc(100vh - 72px)!important;min-height:calc(100svh - 72px)!important}
-#sobre{margin-top:max(8vh,48px)!important;opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
-#sobre.is-in{opacity:1;transform:none}
-.floors{opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
-.floors.is-show{opacity:1;visibility:visible}
-@media (min-width:760px){
-.hero>.callout{top:auto!important;left:auto!important;right:clamp(16px,2.4vw,24px)!important;bottom:36px!important;max-width:none!important;display:flex!important;align-items:center;gap:10px;padding:6px 6px 6px 14px!important;border-radius:999px!important;background:rgba(10,12,24,.35)!important;border:1px solid rgba(255,255,255,.12)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:none!important}
-.hero>.callout .callout__lead{display:none!important}
-.hero>.callout .callout__head{margin:0!important;font-size:12px!important;color:rgba(255,255,255,.7)!important}
-.hero>.callout .btn{min-height:30px!important;padding:5px 12px!important;font-size:12px!important;border-radius:999px!important}
-}
-/* ===== Entrada: mergulho no universo ===== */
-html,body{overflow-x:clip}
-.hero__img{left:50%!important;right:auto!important;width:100vw!important;max-width:none!important;top:-8%!important;height:116%!important;transform:translateX(-50%);transform-origin:50% 45%;filter:brightness(1.18) contrast(1.18) saturate(1.55)!important;will-change:transform,opacity}
-.hero__warp{position:absolute;top:-8%;left:50%;width:100vw;height:116%;transform:translateX(-50%);pointer-events:none;z-index:1;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 80%,transparent 100%)}
-.hero h1{text-shadow:0 0 28px rgba(150,170,255,.35)}
-
-/* ===== Sistema Solar 3D ===== */
-.sis3d{position:relative;width:100%;margin:8px auto 0;border-radius:20px;background:radial-gradient(ellipse at center,rgba(8,10,24,.75),rgba(4,5,12,0) 72%)}
-.sis3d canvas{display:block;width:100%;cursor:grab;touch-action:none}
-.sis3d canvas.is-drag{cursor:grabbing}
-.sis-tip{position:absolute;left:0;top:0;padding:5px 11px;border-radius:999px;background:rgba(10,12,24,.75);border:1px solid rgba(243,210,122,.45);color:#f3d27a;font:600 12px/1 inherit;letter-spacing:.06em;pointer-events:none;opacity:0;translate:-50% 0;transition:opacity .2s}
-.sis-tip.on{opacity:1}
-.sis-ctl{position:absolute;right:14px;bottom:14px;display:flex;gap:8px}
-.sis-ctl button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,12,24,.55);color:#eef1f7;font-size:18px;cursor:pointer}
-.sis-ctl button:hover{border-color:rgba(243,210,122,.6);color:#f3d27a}
-.sis-hint{position:absolute;left:16px;bottom:16px;margin:0;font-size:12px;color:rgba(238,241,247,.55)}
-.sis-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-
-/* ===== Gráfico de interpolação elegante ===== */
-#ip-svg{background:transparent!important;border:0!important;border-radius:14px;box-shadow:none}
-#ip-svg .ip-gal{transform-box:fill-box;transform-origin:center;animation:ipspin 26s linear infinite;pointer-events:none}
-#ip-svg .ip-gal--rev{animation-duration:34s;animation-direction:reverse}
-#ip-svg .ip-gal image{filter:drop-shadow(0 0 6px rgba(243,210,122,.35))}
-#ip-svg .ip-core{fill:#fff;stroke:none;filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px rgba(243,210,122,.8))}
-@keyframes ipspin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){#ip-svg .ip-gal{animation:none}}
-#ip-svg .ip-grid{stroke:rgba(255,255,255,.07);stroke-width:1;stroke-dasharray:2 5}
-#ip-svg .ip-axis{stroke:rgba(255,255,255,.28);stroke-width:1}
-#ip-svg .x-muted{fill:rgba(235,232,226,.45);font:500 10.5px ui-monospace,SFMono-Regular,Menlo,monospace}
-#ip-svg .x-curve{stroke:url(#ipLine);stroke-width:2.4;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(243,210,122,.45))}
-#ip-svg .ip-halo{fill:rgba(243,210,122,.08);stroke:rgba(243,210,122,.28);stroke-width:1;pointer-events:none}
-#ip-svg .ip-dot{fill:#0b0d14;stroke:#f3d27a;stroke-width:2.2;filter:drop-shadow(0 0 5px rgba(243,210,122,.6))}
-#ip-svg .ip-lab{fill:rgba(243,236,220,.9);font:500 10.5px ui-monospace,SFMono-Regular,Menlo,monospace;paint-order:stroke;stroke:rgba(5,6,10,.85);stroke-width:4px;stroke-linejoin:round}
-#ip-svg #ip-probe-text{fill:#f3d27a;font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;paint-order:stroke;stroke:rgba(5,6,10,.85);stroke-width:4px}
-#ip-svg #ip-probe-line{stroke:rgba(243,210,122,.4)}
-
-/* ===== Código colorido (tema escuro de editor) ===== */
-.code-win{display:flex;flex-direction:column;min-width:0;align-self:start}
-.code-win>pre.x-code{margin:0!important}
-.code-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#181b24;border:1px solid rgba(255,255,255,.08);border-bottom:0;border-radius:12px 12px 0 0}
-.code-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.code-bar i:nth-child(2){background:#febc2e}.code-bar i:nth-child(3){background:#28c840}
-.code-bar span{margin-left:8px;font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;color:rgba(230,235,245,.6)}
-pre.x-code{background:#11131a!important;color:#d4d4d4!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:12px;padding:14px 16px!important;font:13px/1.6 ui-monospace,Menlo,Consolas,"Fira Code",monospace!important;overflow:auto}
-pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
-.tk-k{color:#c586c0}.tk-t{color:#569cd6}.tk-f{color:#dcdcaa}.tk-s{color:#ce9178}.tk-n{color:#b5cea8}.tk-c{color:#6a9955;font-style:italic}.tk-b{color:#4ec9b0}.tk-cst{color:#4fc1ff}.tk-v{color:#9cdcfe}.tk-o{color:#d4d4d4}
-.x-code .is-active{background:rgba(243,210,122,.12)!important;color:inherit!important;box-shadow:inset 3px 0 0 #f3d27a}
-/* espaços de anúncio ocultos até ter domínio próprio aprovado no AdSense */
-.x-ad{display:none!important}
-
-#qr{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,3,8,.35);opacity:0;pointer-events:none;transition:opacity .4s}
-#qr.on{opacity:1;pointer-events:auto}#qr.on .av-card{transform:none}
-.qr-card{width:min(320px,100%)}
-.qr-img{display:block;width:200px;height:200px;margin:4px auto 6px;padding:10px;border-radius:16px;background:#fff;image-rendering:pixelated;box-shadow:0 0 0 1px rgba(243,210,122,.5),0 0 28px rgba(243,210,122,.25)}
-#qr-btn{position:fixed;right:140px;bottom:16px;z-index:9998;display:flex;align-items:center;gap:6px;padding:11px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#eef1f7;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.4);transition:transform .2s,border-color .2s}
-#qr-btn:hover{transform:translateY(-2px);border-color:rgba(243,210,122,.6)}
-/* botões da avaliação */
-.av-send{position:relative;overflow:hidden;padding:13px!important;border-radius:999px!important;background:linear-gradient(135deg,#fff1c1 0%,#f3d27a 35%,#d9a441 100%)!important;color:#1a1305!important;font-weight:700!important;letter-spacing:.04em;box-shadow:0 8px 24px rgba(243,210,122,.35),inset 0 1px 0 rgba(255,255,255,.7);transition:transform .2s,box-shadow .2s}
-.av-send::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
-.av-send:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(243,210,122,.55),inset 0 1px 0 rgba(255,255,255,.7)}
-.av-send:hover::after{transform:translateX(120%)}
-.av-send:active{transform:translateY(0) scale(.98)}
-.av-share a,.av-share button{display:flex;align-items:center;justify-content:center;gap:6px;border-color:rgba(243,210,122,.28)!important;transition:background .2s,border-color .2s,transform .2s}
-.av-share a:hover,.av-share button:hover{border-color:rgba(243,210,122,.7)!important;transform:translateY(-1px)}
-#av-btn{padding:11px 18px!important;font-weight:600;letter-spacing:.03em;border:1px solid rgba(243,210,122,.45)!important;background:linear-gradient(135deg,rgba(243,210,122,.18),rgba(255,255,255,.05))!important;box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 18px rgba(243,210,122,.25);transition:transform .2s,box-shadow .2s;animation:avpulse 3.2s ease-in-out infinite}
-#av-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.45),0 0 26px rgba(243,210,122,.5)}
-@keyframes avpulse{0%,100%{box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 14px rgba(243,210,122,.2)}50%{box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 26px rgba(243,210,122,.45)}}
-.av-rec input{accent-color:#f3d27a}
-@media (prefers-reduced-motion:reduce){#av-btn{animation:none}}
-</style>
+<button type="button" id="av-btn" aria-label="Avaliar o site" aria-haspopup="dialog"><span aria-hidden="true">&#9733; </span>Avaliar</button>
 <script>
 (function(){var m=document.getElementById('av'),m2=document.getElementById('av2'),nota=0,bs=m.querySelectorAll('.av-stars button');
 var URL="https://docs.google.com/forms/d/e/1FAIpQLSeKMQZeRLbxvEGqdb4HXKmP7lkpGeiVXSBQeEzD7by902nhDg/formResponse";
@@ -1340,25 +1453,40 @@ function abre(){try{sessionStorage.setItem('av_s','1')}catch(e){}m.classList.rem
 function fecha(){var tinha=m.classList.contains('done');m.classList.remove('on');marca();if(tinha&&!m2.classList.contains('done'))setTimeout(function(){m2.classList.add('on')},450)}
 function fecha2(){m2.classList.remove('on')}
 function pinta(n){bs.forEach(function(b){b.classList.toggle('lit',+b.dataset.v<=n)})}
-bs.forEach(function(b){b.onmouseenter=function(){pinta(+b.dataset.v)};b.onmouseleave=function(){pinta(nota)};b.onclick=function(){nota=+b.dataset.v;pinta(nota);var f=new FormData();f.append('entry.1584365776',String(nota));envia(f);setTimeout(function(){m.classList.add('done')},350);marca()}});
-m2.querySelector('.av-send').onclick=function(){var g=document.getElementById('av-gostou').value.trim(),me=document.getElementById('av-melhorar').value.trim(),r=m2.querySelector('input[name=avr]:checked');if(!g&&!me&&!r){fecha2();return}
+bs.forEach(function(b){b.onmouseenter=function(){pinta(+b.dataset.v)};b.onmouseleave=function(){pinta(nota)};b.onclick=function(){nota=+b.dataset.v;pinta(nota);bs.forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});var f=new FormData();f.append('entry.1584365776',String(nota));envia(f);setTimeout(function(){m.classList.add('done')},350);marca()}});
+m2.querySelector('.av-send').onclick=function(){var g=document.getElementById('av-gostou').value.trim(),me=document.getElementById('av-melhorar').value.trim(),r=m2.querySelector('input[name=avr]:checked');var erro=document.getElementById('av-erro');if(!g&&!me&&!r){erro.textContent='Escreva pelo menos uma resposta ou escolha uma opção antes de enviar.';document.getElementById('av-gostou').focus();return}erro.textContent='';
 var f=new FormData();if(nota)f.append('entry.1584365776',String(nota));if(g)f.append('entry.256832390',g);if(me)f.append('entry.1823658584',me);if(r)f.append('entry.214130862',r.value);envia(f);m2.classList.add('done');setTimeout(fecha2,2200)};
 m.querySelector('.av-x').onclick=fecha;m.onclick=function(e){if(e.target===m)fecha()};
 m2.querySelector('.av-x').onclick=fecha2;m2.onclick=function(e){if(e.target===m2)fecha2()};
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(m2.classList.contains('on'))fecha2();else if(m.classList.contains('on'))fecha()}});
 document.getElementById('av-btn').onclick=abre;
-m.querySelector('.av-copy').onclick=function(){var b=this;navigator.clipboard&&navigator.clipboard.writeText("https://niinacanteiro.github.io/eletrons-e-estrelas/").then(function(){b.textContent='Copiado!'})};
+m.querySelector('.av-copy').onclick=function(){var b=this;navigator.clipboard&&navigator.clipboard.writeText("https://niinacanteiro.github.io/eletrons-e-estrelas/").then(function(){b.textContent='Copiado!';if(window.EEA11y)EEA11y.anunciar('Link do site copiado')})};
 var v=null;try{v=localStorage.getItem('av_visto')||sessionStorage.getItem('av_s')}catch(e){}if(!v)setTimeout(function(){if(!document.querySelector('#av.on,#av2.on,#qr.on'))abre()},8000);})();
 </script>
 <script>(function(){var q=document.getElementById('qr'),b=document.getElementById('qr-btn'),a=document.getElementById('av-btn');if(!q||!b)return;
 function pos(){if(a&&a.offsetWidth)b.style.right=(16+a.offsetWidth+10)+'px'}pos();addEventListener('resize',pos);setTimeout(pos,800);
 b.onclick=function(){q.classList.add('on')};function f(){q.classList.remove('on')}q.querySelector('.av-x').onclick=f;q.onclick=function(e){if(e.target===q)f()};document.addEventListener('keydown',function(e){if(e.key==='Escape')f()})})();</script>
 <script>(function(){var f=document.querySelector('.floors'),h=document.querySelector('.hero');if(!f||!h)return;var tk=0;function u(){tk=0;f.classList.toggle('is-show',scrollY>h.offsetHeight*0.55);var so=document.getElementById('sobre');if(so)so.classList.toggle('is-in',scrollY>30)}addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(u)}},{passive:true});u()})();</script>
-<script>(function(){var p=document.querySelector('.hero__sub.tw');if(!p)return;var live=p.querySelector('.tw-live'),txt=p.querySelector('.tw-ghost').textContent,i=0;
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){live.textContent=txt;p.classList.add('done');return}
-function tick(){i++;live.textContent=txt.slice(0,i);if(i<txt.length){var c=txt.charAt(i-1);setTimeout(tick,/[.,:]/.test(c)?260:26+Math.random()*34)}else setTimeout(apaga,4200)}
-function apaga(){i--;live.textContent=txt.slice(0,i);if(i>0)setTimeout(apaga,12);else setTimeout(tick,900)}
-setTimeout(tick,600)})();</script>
-<script src="cosmos.js?v=5" defer></script><script src="extras.js?v=2" defer></script>
+<script>/* Subtítulo digitado: para quando a pessoa pede menos movimento (sistema ou painel de acessibilidade) */
+(function(){var p=document.querySelector('.hero__sub.tw');if(!p)return;var live=p.querySelector('.tw-live'),txt=p.querySelector('.tw-ghost').textContent,i=0,t=0;
+function parado(){return window.EEA11y?EEA11y.parado():matchMedia('(prefers-reduced-motion: reduce)').matches}
+function fixo(){clearTimeout(t);live.textContent=txt;p.classList.add('done')}
+function tick(){if(parado())return fixo();i++;live.textContent=txt.slice(0,i);if(i<txt.length){var c=txt.charAt(i-1);t=setTimeout(tick,/[.,:]/.test(c)?260:26+Math.random()*34)}else t=setTimeout(apaga,4200)}
+function apaga(){if(parado())return fixo();i--;live.textContent=txt.slice(0,i);if(i>0)t=setTimeout(apaga,12);else t=setTimeout(tick,900)}
+document.addEventListener('ee:movimento',function(){if(parado())fixo();else{clearTimeout(t);p.classList.remove('done');i=txt.length;t=setTimeout(apaga,1500)}});
+if(parado())fixo();else t=setTimeout(tick,600)})();</script>
+<script src="cosmos.js?v=6" defer></script><script src="extras.js?v=3" defer></script>
+<!-- VLibras: tradução do conteúdo para Libras (widget oficial gov.br) -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  /* Inicia o VLibras só se o script do gov.br carregou (sem internet, o resto do site segue normal) */
+  if (window.VLibras) new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
 </body>
 </html>
