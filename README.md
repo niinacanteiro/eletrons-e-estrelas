@@ -2,6 +2,21 @@
 
 Engenharia Elétrica e Física explicadas por uma estudante.
 
+## Trilha de estudo
+
+1. Fundamentos de circuitos
+2. Circuito RC
+3. Interpolação quadrática (Python)
+4. Motor de indução trifásico com rotor gaiola de esquilo
+5. Eletrônica de potência e PSIM
+6. Arduino e sensores
+7. Relatórios em LaTeX
+8. Astronomia
+9. Estudo ativo: flash cards (caixas de Leitner) e simulado misto
+10. Referências (ABNT)
+
+Cada módulo traz teoria, laboratório interativo, flash cards e quiz. Arquivos: `estudo.css` e `estudo.js` (JavaScript puro).
+
 Site: https://niinacanteiro.github.io/eletrons-e-estrelas/
 
 ## Acessibilidade

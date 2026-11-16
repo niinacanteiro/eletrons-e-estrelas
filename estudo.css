@@ -1,0 +1,120 @@
+/* Elétrons e Estrelas — trilha de estudo, teoria, flash cards e quizzes
+   © 2026 Nicoly Canteiro Araújo */
+
+.ee-toc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;counter-reset:mod}
+.ee-toc li{counter-increment:mod}
+.ee-toc a{display:block;height:100%;padding:16px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(10,12,24,.45);color:inherit;text-decoration:none;transition:border-color .2s,transform .2s}
+.ee-toc a:hover,.ee-toc a:focus-visible{border-color:rgba(243,210,122,.6);transform:translateY(-2px)}
+.ee-toc a::before{content:"Módulo " counter(mod);display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#f3d27a;margin-bottom:6px}
+.ee-toc strong{display:block;font-size:1.05rem;margin-bottom:4px}
+.ee-toc span{display:block;font-size:.92rem;opacity:.78;line-height:1.45}
+
+.ee-steps{counter-reset:st;list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px}
+.ee-steps li{counter-increment:st;position:relative;padding:10px 14px 10px 50px;border-radius:12px;background:rgba(255,255,255,.04)}
+.ee-steps li::before{content:counter(st);position:absolute;left:12px;top:9px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(243,210,122,.16);color:#f3d27a;font-weight:600;font-size:.85rem}
+
+.ee-theory{margin-top:28px}
+.ee-theory h3{font-size:1.15rem;margin:28px 0 10px;color:#f3e7c6}
+.ee-theory h3:first-child{margin-top:0}
+.ee-theory h4{font-size:1rem;margin:20px 0 8px}
+.ee-theory p,.ee-theory li{line-height:1.7;max-width:72ch}
+.ee-theory ul,.ee-theory ol{padding-left:1.3em}
+.ee-theory li{margin:4px 0}
+.ee-theory abbr{text-decoration:underline dotted}
+.ee-eq{display:block;margin:14px 0;padding:14px 18px;border-radius:12px;background:rgba(243,210,122,.06);border-left:3px solid #f3d27a;font:500 1.02rem/1.6 "Geist Mono",ui-monospace,Menlo,Consolas,monospace;overflow-x:auto;white-space:nowrap}
+.ee-eq small{display:block;white-space:normal;font-family:var(--sans,system-ui);font-weight:400;font-size:.85rem;opacity:.8;margin-top:4px}
+.ee-ex{margin:16px 0;padding:14px 18px;border-radius:12px;border:1px dashed rgba(255,255,255,.18);background:rgba(255,255,255,.03)}
+.ee-ex>p:first-child{margin-top:0;font-weight:600;color:#f3d27a}
+.ee-note{font-size:.85rem;opacity:.75}
+.ee-cite{font-size:.8rem;opacity:.7;white-space:nowrap}
+
+details.ee-more{margin:12px 0;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(10,12,24,.4)}
+details.ee-more>summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px;min-height:44px;align-items:center}
+details.ee-more>summary::-webkit-details-marker{display:none}
+details.ee-more>summary::after{content:"+";font-size:1.3rem;color:#f3d27a;transition:transform .2s}
+details.ee-more[open]>summary::after{transform:rotate(45deg)}
+details.ee-more>summary:focus-visible{outline:2px solid #f3d27a;outline-offset:2px;border-radius:14px}
+details.ee-more>.ee-more__in{padding:0 18px 18px}
+
+.ee-table-wrap{overflow-x:auto;margin:14px 0;border-radius:12px;border:1px solid rgba(255,255,255,.1)}
+.ee-table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:420px}
+.ee-table caption{text-align:left;padding:10px 14px;font-weight:600;color:#f3e7c6}
+.ee-table th,.ee-table td{padding:9px 14px;border-top:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:top}
+.ee-table th{background:rgba(255,255,255,.04);font-weight:600}
+
+/* parts list of the motor */
+.ee-parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0;padding:0;list-style:none}
+.ee-parts li{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);margin:0}
+.ee-parts b{display:block;color:#f3d27a;margin-bottom:4px}
+
+/* labs */
+.ee-lab{margin:22px 0;padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(8,10,20,.55)}
+.ee-lab h3{margin-top:0}
+.ee-lab__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:18px;align-items:center}
+@media (max-width:760px){.ee-lab__grid{grid-template-columns:1fr}}
+.ee-field{display:grid;gap:6px;margin:0 0 12px}
+.ee-field label,.ee-field .ee-lbl{display:flex;justify-content:space-between;gap:10px;font-size:.92rem}
+.ee-field output{color:#f3d27a;font-variant-numeric:tabular-nums}
+.ee-field input[type=range]{width:100%;accent-color:#f3d27a;min-height:28px}
+.ee-field select{min-height:40px;border-radius:10px;padding:6px 10px;background:#11131a;color:#eef1f7;border:1px solid rgba(255,255,255,.18);font:inherit}
+.ee-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-top:8px}
+.ee-out div{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05)}
+.ee-out b{display:block;font-size:1.15rem;color:#f3d27a;font-variant-numeric:tabular-nums}
+.ee-out span{font-size:.8rem;opacity:.75}
+.ee-svg{width:100%;height:auto;display:block}
+.ee-svg text{fill:rgba(238,241,247,.85);font:500 11px ui-monospace,Menlo,Consolas,monospace}
+.ee-btn{min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid rgba(243,210,122,.45);background:rgba(243,210,122,.1);color:#eef1f7;font:inherit;cursor:pointer}
+.ee-btn:hover{background:rgba(243,210,122,.2)}
+.ee-btn:focus-visible{outline:2px solid #f3d27a;outline-offset:2px}
+.ee-btn[aria-pressed=true]{background:rgba(243,210,122,.28)}
+
+/* flash cards */
+.ee-deck{margin:22px 0}
+.ee-deck__bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.ee-deck__title{font-weight:600;margin:0}
+.ee-deck__count{font-size:.85rem;opacity:.75}
+.ee-card{position:relative;width:100%;min-height:200px;perspective:1200px;border:0;padding:0;background:none;color:inherit;font:inherit;cursor:pointer;text-align:center;display:block}
+.ee-card__in{position:relative;width:100%;min-height:200px;transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.ee-card.is-flip .ee-card__in{transform:rotateY(180deg)}
+.ee-card__f,.ee-card__b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:22px 26px;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid rgba(243,210,122,.35);background:linear-gradient(160deg,rgba(28,24,48,.92),rgba(10,12,24,.95));box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.ee-card__b{transform:rotateY(180deg);background:linear-gradient(160deg,rgba(44,36,14,.92),rgba(12,12,20,.95))}
+.ee-card__tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#f3d27a}
+.ee-card__q{font-size:1.1rem;font-weight:600;line-height:1.45;margin:0}
+.ee-card__a{font-size:1rem;line-height:1.6;margin:0}
+.ee-card__hint{font-size:.78rem;opacity:.6}
+.ee-card:focus-visible{outline:2px solid #f3d27a;outline-offset:4px;border-radius:18px}
+.ee-deck__nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+.ee-deck__nav .ee-ok{border-color:rgba(48,209,88,.6)}
+.ee-deck__nav .ee-bad{border-color:rgba(255,69,58,.6)}
+@media (prefers-reduced-motion:reduce){.ee-card__in{transition:none}}
+html.a11y-pausar .ee-card__in{transition:none}
+
+/* quiz */
+.ee-quiz{margin:22px 0;padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(8,10,20,.55)}
+.ee-quiz h3{margin:0 0 4px}
+.ee-quiz__meta{font-size:.85rem;opacity:.75;margin:0 0 12px}
+.ee-quiz fieldset{border:0;margin:0;padding:0}
+.ee-quiz legend{font-weight:600;line-height:1.5;margin-bottom:10px;padding:0}
+.ee-opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;margin:6px 0;border-radius:12px;border:1px solid rgba(255,255,255,.12);cursor:pointer;min-height:44px;line-height:1.45}
+.ee-opt:hover{border-color:rgba(243,210,122,.5)}
+.ee-opt input{margin-top:3px;accent-color:#f3d27a;flex:none;width:18px;height:18px}
+.ee-opt.is-right{border-color:rgba(48,209,88,.8);background:rgba(48,209,88,.1)}
+.ee-opt.is-wrong{border-color:rgba(255,69,58,.8);background:rgba(255,69,58,.1)}
+.ee-quiz__fb{min-height:1.5em;margin:10px 0 0;line-height:1.55}
+.ee-quiz__fb b.ok{color:#5be37d}.ee-quiz__fb b.no{color:#ff7b72}
+.ee-quiz__nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ee-quiz__score{font-size:1.05rem}
+html.a11y-contraste .ee-opt.is-right{background:#003d14}
+html.a11y-contraste .ee-opt.is-wrong{background:#4a0000}
+
+/* referências */
+.ee-refs{padding-left:0;list-style:none;display:grid;gap:10px}
+.ee-refs li{line-height:1.6;padding-left:1.6em;text-indent:-1.6em;font-size:.93rem;word-break:break-word}
+.ee-refs a{color:#f3d27a}
+
+/* rotating field animation */
+#mf-svg .mf-coil{fill:none;stroke-width:10;stroke-linecap:round;opacity:.85}
+#mf-svg .mf-vec{stroke-width:3;stroke-linecap:round}
+#mf-svg .mf-res{stroke:#f3d27a;stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(243,210,122,.7))}
+#mf-svg .mf-rotor{fill:rgba(160,170,190,.12);stroke:rgba(200,210,225,.45)}
+#mf-svg .mf-bar{fill:rgba(205,170,90,.75)}

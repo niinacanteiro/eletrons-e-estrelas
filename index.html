@@ -8,7 +8,7 @@
     <meta name="google-site-verification" content="MHL9yTXpzzBWT_ZVFPidLEVv1pZMy-zlhARl7H9-MZk" />
     <meta name="author" content="Nicoly Canteiro Araújo">
     <title>Elétrons e Estrelas — Engenharia Elétrica e Física explicadas por uma estudante</title>
-    <meta name="description" content="Engenharia Elétrica e Física explicadas por Nicoly Canteiro Araújo, estudante do IFMT: resumos de laboratório, equações resolvidas, simulações interativas de circuito RC, interpolação em Python, Arduino e um Sistema Solar em 3D." />
+    <meta name="description" content="Elétrons e Estrelas, de Nicoly Canteiro Araújo (IFMT): trilha de estudo de Engenharia Elétrica e Física com teoria, laboratórios interativos, flash cards e quizzes: circuitos, circuito RC, interpolação em Python, motor de indução gaiola de esquilo, eletrônica de potência, Arduino, LaTeX e astronomia." />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#000000" />
     <!-- Acessibilidade: carregado cedo para aplicar as preferências salvas antes da página aparecer -->
@@ -177,7 +177,7 @@ a:not(.btn){color:#D6DEEC}
 .floors ol{list-style:none;margin:0;padding:0;position:relative}
 .floors ol::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:2px;border-radius:2px;background:rgba(255,255,255,.10)}
 .floors__fill{position:absolute;left:8px;top:10px;width:2px;border-radius:2px;height:0;background:linear-gradient(#FFFFFF,#AFC3FF);box-shadow:0 0 10px rgba(175,195,255,.6);transition:height .25s ease-out}
-.floors li{margin:0 0 20px}.floors li:last-child{margin:0}
+.floors li{margin:0 0 11px}.floors li:last-child{margin:0}
 .floors a{display:flex;align-items:center;gap:14px;text-decoration:none;color:rgba(235,232,226,.55);font:500 14px/1.2 system-ui,sans-serif;letter-spacing:.06em;transition:color .3s,transform .3s}
 .floors a:hover{color:#FFFFFF;transform:translateX(3px)}
 .floors__dot{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);background:#050506;flex:none;transition:all .35s;position:relative;z-index:1;display:grid;place-items:center}
@@ -394,7 +394,7 @@ pre.x-code{background:#11131a!important;color:#d4d4d4!important;border:1px solid
 pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
 .tk-k{color:#c586c0}.tk-t{color:#569cd6}.tk-f{color:#dcdcaa}.tk-s{color:#ce9178}.tk-n{color:#b5cea8}.tk-c{color:#86b874;font-style:italic}.tk-b{color:#4ec9b0}.tk-cst{color:#4fc1ff}.tk-v{color:#9cdcfe}.tk-o{color:#d4d4d4}
 .x-code .is-active{background:rgba(243,210,122,.12)!important;color:inherit!important;box-shadow:inset 3px 0 0 #f3d27a}
-/* espaços de anúncio discretos (Adsterra banner/native, sem pop-up) */
+/* espaços de anúncio discretos (banners, sem pop-up) */
 .x-ad{display:flex!important;flex-direction:column;align-items:center;gap:8px;min-height:0;margin:40px auto;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(10,12,24,.35);max-width:760px}
 .x-ad>span{align-self:flex-start;font-size:11px;opacity:.7}
 .x-ad__slot{width:100%;display:flex;justify-content:center;overflow:hidden}
@@ -421,11 +421,12 @@ pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
 @media (prefers-reduced-motion:reduce){#av-btn{animation:none}}
 </style>
     <link rel="stylesheet" href="acessibilidade.css" />
+    <link rel="stylesheet" href="estudo.css?v=1" />
 </head>
   <body>
 <a class="a11y-pular" href="#conteudo">Pular para o conteúdo</a>
 <canvas id="cosmos" aria-hidden="true"></canvas>
-<nav class="floors" aria-label="Andares da página"><p class="floors__title" aria-hidden="true">ANDARES</p><ol><li class="floors__fill" role="none" aria-hidden="true"></li><li><a href="#top" data-floor="top"><span class="floors__n" aria-hidden="true">01</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__n" aria-hidden="true">02</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__n" aria-hidden="true">03</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__n" aria-hidden="true">04</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#python" data-floor="python"><span class="floors__n" aria-hidden="true">05</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__n" aria-hidden="true">06</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__n" aria-hidden="true">07</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#material" data-floor="material"><span class="floors__n" aria-hidden="true">08</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__n" aria-hidden="true">09</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
+<nav class="floors" aria-label="Andares da página"><p class="floors__title" aria-hidden="true">ANDARES</p><ol><li class="floors__fill" role="none" aria-hidden="true"></li><li><a href="#top" data-floor="top"><span class="floors__n" aria-hidden="true">01</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Início</span></a></li><li><a href="#sobre" data-floor="sobre"><span class="floors__n" aria-hidden="true">02</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Sobre</span></a></li><li><a href="#sumario" data-floor="sumario"><span class="floors__n" aria-hidden="true">03</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Sumário</span></a></li><li><a href="#fundamentos" data-floor="fundamentos"><span class="floors__n" aria-hidden="true">04</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Fundamentos</span></a></li><li><a href="#rc" data-floor="rc"><span class="floors__n" aria-hidden="true">05</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Circuito RC</span></a></li><li><a href="#python" data-floor="python"><span class="floors__n" aria-hidden="true">06</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Interpolação</span></a></li><li><a href="#motor" data-floor="motor"><span class="floors__n" aria-hidden="true">07</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Motor de indução</span></a></li><li><a href="#potencia" data-floor="potencia"><span class="floors__n" aria-hidden="true">08</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Potência e PSIM</span></a></li><li><a href="#arduino" data-floor="arduino"><span class="floors__n" aria-hidden="true">09</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Arduino</span></a></li><li><a href="#latex" data-floor="latex"><span class="floors__n" aria-hidden="true">10</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">LaTeX</span></a></li><li><a href="#ceu" data-floor="ceu"><span class="floors__n" aria-hidden="true">11</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Céu</span></a></li><li><a href="#estudar" data-floor="estudar"><span class="floors__n" aria-hidden="true">12</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Estudar</span></a></li><li><a href="#referencias" data-floor="referencias"><span class="floors__n" aria-hidden="true">13</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Referências</span></a></li><li><a href="#material" data-floor="material"><span class="floors__n" aria-hidden="true">14</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Material</span></a></li><li><a href="#visitantes" data-floor="visitantes"><span class="floors__n" aria-hidden="true">15</span><span class="floors__dot" aria-hidden="true"></span><span class="floors__lbl">Visitantes</span></a></li></ol></nav>
     <div class="page" id="top">
       <header class="nav glass" data-auto></header>
       <main class="main" id="conteudo" tabindex="-1">
@@ -439,8 +440,8 @@ pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
           </div>
           <aside class="callout" aria-label="Próximo passo">
             <p class="callout__head"><span aria-hidden="true">✦ </span>Por onde começar</p>
-            <p class="callout__lead"><strong>Comece pelo circuito RC.</strong> A carga do capacitor em quatro passos curtos.</p>
-            <a class="btn" href="#rc">Comece pelo circuito RC</a>
+            <p class="callout__lead"><strong>Siga a trilha.</strong> Dez módulos em ordem, do elétron ao motor de indução, com flash cards e quizzes.</p>
+            <a class="btn" href="#sumario">Ver o sumário</a>
           </aside>
           <p class="hero__credit">Foto: <abbr title="Observatório Europeu do Sul">ESO</abbr> (CC BY 4.0)</p>
         </section>
@@ -462,9 +463,96 @@ pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
           </p>
         </section>
 
-        <section class="section" id="rc" data-nav="Laboratório RC">
+        <section class="section" id="sumario" data-nav="Sumário">
           <div class="head">
-            <p class="head__eyebrow">Circuitos elétricos</p>
+            <p class="head__eyebrow">Trilha de estudo</p>
+            <h2>Sumário: do elétron ao motor, na ordem certa.</h2>
+            <p class="head__sub">Cada módulo traz a teoria física e matemática, um laboratório interativo, flash cards e um quiz de autoestudo. Siga a ordem ou pule direto para o assunto da sua prova.</p>
+          </div>
+          <ol class="ee-toc">
+            <li><a href="#fundamentos"><strong>Fundamentos de circuitos</strong><span>Carga, corrente, tensão, potência, Lei de Ohm e Leis de Kirchhoff.</span></a></li>
+            <li><a href="#rc"><strong>Circuito RC</strong><span>Capacitores, constante de tempo e a equação diferencial da carga.</span></a></li>
+            <li><a href="#python"><strong>Interpolação quadrática</strong><span>Método numérico em Python: uma parábola por três pontos.</span></a></li>
+            <li><a href="#motor"><strong>Motor de indução gaiola de esquilo</strong><span>Campo girante, escorregamento, torque, perdas, calor e partida.</span></a></li>
+            <li><a href="#potencia"><strong>Eletrônica de potência</strong><span>Conversores, PWM, inversores e simulação no PSIM.</span></a></li>
+            <li><a href="#arduino"><strong>Arduino e sensores</strong><span>Semáforo, sensor ultrassônico e os cálculos por trás do código.</span></a></li>
+            <li><a href="#latex"><strong>Relatórios em LaTeX</strong><span>Pacotes e estrutura de um relatório técnico.</span></a></li>
+            <li><a href="#ceu"><strong>Astronomia</strong><span>Sistema Solar em 3D com flash cards.</span></a></li>
+            <li><a href="#estudar"><strong>Estudo ativo</strong><span>Todos os flash cards, simulado misto e métodos de estudo com base científica.</span></a></li>
+            <li><a href="#referencias"><strong>Referências</strong><span>Bibliografia completa em ABNT.</span></a></li>
+          </ol>
+          <details class="ee-more">
+            <summary>Como estudar com este site</summary>
+            <div class="ee-more__in">
+              <ol class="ee-steps">
+                <li>Leia a teoria do módulo com papel ao lado e refaça as contas dos exemplos.</li>
+                <li>Mexa no laboratório interativo e tente prever o resultado antes de soltar o controle.</li>
+                <li>Passe pelos flash cards. Marque “Errei” sem dó: esses cards voltam primeiro.</li>
+                <li>Faça o quiz. A explicação de cada resposta é parte do estudo.</li>
+                <li>Revise depois de 1, 3 e 7 dias. Espaçar as revisões fixa muito mais do que reler tudo de uma vez.</li>
+              </ol>
+            </div>
+          </details>
+        </section>
+
+        <section class="section" id="fundamentos" data-nav="Fundamentos">
+          <div class="head">
+            <p class="head__eyebrow">Módulo 1 · Fundamentos de circuitos</p>
+            <h2>Carga, corrente, tensão e as leis que governam qualquer circuito.</h2>
+            <p class="head__sub">Antes de capacitores e motores, quatro grandezas e três leis. Com elas dá para analisar praticamente todo circuito resistivo.</p>
+          </div>
+          <div class="ee-theory prose">
+            <h3>1. Carga e corrente</h3>
+            <p>A carga elétrica é uma propriedade da matéria: o elétron carrega −1,602 × 10⁻¹⁹ C e o próton a mesma quantidade, positiva. Num fio metálico, os elétrons livres vagueiam ao acaso; quando aplicamos uma tensão, eles ganham um arrasto lento e coletivo numa direção. A <strong>corrente</strong> mede quanta carga atravessa uma seção do condutor por unidade de tempo:</p>
+            <span class="ee-eq">i = dq / dt <small>Unidade: ampère (A) = 1 coulomb por segundo. Por convenção histórica, o sentido da corrente é o do movimento de cargas positivas, oposto ao dos elétrons.</small></span>
+            <h3>2. Tensão: energia por carga</h3>
+            <p>A <strong>tensão</strong> (ou diferença de potencial) entre dois pontos é o trabalho necessário para mover uma unidade de carga entre eles. Uma pilha de 1,5 V entrega 1,5 J a cada coulomb que passa por ela. É a analogia da altura da água numa caixa-d'água: o desnível é que faz a água correr.</p>
+            <span class="ee-eq">v = dw / dq <small>Unidade: volt (V) = 1 joule por coulomb.</small></span>
+            <h3>3. Potência e energia</h3>
+            <p>Multiplicando as duas definições, a potência de qualquer elemento é simplesmente tensão vezes corrente. Na <strong>convenção passiva</strong> (a corrente entra pelo terminal +), potência positiva significa que o elemento absorve energia; negativa, que fornece. Num circuito isolado, a soma das potências é sempre zero: é a conservação de energia em ação.</p>
+            <span class="ee-eq">p = v · i &nbsp;&nbsp;·&nbsp;&nbsp; w = ∫ p dt <small>A conta de luz cobra energia em kWh: 1 kWh = 3,6 × 10⁶ J.</small></span>
+            <h3>4. Lei de Ohm e resistência</h3>
+            <p>Em muitos materiais, a corrente é proporcional à tensão aplicada; a constante de proporcionalidade é a <strong>resistência</strong>. Fisicamente, ela vem das colisões dos elétrons com a rede cristalina, que convertem energia elétrica em calor (efeito Joule). Depende do material (resistividade ρ) e da geometria do condutor:</p>
+            <span class="ee-eq">v = R · i &nbsp;&nbsp;·&nbsp;&nbsp; R = ρ · L / A &nbsp;&nbsp;·&nbsp;&nbsp; p = R · i² = v² / R <small>Cobre a 20 °C: ρ ≈ 1,72 × 10⁻⁸ Ω·m. Por isso fios longos e finos esquentam mais.</small></span>
+            <h3>5. Leis de Kirchhoff</h3>
+            <p>Gustav Kirchhoff traduziu duas leis de conservação para a linguagem dos circuitos:</p>
+            <ul>
+              <li><strong>Lei das Correntes (LKC):</strong> a soma das correntes que entram num nó é igual à soma das que saem (Σ i = 0). Carga não se cria nem se acumula num ponto de ligação.</li>
+              <li><strong>Lei das Tensões (LKT):</strong> ao percorrer qualquer malha fechada, a soma algébrica das tensões é zero (Σ v = 0). Uma carga que dá a volta completa volta ao mesmo potencial.</li>
+            </ul>
+            <h3>6. Associações e divisores</h3>
+            <p>Em <strong>série</strong> a corrente é a mesma e as resistências se somam. Em <strong>paralelo</strong> a tensão é a mesma e as condutâncias (1/R) se somam. Daí saem os divisores, usados o tempo todo para ler sensores no Arduino:</p>
+            <span class="ee-eq">Série: Req = R1 + R2 &nbsp;&nbsp;·&nbsp;&nbsp; Paralelo: Req = R1·R2 / (R1 + R2) &nbsp;&nbsp;·&nbsp;&nbsp; V2 = V · R2 / (R1 + R2)</span>
+            <div class="ee-ex">
+              <p>Exemplo resolvido</p>
+              <p>Uma fonte de 12 V alimenta R1 = 4 kΩ em série com R2 = 8 kΩ. A resistência total é 12 kΩ, logo i = 12/12 000 = 1 mA. Pela Lei de Ohm, V1 = 4 V e V2 = 8 V; somando, 12 V, exatamente como exige a LKT. A potência total é p = 12 · 0,001 = 12 mW.</p>
+            </div>
+          </div>
+          <div class="ee-lab" id="dv-lab">
+            <h3>Laboratório: divisor de tensão</h3>
+            <div class="ee-lab__grid">
+              <div>
+                <div class="ee-field"><label for="dv-v">Tensão da fonte V <output id="dv-v-o" for="dv-v">12 V</output></label><input type="range" id="dv-v" min="1" max="24" step="0.5" value="12" /></div>
+                <div class="ee-field"><label for="dv-r1">Resistor R1 <output id="dv-r1-o" for="dv-r1">4 kΩ</output></label><input type="range" id="dv-r1" min="100" max="20000" step="100" value="4000" /></div>
+                <div class="ee-field"><label for="dv-r2">Resistor R2 <output id="dv-r2-o" for="dv-r2">8 kΩ</output></label><input type="range" id="dv-r2" min="100" max="20000" step="100" value="8000" /></div>
+              </div>
+              <div class="ee-out" aria-live="polite">
+                <div><b id="dv-i">1 mA</b><span>Corrente i</span></div>
+                <div><b id="dv-v1">4 V</b><span>Tensão em R1</span></div>
+                <div><b id="dv-v2">8 V</b><span>Tensão em R2</span></div>
+                <div><b id="dv-p">12 mW</b><span>Potência total</span></div>
+              </div>
+            </div>
+            <p class="ee-note">Repare: V1 + V2 é sempre igual a V (LKT), e a tensão se divide na proporção das resistências.</p>
+          </div>
+          <div class="ee-deck" data-deck="fundamentos"></div>
+          <div class="ee-quiz" data-quiz="fundamentos" data-titulo="Quiz: fundamentos de circuitos"></div>
+          <p class="ee-note">Base teórica: Alexander e Sadiku (2013); Halliday, Resnick e Walker (2016); Nilsson e Riedel (2015).</p>
+        </section>
+
+        <section class="section" id="rc" data-nav="Circuito RC">
+          <div class="head">
+            <p class="head__eyebrow">Módulo 2 · Circuitos elétricos</p>
             <h2>Circuito RC: como o capacitor carrega.</h2>
             <p class="head__sub">A tensão sobe rápido no começo e desacelera, sempre no ritmo da constante de tempo τ.</p>
           </div>
@@ -574,42 +662,39 @@ pre.x-code.has-bar{border-radius:0 0 12px 12px;margin-top:0!important}
           <div class="links">
             <a class="btn" href="https://github.com/niinacanteiro/relatorios-latex" target="_blank" rel="noopener noreferrer">Fonte: relatorios-latex no GitHub<span class="a11y-sr"> (abre em nova aba)</span></a>
           </div>
+          <details class="ee-more">
+            <summary>Entenda a física e a matemática do circuito RC</summary>
+            <div class="ee-more__in ee-theory">
+              <h3>O capacitor</h3>
+              <p>Um capacitor são duas placas condutoras separadas por um isolante (dielétrico). Ao ligar uma fonte, elétrons saem de uma placa e se acumulam na outra; surge um campo elétrico entre elas que guarda energia. A carga é proporcional à tensão, e a corrente depende de quão rápido a tensão varia:</p>
+              <span class="ee-eq">q = C · v &nbsp;&nbsp;·&nbsp;&nbsp; i = C · dv/dt &nbsp;&nbsp;·&nbsp;&nbsp; C = ε · A / d <small>C em farads (F). Placas maiores (A), mais próximas (d) e dielétricos melhores (ε) aumentam a capacitância.</small></span>
+              <h3>A equação diferencial</h3>
+              <p>Aplicando a LKT na malha fonte–resistor–capacitor durante a carga: V<sub>s</sub> = R·i + v<sub>C</sub>. Substituindo i = C·dv<sub>C</sub>/dt chegamos a uma equação diferencial linear de primeira ordem:</p>
+              <span class="ee-eq">R·C · dv<sub>C</sub>/dt + v<sub>C</sub> = V<sub>s</sub></span>
+              <p>Separando variáveis e integrando com v<sub>C</sub>(0) = 0, a solução é uma exponencial que se aproxima de V<sub>s</sub>. A corrente, por sua vez, começa em V<sub>s</sub>/R e decai a zero:</p>
+              <span class="ee-eq">v<sub>C</sub>(t) = V<sub>s</sub> (1 − e<sup>−t/τ</sup>) &nbsp;&nbsp;·&nbsp;&nbsp; i(t) = (V<sub>s</sub>/R) e<sup>−t/τ</sup> &nbsp;&nbsp;·&nbsp;&nbsp; τ = R·C</span>
+              <div class="ee-table-wrap"><table class="ee-table"><caption>Quanto o capacitor carrega a cada constante de tempo</caption>
+                <thead><tr><th scope="col">Tempo</th><th scope="col">1τ</th><th scope="col">2τ</th><th scope="col">3τ</th><th scope="col">4τ</th><th scope="col">5τ</th></tr></thead>
+                <tbody><tr><th scope="row">v<sub>C</sub> / V<sub>s</sub></th><td>63,2%</td><td>86,5%</td><td>95,0%</td><td>98,2%</td><td>99,3%</td></tr></tbody></table></div>
+              <h3>Descarga e energia</h3>
+              <p>Sem a fonte, o capacitor descarrega pelo resistor: v<sub>C</sub>(t) = V<sub>0</sub>·e<sup>−t/τ</sup>. A energia guardada é W = ½·C·V². Um resultado curioso: carregando um capacitor a partir do zero com fonte constante, a fonte entrega C·V², metade fica no capacitor e a outra metade vira calor no resistor, seja qual for o valor de R.</p>
+              <h3>Onde isso aparece</h3>
+              <p>Temporizadores (como o 555), filtros que suavizam a saída de retificadores, o “debounce” de botões no Arduino e até o aquecimento de um motor, que segue a mesma curva exponencial (veja o módulo do motor).</p>
+            </div>
+          </details>
+          <div class="ee-deck" data-deck="rc"></div>
+          <div class="ee-quiz" data-quiz="rc" data-titulo="Quiz: circuito RC"></div>
         </section>
 
         <script>
-/* chaves de anúncio por endereço do site (github.io ou domínio próprio) */
-window.EEAds=(function(){var d=location.hostname.indexOf('ninacanteiro.com.br')>-1;
-var k=d?{n:'70f1da02a30d83c2b2c8d321ba5cf127',b300:'7a2f16bf6807fe503d3426179770d6f9',b728:'5e760450fafcd7acfe5217344828ba9d'}
-       :{n:'f2e8efa4d2fd37ecc5c0f7f1d00db647',b300:'3840ce2c7eacdb9a120148efc2173ce1',b728:'5191a33a1497ef4aa496d8c2bec8d385'};
-return{native:function(){document.write('<scr'+'ipt async="async" data-cfasync="false" src="https://bauval.org/21/'+k.n+'"></scr'+'ipt><div id="container-'+k.n+'"></div>');},
-banner:function(wide){var big=wide&&window.innerWidth>=760;window.atOptions={'key':big?k.b728:k.b300,'format':'iframe','height':big?90:250,'width':big?728:300,'params':{}};
+/* anúncios: somente banners discretos, sem pop-up */
+window.EEAds=(function(){var k={b300:'3840ce2c7eacdb9a120148efc2173ce1',b728:'5191a33a1497ef4aa496d8c2bec8d385'};
+return{banner:function(wide){var big=wide&&window.innerWidth>=760;window.atOptions={'key':big?k.b728:k.b300,'format':'iframe','height':big?90:250,'width':big?728:300,'params':{}};
 document.write('<scr'+'ipt src="https://bauval.org/22/'+(big?k.b728:k.b300)+'"></scr'+'ipt>');}};})();
 </script>
-        <aside class="x-ad" aria-label="Publicidade 1"><span>Publicidade</span>
-          <div class="x-ad__slot"><script>EEAds.native();</script></div>
-        </aside>
-
-        <section class="section" id="potencia">
-          <div class="head">
-            <p class="head__eyebrow">Eletrônica de potência</p>
-            <h2>Simular antes de montar poupa componentes.</h2>
-          </div>
-          <div class="prose">
-            <p>Uma simulação mostra tensões, correntes e a resposta do sistema antes de montar o circuito: dá para conferir se os valores batem com o cálculo, achar erros de ligação e testar outros componentes sem queimar nada.</p>
-          </div>
-          <figure class="band">
-            <img src="psim-simulacao.webp" alt="Tela do PSIM com um circuito de eletrônica de potência simulado" />
-            <figcaption>Simulação no PSIM feita para a disciplina</figcaption>
-          </figure>
-          <figure class="band">
-            <img src="grafico-motor.webp" alt="Gráfico com a resposta de um motor ao longo do tempo" />
-            <figcaption>Gráfico de resposta de um motor</figcaption>
-          </figure>
-        </section>
-
         <section class="section" id="python" data-nav="Interpolação">
           <div class="head">
-            <p class="head__eyebrow">Métodos numéricos em Python</p>
+            <p class="head__eyebrow">Módulo 3 · Métodos numéricos em Python</p>
             <h2>Interpolação quadrática: uma parábola por três pontos.</h2>
           </div>
           <div class="prose">
@@ -668,11 +753,264 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
           <div class="links">
             <a class="btn" href="https://github.com/niinacanteiro/Metodos_Computacionais" target="_blank" rel="noopener noreferrer">Fonte: Metodos_Computacionais no GitHub<span class="a11y-sr"> (abre em nova aba)</span></a>
           </div>
+          <details class="ee-more">
+            <summary>Entenda a matemática da interpolação</summary>
+            <div class="ee-more__in ee-theory">
+              <h3>Por que interpolar?</h3>
+              <p>Em laboratório medimos valores em pontos isolados: a tensão a cada segundo, a temperatura a cada metro. Interpolar é estimar o que acontece entre esses pontos com uma função simples que passa exatamente por eles. Com três pontos de abscissas diferentes existe um, e só um, polinômio de grau até 2 que cumpre isso.</p>
+              <h3>Caminho 1: sistema de Vandermonde</h3>
+              <p>Impondo P(x<sub>i</sub>) = y<sub>i</sub> para P(x) = a·x² + b·x + c, temos três equações lineares nas incógnitas a, b e c. A matriz do sistema tem linhas (x<sub>i</sub>², x<sub>i</sub>, 1); ela só é invertível se os x<sub>i</sub> forem distintos.</p>
+              <h3>Caminho 2: forma de Lagrange</h3>
+              <p>Montamos três polinômios “base”, cada um valendo 1 no seu ponto e 0 nos outros dois, e somamos com os pesos y<sub>i</sub>:</p>
+              <span class="ee-eq">P(x) = y<sub>0</sub>·L<sub>0</sub>(x) + y<sub>1</sub>·L<sub>1</sub>(x) + y<sub>2</sub>·L<sub>2</sub>(x) &nbsp;&nbsp; com &nbsp;&nbsp; L<sub>0</sub>(x) = (x−x<sub>1</sub>)(x−x<sub>2</sub>) / [(x<sub>0</sub>−x<sub>1</sub>)(x<sub>0</sub>−x<sub>2</sub>)]</span>
+              <h3>Quanto erramos?</h3>
+              <p>Se a função real f tem terceira derivada contínua, o erro num ponto x do intervalo é:</p>
+              <span class="ee-eq">f(x) − P(x) = f'''(ξ) / 3! · (x − x<sub>0</sub>)(x − x<sub>1</sub>)(x − x<sub>2</sub>) <small>ξ é algum ponto do intervalo. O produto cresce depressa fora dele: por isso extrapolar é arriscado.</small></span>
+              <h3>Em Python</h3>
+              <div class="code-win"><div class="code-bar"><i></i><i></i><i></i><span>interpolacao.py</span></div>
+<pre class="x-code has-bar" tabindex="0" role="region" aria-label="Código Python da interpolação de Lagrange"><code><span class="tk-k">def</span> <span class="tk-f">lagrange2</span>(<span class="tk-v">xs</span>, <span class="tk-v">ys</span>, <span class="tk-v">x</span>):
+    <span class="tk-s">"""Valor da parábola que passa por três pontos."""</span>
+    (<span class="tk-v">x0</span>, <span class="tk-v">x1</span>, <span class="tk-v">x2</span>), (<span class="tk-v">y0</span>, <span class="tk-v">y1</span>, <span class="tk-v">y2</span>) = <span class="tk-v">xs</span>, <span class="tk-v">ys</span>
+    <span class="tk-v">L0</span> = (<span class="tk-v">x</span> - <span class="tk-v">x1</span>) * (<span class="tk-v">x</span> - <span class="tk-v">x2</span>) / ((<span class="tk-v">x0</span> - <span class="tk-v">x1</span>) * (<span class="tk-v">x0</span> - <span class="tk-v">x2</span>))
+    <span class="tk-v">L1</span> = (<span class="tk-v">x</span> - <span class="tk-v">x0</span>) * (<span class="tk-v">x</span> - <span class="tk-v">x2</span>) / ((<span class="tk-v">x1</span> - <span class="tk-v">x0</span>) * (<span class="tk-v">x1</span> - <span class="tk-v">x2</span>))
+    <span class="tk-v">L2</span> = (<span class="tk-v">x</span> - <span class="tk-v">x0</span>) * (<span class="tk-v">x</span> - <span class="tk-v">x1</span>) / ((<span class="tk-v">x2</span> - <span class="tk-v">x0</span>) * (<span class="tk-v">x2</span> - <span class="tk-v">x1</span>))
+    <span class="tk-k">return</span> <span class="tk-v">y0</span> * <span class="tk-v">L0</span> + <span class="tk-v">y1</span> * <span class="tk-v">L1</span> + <span class="tk-v">y2</span> * <span class="tk-v">L2</span>
+
+<span class="tk-f">print</span>(<span class="tk-f">lagrange2</span>((<span class="tk-n">0</span>, <span class="tk-n">1</span>, <span class="tk-n">2</span>), (<span class="tk-n">1</span>, <span class="tk-n">3</span>, <span class="tk-n">7</span>), <span class="tk-n">1.5</span>))  <span class="tk-c"># 4.75</span></code></pre></div>
+            </div>
+          </details>
+          <div class="ee-deck" data-deck="interpolacao"></div>
+          <div class="ee-quiz" data-quiz="interpolacao" data-titulo="Quiz: interpolação quadrática"></div>
         </section>
 
-        <aside class="x-ad" aria-label="Publicidade 2"><span>Publicidade</span>
+        <aside class="x-ad" aria-label="Publicidade 1"><span>Publicidade</span>
           <div class="x-ad__slot"><script>EEAds.banner(false);</script></div>
         </aside>
+
+        <section class="section" id="motor" data-nav="Motor">
+          <div class="head">
+            <p class="head__eyebrow">Módulo 4 · Máquinas elétricas</p>
+            <h2>Motor de indução trifásico com rotor gaiola de esquilo.</h2>
+            <p class="head__sub">O motor mais usado do mundo: move bombas, esteiras, ventiladores e compressores. Não tem escovas nem contato elétrico com o rotor, e mesmo assim gira. Entenda por quê.</p>
+          </div>
+
+          <div class="ee-theory prose">
+            <h3>1. Um pouco de história</h3>
+            <p>Em 1885 o italiano Galileo Ferraris demonstrou que duas correntes alternadas defasadas criam um campo magnético que gira. Nikola Tesla obteve em 1888 as patentes de motores polifásicos, e em 1889 Mikhail Dolivo-Dobrovolsky, engenheiro da AEG, construiu o motor trifásico com rotor em gaiola, cuja forma básica é a mesma usada até hoje. A combinação de construção simples, robustez e baixo custo explica por que ele domina a indústria.</p>
+
+            <h3>2. Componentes</h3>
+            <ul class="ee-parts">
+              <li><b>Carcaça</b>Estrutura de ferro fundido ou alumínio, com aletas externas que aumentam a área de troca de calor.</li>
+              <li><b>Núcleo do estator</b>Pacote de chapas finas de aço-silício, isoladas entre si, que conduz o fluxo magnético e reduz as correntes parasitas.</li>
+              <li><b>Enrolamento do estator</b>Três conjuntos de bobinas de cobre esmaltado, deslocados de 120° elétricos, alojados em ranhuras e ligados à rede trifásica.</li>
+              <li><b>Rotor em gaiola</b>Núcleo laminado com barras de alumínio (ou cobre) injetadas nas ranhuras e curto-circuitadas por dois anéis nas pontas.</li>
+              <li><b>Entreferro</b>Folga de ar entre estator e rotor, de décimos de milímetro a poucos milímetros. Quanto menor, menor a corrente de magnetização.</li>
+              <li><b>Eixo e rolamentos</b>Transmitem o torque à carga e mantêm o rotor centrado.</li>
+              <li><b>Ventilador e tampa defletora</b>Preso ao eixo, sopra ar sobre as aletas (motor fechado com ventilação externa).</li>
+              <li><b>Caixa de ligação e placa</b>Bornes para ligar em estrela ou triângulo e a placa com os dados nominais.</li>
+            </ul>
+            <p>As barras do rotor costumam ser levemente inclinadas em relação ao eixo. Isso suaviza o torque, reduz ruído magnético e evita que o rotor “trave” em certas posições na partida.</p>
+
+            <h3>3. Princípio de funcionamento</h3>
+            <h4>3.1 O campo magnético girante</h4>
+            <p>Cada fase do estator produz um campo que pulsa no tempo, mas fica parado no espaço. Como as três bobinas estão deslocadas de 120° no espaço e as três correntes estão defasadas de 120° no tempo, a soma dos três campos tem amplitude constante (1,5 vez o pico de uma fase) e gira com velocidade uniforme. É como uma “ola” num estádio: ninguém sai do lugar, mas a onda dá a volta.</p>
+            <span class="ee-eq">B<sub>A</sub> + B<sub>B</sub> + B<sub>C</sub> = 1,5 · B<sub>máx</sub> · [cos(ωt) x̂ + sen(ωt) ŷ] <small>A resultante gira à frequência angular ω da rede.</small></span>
+            <h4>3.2 Indução e força nas barras</h4>
+            <p>O campo girante “varre” as barras do rotor. Pela <strong>Lei de Faraday</strong>, a variação do fluxo induz uma força eletromotriz em cada barra; como as barras estão em curto pelos anéis, circulam correntes intensas. Cada barra percorrida por corrente dentro do campo sofre a <strong>força de Lorentz</strong>, e a soma das forças vezes o raio dá o torque. Pela <strong>Lei de Lenz</strong>, o efeito se opõe à causa: o rotor é arrastado no mesmo sentido do campo, tentando diminuir a velocidade relativa.</p>
+            <span class="ee-eq">e = −dΦ/dt &nbsp;&nbsp;·&nbsp;&nbsp; F = I · L × B &nbsp;&nbsp;·&nbsp;&nbsp; T = Σ r × F</span>
+            <h4>3.3 Por que “assíncrono”?</h4>
+            <p>Se o rotor alcançasse a velocidade do campo, as barras deixariam de ver variação de fluxo: sem tensão induzida, sem corrente e sem torque. Por isso o rotor sempre gira um pouco mais devagar. Essa diferença relativa é o <strong>escorregamento</strong>, e ela é o “preço” que o motor paga para produzir torque.</p>
+          </div>
+
+          <div class="ee-lab" id="mf-lab">
+            <h3>Laboratório: veja o campo girar</h3>
+            <div class="ee-lab__grid">
+              <svg class="ee-svg" id="mf-svg" viewBox="0 0 300 300" role="img" aria-label="Animação do estator com as bobinas A, B e C. Os vetores coloridos de cada fase pulsam e a resultante dourada gira em velocidade constante, arrastando o rotor em gaiola.">
+                <circle cx="150" cy="150" r="138" fill="none" stroke="rgba(200,210,225,.25)" stroke-width="14"/>
+                <circle cx="268.0" cy="150.0" r="13" fill="none" stroke="#ff6b5e" stroke-width="4"/><text x="268.0" y="154.0" text-anchor="middle">A</text><circle cx="32.0" cy="150.0" r="13" fill="none" stroke="#ff6b5e" stroke-width="4"/><text x="32.0" y="154.0" text-anchor="middle">A’</text><circle cx="91.0" cy="47.8" r="13" fill="none" stroke="#5bd17d" stroke-width="4"/><text x="91.0" y="51.8" text-anchor="middle">B</text><circle cx="209.0" cy="252.2" r="13" fill="none" stroke="#5bd17d" stroke-width="4"/><text x="209.0" y="256.2" text-anchor="middle">B’</text><circle cx="91.0" cy="252.2" r="13" fill="none" stroke="#5aa8ff" stroke-width="4"/><text x="91.0" y="256.2" text-anchor="middle">C</text><circle cx="209.0" cy="47.8" r="13" fill="none" stroke="#5aa8ff" stroke-width="4"/><text x="209.0" y="51.8" text-anchor="middle">C’</text>
+                <g id="mf-rotorg"><circle class="mf-rotor" cx="150" cy="150" r="60"/><circle cx="150" cy="150" r="9" fill="rgba(220,225,235,.6)"/><circle class="mf-bar" cx="196.0" cy="150.0" r="5"/><circle class="mf-bar" cx="189.8" cy="127.0" r="5"/><circle class="mf-bar" cx="173.0" cy="110.2" r="5"/><circle class="mf-bar" cx="150.0" cy="104.0" r="5"/><circle class="mf-bar" cx="127.0" cy="110.2" r="5"/><circle class="mf-bar" cx="110.2" cy="127.0" r="5"/><circle class="mf-bar" cx="104.0" cy="150.0" r="5"/><circle class="mf-bar" cx="110.2" cy="173.0" r="5"/><circle class="mf-bar" cx="127.0" cy="189.8" r="5"/><circle class="mf-bar" cx="150.0" cy="196.0" r="5"/><circle class="mf-bar" cx="173.0" cy="189.8" r="5"/><circle class="mf-bar" cx="189.8" cy="173.0" r="5"/></g>
+              </svg>
+              <div>
+                <div class="ee-field"><label for="mf-s">Escorregamento do rotor <output id="mf-s-o" for="mf-s">5%</output></label><input type="range" id="mf-s" min="0" max="40" step="1" value="5" /></div>
+                <p class="x-status" id="mf-status" aria-live="polite"></p>
+                <button type="button" class="ee-btn" id="mf-play" aria-pressed="false">Pausar</button>
+                <p class="ee-note">Vermelho, verde e azul são os campos das fases A, B e C; o vetor dourado é a soma. Em câmera lenta: na rede de 60 Hz o campo de um motor de 2 polos dá 60 voltas por segundo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ee-theory prose">
+            <h3>4. As equações essenciais</h3>
+            <h4>4.1 Velocidade síncrona e escorregamento</h4>
+            <span class="ee-eq">n<sub>s</sub> = 120 · f / p &nbsp;&nbsp;·&nbsp;&nbsp; s = (n<sub>s</sub> − n) / n<sub>s</sub> &nbsp;&nbsp;·&nbsp;&nbsp; n = n<sub>s</sub> (1 − s) &nbsp;&nbsp;·&nbsp;&nbsp; f<sub>r</sub> = s · f <small>n em rpm, f em Hz, p = número de polos. A frequência f<sub>r</sub> das correntes do rotor é pequena em operação normal.</small></span>
+            <div class="ee-table-wrap"><table class="ee-table"><caption>Velocidade síncrona em 60 Hz</caption>
+              <thead><tr><th scope="col">Polos</th><th scope="col">2</th><th scope="col">4</th><th scope="col">6</th><th scope="col">8</th></tr></thead>
+              <tbody><tr><th scope="row">n<sub>s</sub> (rpm)</th><td>3600</td><td>1800</td><td>1200</td><td>900</td></tr>
+              <tr><th scope="row">n típica em carga (rpm)</th><td>≈ 3500</td><td>≈ 1750</td><td>≈ 1160</td><td>≈ 870</td></tr></tbody></table></div>
+            <h4>4.2 Circuito equivalente por fase</h4>
+            <p>O motor se comporta como um transformador cujo secundário (o rotor) gira. Por fase, temos a resistência R<sub>1</sub> e a reatância de dispersão X<sub>1</sub> do estator, um ramo de magnetização X<sub>m</sub> (com R<sub>c</sub> representando as perdas no ferro) e o rotor referido ao estator, com X<sub>2</sub> e uma resistência que depende do escorregamento, R<sub>2</sub>/s. O truque está em separar R<sub>2</sub>/s em duas partes:</p>
+            <span class="ee-eq">R<sub>2</sub>/s = R<sub>2</sub> + R<sub>2</sub>·(1 − s)/s <small>A primeira parte é a perda Joule real do rotor; a segunda é uma “resistência de carga” que representa a potência convertida em trabalho mecânico.</small></span>
+            <h4>4.3 Fluxo de potência</h4>
+            <span class="ee-eq">P<sub>ef</sub> = 3 · I<sub>2</sub>² · R<sub>2</sub>/s &nbsp;&nbsp;·&nbsp;&nbsp; P<sub>Cu2</sub> = s · P<sub>ef</sub> &nbsp;&nbsp;·&nbsp;&nbsp; P<sub>mec</sub> = (1 − s) · P<sub>ef</sub> <small>P<sub>ef</sub> é a potência que atravessa o entreferro. Quanto maior o escorregamento, maior a fração perdida em calor no rotor.</small></span>
+            <h4>4.4 Torque</h4>
+            <span class="ee-eq">T = P<sub>mec</sub> / ω<sub>m</sub> = P<sub>ef</sub> / ω<sub>s</sub> &nbsp;&nbsp;·&nbsp;&nbsp; ω<sub>s</sub> = 2π · n<sub>s</sub> / 60 &nbsp;&nbsp;·&nbsp;&nbsp; T ∝ V² <small>Simplificando o estator pelo equivalente de Thévenin (V<sub>th</sub>, R<sub>th</sub>, X<sub>th</sub>): T = 3·V<sub>th</sub>²·(R<sub>2</sub>/s) / {ω<sub>s</sub>·[(R<sub>th</sub> + R<sub>2</sub>/s)² + (X<sub>th</sub> + X<sub>2</sub>)²]}.</small></span>
+            <p>O torque máximo (ou crítico) ocorre no escorregamento s<sub>Tmáx</sub> = R<sub>2</sub> / √[R<sub>th</sub>² + (X<sub>th</sub> + X<sub>2</sub>)²]. O valor do torque máximo não depende de R<sub>2</sub>, mas sua posição sim: rotores com barras mais resistivas têm torque máximo em escorregamentos maiores e, por isso, maior torque de partida. Uma aproximação muito usada é a fórmula de Kloss:</p>
+            <span class="ee-eq">T / T<sub>máx</sub> ≈ 2 / (s / s<sub>Tmáx</sub> + s<sub>Tmáx</sub> / s)</span>
+            <div class="ee-ex">
+              <p>Exemplo resolvido</p>
+              <p>Motor de 4 polos, 60 Hz, girando a 1746 rpm e entregando 7,5 kW. Velocidade síncrona: n<sub>s</sub> = 120·60/4 = 1800 rpm. Escorregamento: s = (1800 − 1746)/1800 = 0,03 (3%). Frequência no rotor: 0,03·60 = 1,8 Hz. Velocidade angular: ω<sub>m</sub> = 2π·1746/60 ≈ 182,8 rad/s. Torque no eixo: T = 7500/182,8 ≈ 41 N·m.</p>
+            </div>
+
+            <h3>5. Curva torque × velocidade</h3>
+            <p>Da partida (n = 0, s = 1) até a velocidade síncrona (s = 0), o torque passa por três pontos importantes: o <strong>torque de partida</strong>, que precisa vencer a inércia e o atrito da carga parada; o <strong>torque máximo</strong>, limite antes de o motor “desabar”; e o <strong>ponto nominal</strong>, na região quase reta perto de n<sub>s</sub>, onde o motor trabalha de forma estável. A ABNT NBR 17094-1 classifica os motores em categorias conforme essa curva: N (torque de partida normal, uso geral), H (torque de partida alto, cargas pesadas na partida) e D (alto escorregamento, cargas de impacto como prensas).</p>
+          </div>
+
+          <div class="ee-lab" id="mt-lab">
+            <h3>Laboratório: calculadora do motor e curva de torque</h3>
+            <div class="ee-lab__grid">
+              <div>
+                <div class="ee-field"><label for="mt-f">Frequência da rede</label><select id="mt-f"><option value="60" selected>60 Hz (Brasil)</option><option value="50">50 Hz</option></select></div>
+                <div class="ee-field"><label for="mt-p">Número de polos</label><select id="mt-p"><option value="2">2 polos</option><option value="4" selected>4 polos</option><option value="6">6 polos</option><option value="8">8 polos</option></select></div>
+                <div class="ee-field"><label for="mt-n">Velocidade do rotor <output id="mt-n-o" for="mt-n">1746 rpm</output></label><input type="range" id="mt-n" min="0" max="1800" step="1" value="1746" /></div>
+                <div class="ee-field"><label for="mt-sm">Escorregamento do torque máximo <output id="mt-sm-o" for="mt-sm">15%</output></label><input type="range" id="mt-sm" min="5" max="60" step="1" value="15" /></div>
+                <div class="ee-out" aria-live="polite">
+                  <div><b id="mt-ns">1800 rpm</b><span>Velocidade síncrona</span></div>
+                  <div><b id="mt-s">3%</b><span>Escorregamento</span></div>
+                  <div><b id="mt-fr">1,8 Hz</b><span>Frequência no rotor</span></div>
+                  <div><b id="mt-t">—</b><span>Torque (Kloss)</span></div>
+                  <div><b id="mt-tp">—</b><span>Torque de partida</span></div>
+                </div>
+              </div>
+              <svg class="ee-svg" id="mt-svg" viewBox="0 0 430 240" role="img" aria-label="Curva torque por velocidade do motor de indução">
+                <line x1="50" y1="210" x2="415" y2="210" stroke="rgba(255,255,255,.35)"/><line x1="50" y1="20" x2="50" y2="210" stroke="rgba(255,255,255,.35)"/>
+                <line x1="50" y1="30" x2="410" y2="30" stroke="rgba(255,255,255,.12)" stroke-dasharray="3 4"/>
+                <text x="8" y="34">T_máx</text><text x="30" y="226">0</text><text x="392" y="226" id="mt-lbl-ns">1800</text><text x="200" y="236">velocidade (rpm)</text>
+                <text x="56" y="16">torque</text>
+                <line id="mt-vline" x1="300" y1="20" x2="300" y2="210" stroke="rgba(243,210,122,.35)" stroke-dasharray="3 4"/>
+                <path id="mt-curve" d="" fill="none" stroke="#f3d27a" stroke-width="2.6" stroke-linecap="round"/>
+                <circle id="mt-dot" r="6" cx="300" cy="100" fill="#0b0d14" stroke="#f3d27a" stroke-width="2.4"/>
+              </svg>
+            </div>
+            <p class="ee-note">Modelo didático pela fórmula de Kloss, que despreza a resistência do estator. Em rotores reais o torque de partida costuma ser maior que o previsto aqui, por causa do efeito pelicular nas barras profundas (a resistência do rotor aumenta com a frequência f<sub>r</sub>, que é alta na partida). Os valores reais vêm do catálogo do fabricante e dos ensaios previstos na NBR 17094-3.</p>
+          </div>
+
+          <div class="ee-theory prose">
+            <h3>6. Energia, perdas e termodinâmica do motor</h3>
+            <p>Pela <strong>1ª lei da termodinâmica</strong>, a energia elétrica que entra é igual à energia mecânica entregue no eixo mais o calor gerado. Nenhum motor real escapa da <strong>2ª lei</strong>: atrito, histerese e efeito Joule são processos irreversíveis que geram entropia, e toda energia perdida vira calor que precisa sair da máquina.</p>
+            <span class="ee-eq">P<sub>entrada</sub> = √3 · V<sub>L</sub> · I<sub>L</sub> · cos φ &nbsp;&nbsp;·&nbsp;&nbsp; P<sub>entrada</sub> = P<sub>saída</sub> + Σ perdas &nbsp;&nbsp;·&nbsp;&nbsp; η = P<sub>saída</sub> / P<sub>entrada</sub></span>
+            <div class="ee-table-wrap"><table class="ee-table"><caption>Onde a energia se perde</caption>
+              <thead><tr><th scope="col">Perda</th><th scope="col">Origem física</th><th scope="col">Depende de</th></tr></thead>
+              <tbody>
+                <tr><td>Joule no estator</td><td>Resistência do cobre das bobinas (3·I<sub>1</sub>²·R<sub>1</sub>)</td><td>Carga (∝ I²) e temperatura</td></tr>
+                <tr><td>Joule no rotor</td><td>Correntes nas barras (s·P<sub>ef</sub>)</td><td>Escorregamento</td></tr>
+                <tr><td>No ferro</td><td>Histerese (reorientação dos domínios magnéticos) e correntes de Foucault no núcleo</td><td>Tensão e frequência; quase constante</td></tr>
+                <tr><td>Mecânicas</td><td>Atrito nos rolamentos e ventilação</td><td>Velocidade</td></tr>
+                <tr><td>Adicionais</td><td>Harmônicos e fluxos de dispersão</td><td>Carga e projeto</td></tr>
+              </tbody></table></div>
+            <h4>6.1 Como o calor sai</h4>
+            <p>O calor gerado no cobre atravessa o isolamento e o ferro por <strong>condução</strong> até a carcaça; das aletas, é levado pelo ar soprado pelo ventilador por <strong>convecção forçada</strong>; uma parcela menor sai por <strong>radiação</strong>. Como num circuito elétrico, cada caminho tem uma “resistência térmica”: a elevação de temperatura é aproximadamente as perdas vezes a resistência térmica total, ΔT ≈ P<sub>perdas</sub> · R<sub>th</sub>.</p>
+            <h4>6.2 O motor esquenta como um capacitor carrega</h4>
+            <p>Somando a capacidade térmica da massa do motor (C<sub>th</sub>), o balanço de energia dá uma equação idêntica à do circuito RC: perdas = C<sub>th</sub>·dθ/dt + θ/R<sub>th</sub>. A solução é a mesma exponencial, com constante térmica de tempo τ<sub>th</sub> = R<sub>th</sub>·C<sub>th</sub>, que em motores vai de minutos a horas.</p>
+            <span class="ee-eq">θ(t) = θ<sub>amb</sub> + ΔT<sub>final</sub> · (1 − e<sup>−t/τth</sup>)</span>
+            <h4>6.3 Classes de isolamento e vida útil</h4>
+            <p>O ponto fraco térmico do motor é o verniz e o esmalte que isolam as bobinas. As classes térmicas (IEC 60085, adotadas na NBR 17094-1) definem a temperatura máxima do ponto mais quente: <strong>A 105 °C, E 120 °C, B 130 °C, F 155 °C e H 180 °C</strong>. O envelhecimento do isolamento é uma reação química que segue a lei de Arrhenius; na prática, vale a regra de que cada cerca de 10 °C acima do limite reduz a vida do isolamento pela metade. Por isso motores sobrecarregados, mal ventilados ou alimentados com tensão desequilibrada queimam antes do tempo.</p>
+            <h4>6.4 Medindo a temperatura pela resistência</h4>
+            <p>A resistência do cobre cresce com a temperatura: R<sub>T</sub> = R<sub>0</sub>·[1 + α(T − T<sub>0</sub>)], com α ≈ 0,00393 /°C a 20 °C. Medindo a resistência do enrolamento a frio e logo após desligar o motor quente, calcula-se a elevação média de temperatura das bobinas. Esse é o método da variação da resistência, usado nos ensaios de elevação de temperatura.</p>
+            <h4>6.5 Rendimento</h4>
+            <p>As classes de rendimento IE1 (padrão), IE2 (alto), IE3 (premium) e IE4 (super premium) são definidas pela IEC 60034-30-1. No Brasil, o rendimento mínimo dos motores trifásicos com rotor gaiola é fixado por regulamentação federal e verificado pelo Inmetro. Como um motor pode consumir em energia, ao longo da vida, muitas vezes o seu preço de compra, cada ponto percentual de rendimento conta.</p>
+          </div>
+
+          <div class="ee-lab" id="th-lab">
+            <h3>Laboratório: aquecimento do motor</h3>
+            <div class="ee-lab__grid">
+              <div>
+                <div class="ee-field"><label for="th-c">Carga no eixo <output id="th-c-o" for="th-c">100%</output></label><input type="range" id="th-c" min="0" max="130" step="5" value="100" /></div>
+                <div class="ee-field"><label for="th-amb">Temperatura ambiente <output id="th-amb-o" for="th-amb">40 °C</output></label><input type="range" id="th-amb" min="0" max="60" step="1" value="40" /></div>
+                <div class="ee-field"><label for="th-tau"><span>Constante térmica τ<sub>th</sub></span> <output id="th-tau-o" for="th-tau">30 min</output></label><input type="range" id="th-tau" min="5" max="120" step="5" value="30" /></div>
+                <div class="ee-field"><label for="th-cls">Classe de isolamento</label><select id="th-cls"><option value="130">B (130 °C)</option><option value="155" selected>F (155 °C)</option><option value="180">H (180 °C)</option></select></div>
+                <div class="ee-out" aria-live="polite">
+                  <div><b id="th-tf">—</b><span>Temperatura final</span></div>
+                  <div><b id="th-marg">—</b><span>Folga até o limite</span></div>
+                  <div><b id="th-vida">—</b><span>Vida estimada do isolamento</span></div>
+                </div>
+                <p class="x-status" id="th-st" aria-live="polite"></p>
+              </div>
+              <svg class="ee-svg" id="th-svg" viewBox="0 0 430 240" role="img" aria-label="Curva de aquecimento do motor">
+                <line x1="50" y1="210" x2="415" y2="210" stroke="rgba(255,255,255,.35)"/><line x1="50" y1="20" x2="50" y2="210" stroke="rgba(255,255,255,.35)"/>
+                <text x="10" y="34">200 °C</text><text x="22" y="214">0</text><text x="56" y="226">0</text><text x="380" y="226" id="th-x">150 min</text><text x="200" y="236">tempo</text>
+                <line id="th-lim" x1="50" x2="410" y1="70" y2="70" stroke="#ff6b5e" stroke-dasharray="5 4"/><text id="th-lim-t" x="300" y="65" style="fill:#ff9a90">limite</text>
+                <path id="th-curve" d="" fill="none" stroke="#f3d27a" stroke-width="2.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="ee-note">Modelo didático de primeira ordem: elevação de 80 °C em carga nominal, com cerca de 30% de perdas fixas e o restante proporcional ao quadrado da carga; a vida estimada usa a regra dos 10 °C com 10 °C de folga para o ponto quente. Valores reais dependem do motor e do ensaio.</p>
+          </div>
+
+          <div class="ee-theory prose">
+            <h3>7. Partida e controle de velocidade</h3>
+            <p>Parado, o motor é como um transformador com o secundário em curto: na partida direta a corrente chega a algo como 6 a 8 vezes a nominal. Para não derrubar a tensão da instalação, usam-se métodos de partida:</p>
+            <ul>
+              <li><strong>Partida direta:</strong> simples e com torque máximo de partida; indicada para motores pequenos.</li>
+              <li><strong>Estrela-triângulo:</strong> parte ligado em estrela (cada bobina recebe V<sub>L</sub>/√3) e comuta para triângulo; corrente e torque de partida caem para cerca de 1/3. Exige motor com seis terminais e carga leve na partida.</li>
+              <li><strong>Chave compensadora:</strong> autotransformador com derivações (por exemplo 65% e 80%) que reduz a tensão na partida.</li>
+              <li><strong>Soft-starter:</strong> tiristores aumentam a tensão gradualmente, com aceleração suave.</li>
+              <li><strong>Inversor de frequência:</strong> retifica a rede, filtra num barramento CC e recria uma tensão trifásica por PWM com frequência ajustável. Mantendo V/f aproximadamente constante, o fluxo se mantém e a velocidade síncrona passa a ser controlada (n<sub>s</sub> = 120f/p). É aqui que o motor encontra a eletrônica de potência do próximo módulo.</li>
+            </ul>
+            <p>Para inverter o sentido de rotação basta trocar duas fases quaisquer: a sequência de fases se inverte e o campo passa a girar ao contrário.</p>
+
+            <h3>8. Lendo a placa de identificação</h3>
+            <div class="ee-table-wrap"><table class="ee-table"><caption>Dados típicos da placa</caption>
+              <thead><tr><th scope="col">Campo</th><th scope="col">O que significa</th></tr></thead>
+              <tbody>
+                <tr><td>kW (cv)</td><td>Potência mecânica nominal no eixo; 1 cv ≈ 0,7355 kW.</td></tr>
+                <tr><td>220/380 V</td><td>Ligação em triângulo na tensão menor e em estrela na maior.</td></tr>
+                <tr><td>A</td><td>Corrente nominal para cada tensão.</td></tr>
+                <tr><td>rpm</td><td>Velocidade em carga nominal (permite calcular o escorregamento).</td></tr>
+                <tr><td>Ip/In</td><td>Relação entre corrente de partida e nominal.</td></tr>
+                <tr><td>FS</td><td>Fator de serviço: sobrecarga contínua admissível (1,15 = 15%).</td></tr>
+                <tr><td>Isol.</td><td>Classe térmica do isolamento (B, F, H).</td></tr>
+                <tr><td>IP</td><td>Grau de proteção contra sólidos e água (ex.: IP55).</td></tr>
+                <tr><td>η e cos φ</td><td>Rendimento e fator de potência em carga nominal.</td></tr>
+                <tr><td>Cat.</td><td>Categoria de conjugado (N, H ou D).</td></tr>
+              </tbody></table></div>
+          </div>
+          <div class="ee-deck" data-deck="motor"></div>
+          <div class="ee-quiz" data-quiz="motor" data-titulo="Quiz: motor de indução"></div>
+          <p class="ee-note">Base teórica: Chapman (2013); Fitzgerald, Kingsley e Umans (2014); WEG (2024); ABNT NBR 17094-1:2018; IEC 60034-30-1; IEC 60085.</p>
+        </section>
+
+        <section class="section" id="potencia">
+          <div class="head">
+            <p class="head__eyebrow">Módulo 5 · Eletrônica de potência</p>
+            <h2>Simular antes de montar poupa componentes.</h2>
+          </div>
+          <div class="prose">
+            <p>Uma simulação mostra tensões, correntes e a resposta do sistema antes de montar o circuito: dá para conferir se os valores batem com o cálculo, achar erros de ligação e testar outros componentes sem queimar nada.</p>
+          </div>
+          <figure class="band">
+            <img src="psim-simulacao.webp" alt="Tela do PSIM com um circuito de eletrônica de potência simulado" />
+            <figcaption>Simulação no PSIM feita para a disciplina</figcaption>
+          </figure>
+          <figure class="band">
+            <img src="grafico-motor.webp" alt="Gráfico com a resposta de um motor ao longo do tempo" />
+            <figcaption>Gráfico de resposta de um motor</figcaption>
+          </figure>
+          <div class="ee-theory prose">
+            <h3>O que a eletrônica de potência faz</h3>
+            <p>É a área que converte e controla energia elétrica com chaves semicondutoras (diodos, tiristores, MOSFETs e IGBTs). Em vez de “queimar” o excesso de tensão num resistor, as chaves ligam e desligam muito rápido; como uma chave ideal tem tensão zero quando fechada e corrente zero quando aberta, ela quase não dissipa potência, e o rendimento passa de 95%.</p>
+            <div class="ee-table-wrap"><table class="ee-table"><caption>As quatro famílias de conversores</caption>
+              <thead><tr><th scope="col">Conversor</th><th scope="col">Converte</th><th scope="col">Exemplo</th></tr></thead>
+              <tbody>
+                <tr><td>Retificador</td><td>CA → CC</td><td>Carregador de celular, entrada do inversor de frequência</td></tr>
+                <tr><td>Chopper (CC-CC)</td><td>CC → CC</td><td>Fontes buck e boost, controle de motores CC</td></tr>
+                <tr><td>Inversor</td><td>CC → CA</td><td>Acionamento de motores de indução, energia solar</td></tr>
+                <tr><td>Cicloconversor / gradador</td><td>CA → CA</td><td>Soft-starter, dimmer</td></tr>
+              </tbody></table></div>
+            <h3>PWM em uma linha</h3>
+            <p>Na modulação por largura de pulso, a saída alterna entre 0 e V<sub>cc</sub> numa frequência alta; o valor médio é a razão cíclica D vezes a tensão: V<sub>méd</sub> = D·V<sub>cc</sub>. Num inversor, D varia senoidalmente e a indutância do motor filtra os pulsos, de modo que a corrente fica quase senoidal. No conversor buck ideal, vale V<sub>o</sub> = D·V<sub>i</sub>; no boost, V<sub>o</sub> = V<sub>i</sub>/(1 − D).</p>
+            <h3>Por que simular</h3>
+            <p>Simuladores como o PSIM resolvem as equações do circuito passo a passo no tempo, mostrando picos de corrente, ondulação e a resposta dinâmica de um motor antes de montar qualquer coisa. O gráfico acima mostra a resposta de um motor simulado na disciplina: a velocidade sobe e se estabiliza, e a corrente tem um pico na partida, exatamente como prevê a teoria do módulo anterior.</p>
+          </div>
+        </section>
 
         <section class="section" id="arduino" data-nav="Arduino">
           <div class="head">
@@ -834,6 +1172,21 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
               <pre class="x-code" id="gate-code" tabindex="0" role="region" aria-label="Código Arduino da cancela"><code><span class="x-ln">long d = medirDistancia();  // cm</span><span class="x-ln" data-g="open">if (d &lt; 20) servo.write(90);  // abre</span><span class="x-ln" data-g="closed">else        servo.write(0);   // fecha</span></code></pre>
             </div>
           </div>
+          <details class="ee-more">
+            <summary>Os cálculos por trás dos projetos</summary>
+            <div class="ee-more__in ee-theory">
+              <h3>Resistor do LED</h3>
+              <p>O LED é um diodo: depois que conduz, a tensão nele fica quase constante (V<sub>f</sub>, cerca de 2 V no vermelho). O resistor em série limita a corrente. Pela LKT e pela Lei de Ohm:</p>
+              <span class="ee-eq">R = (V<sub>cc</sub> − V<sub>f</sub>) / I = (5 − 2) / 0,020 = 150 Ω <small>Usa-se o valor comercial logo acima, 220 Ω, que deixa a corrente em cerca de 14 mA, segura para o LED e para o pino do Arduino.</small></span>
+              <h3>Sensor ultrassônico HC-SR04</h3>
+              <p>O sensor emite um pulso de 40 kHz e mede quanto tempo o eco leva para voltar. Como o som vai e volta, a distância é metade do caminho percorrido. A velocidade do som no ar depende da temperatura (cerca de 331 + 0,6·T m/s, com T em °C):</p>
+              <span class="ee-eq">d = v · t / 2 &nbsp;&nbsp;·&nbsp;&nbsp; v ≈ 343 m/s a 20 °C &nbsp;&nbsp;·&nbsp;&nbsp; d (cm) ≈ t (µs) / 58</span>
+              <h3>A lógica do semáforo</h3>
+              <p>O programa é uma máquina de estados: verde → amarelo → vermelho → verde, cada estado com seu tempo. Trocar delay() por millis() deixa o Arduino livre para ler sensores enquanto espera, uma boa evolução do projeto.</p>
+            </div>
+          </details>
+          <div class="ee-deck" data-deck="arduino"></div>
+          <div class="ee-quiz" data-quiz="arduino" data-titulo="Quiz: Arduino e sensores"></div>
         </section>
 
         <section class="section" id="latex">
@@ -852,10 +1205,24 @@ print(interp_quadratica([1, 2, 4], [1, 4, 16], 3))  # 9.0</code></pre>
               <p class="callout__lead"><strong>Use o Overleaf.</strong> Ele compila LaTeX online, de graça, sem instalar nada.</p>
             </aside>
           </div>
+          <details class="ee-more">
+            <summary>Estrutura de um relatório técnico de laboratório</summary>
+            <div class="ee-more__in ee-theory">
+              <ol>
+                <li><strong>Capa e resumo:</strong> o que foi feito e o principal resultado, em poucas linhas.</li>
+                <li><strong>Introdução e objetivos:</strong> o fenômeno estudado e o que o experimento quer verificar.</li>
+                <li><strong>Fundamentação teórica:</strong> as equações usadas, com as fontes citadas.</li>
+                <li><strong>Materiais e métodos:</strong> instrumentos, circuito montado (o circuitikz desenha) e procedimento.</li>
+                <li><strong>Resultados e discussão:</strong> tabelas, gráficos (pgfplots) e comparação com a teoria, incluindo o erro percentual.</li>
+                <li><strong>Conclusão e referências:</strong> o que foi aprendido e a bibliografia em ABNT.</li>
+              </ol>
+              <p>Uma equação em LaTeX fica assim: <code>\tau = RC</code> e <code>v_C(t) = V_s\left(1 - e^{-t/\tau}\right)</code>.</p>
+            </div>
+          </details>
         </section>
 
 
-        <section class="section" id="ceu" data-nav="Céu">
+        <section class="section" id="ceu">
           <div class="head">
             <p class="head__eyebrow">Flash cards do universo</p>
             <h2>Toque em um planeta</h2>
@@ -883,6 +1250,65 @@ m.querySelector('.fc-x').onclick=function(){m.classList.remove('on')};m.onclick=
 document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.remove('on')});})();
 </script>
 
+        <section class="section" id="estudar" data-nav="Estudar">
+          <div class="head">
+            <p class="head__eyebrow">Módulo 9 · Estudo ativo</p>
+            <h2>Todos os flash cards e um simulado misto, no mesmo lugar.</h2>
+            <p class="head__sub">Ler de novo dá a sensação de que aprendemos. Testar a memória é o que realmente fixa. Escolha um baralho, depois encare o simulado com perguntas de todos os módulos.</p>
+          </div>
+          <div class="ee-deck" data-deck="fundamentos,rc,interpolacao,motor,arduino,ceu"></div>
+          <div class="ee-quiz" data-quiz="fundamentos,rc,interpolacao,motor,arduino" data-max="12" data-titulo="Simulado misto (12 questões sorteadas)"></div>
+          <div class="ee-theory prose">
+            <h3>Métodos de estudo com base científica</h3>
+            <div class="ee-table-wrap"><table class="ee-table"><caption>Técnicas e como usá-las aqui</caption>
+              <thead><tr><th scope="col">Técnica</th><th scope="col">O que é</th><th scope="col">Como aplicar</th></tr></thead>
+              <tbody>
+                <tr><td>Prática de recuperação</td><td>Puxar a resposta da memória, em vez de reler. Estudos de Roediger e Karpicke (2006) mostraram retenção bem maior após testes do que após releituras.</td><td>Responda o card em voz alta antes de virar; faça os quizzes.</td></tr>
+                <tr><td>Repetição espaçada</td><td>Revisar em intervalos crescentes. A síntese de Cepeda et al. (2006) indica que espaçar supera concentrar o estudo.</td><td>Os botões “Errei/Acertei” guardam seu progresso no navegador e trazem primeiro o que você erra (sistema de caixas de Leitner).</td></tr>
+                <tr><td>Intercalação</td><td>Misturar tipos de problema na mesma sessão, o que treina a escolha do método certo.</td><td>Use o simulado misto, que sorteia questões de todos os módulos.</td></tr>
+                <tr><td>Autoexplicação (técnica Feynman)</td><td>Explicar o conteúdo com palavras simples, como se ensinasse alguém; as lacunas aparecem sozinhas.</td><td>Depois de um módulo, explique em voz alta, sem olhar, por que o motor de indução não atinge a velocidade síncrona.</td></tr>
+                <tr><td>Blocos de foco (Pomodoro)</td><td>Ciclos de cerca de 25 minutos de foco com 5 de pausa.</td><td>Um módulo por bloco: teoria, laboratório, cards e quiz.</td></tr>
+                <tr><td>Simulação interativa</td><td>Manipular variáveis e observar o efeito, como nas simulações PhET (Wieman; Adams; Perkins, 2008).</td><td>Antes de mexer num controle, preveja o resultado; depois confira.</td></tr>
+              </tbody></table></div>
+            <p class="ee-note">A revisão de Dunlosky et al. (2013) avaliou dez técnicas e classificou a prática de testes e a prática distribuída como as de maior utilidade.</p>
+          </div>
+        </section>
+
+        <section class="section" id="referencias" data-nav="Referências">
+          <div class="head">
+            <p class="head__eyebrow">Referências</p>
+            <h2>Bibliografia (ABNT NBR 6023:2018)</h2>
+            <p class="head__sub">Todo o conteúdo deste site foi escrito com palavras próprias a partir das obras abaixo e dos relatórios de laboratório da autora.</p>
+          </div>
+          <ol class="ee-refs">
+            <li>ALEXANDER, C. K.; SADIKU, M. N. O. <strong>Fundamentos de circuitos elétricos</strong>. 5. ed. Porto Alegre: AMGH, 2013.</li>
+            <li>ARDUINO. <strong>Arduino language reference</strong>. [S. l.]: Arduino, [2024]. Disponível em: <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener noreferrer">https://docs.arduino.cc/language-reference/</a>. Acesso em: 16 nov. 2026.</li>
+            <li>ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. <strong>ABNT NBR 17094-1</strong>: máquinas elétricas girantes: parte 1: motores de indução trifásicos: requisitos. Rio de Janeiro: ABNT, 2018.</li>
+            <li>ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. <strong>ABNT NBR 6023</strong>: informação e documentação: referências: elaboração. Rio de Janeiro: ABNT, 2018.</li>
+            <li>BRASIL. Lei nº 13.146, de 6 de julho de 2015. Institui a Lei Brasileira de Inclusão da Pessoa com Deficiência (Estatuto da Pessoa com Deficiência). <strong>Diário Oficial da União</strong>: seção 1, Brasília, DF, 7 jul. 2015.</li>
+            <li>BURDEN, R. L.; FAIRES, J. D.; BURDEN, A. M. <strong>Análise numérica</strong>. 3. ed. São Paulo: Cengage Learning, 2016.</li>
+            <li>CEPEDA, N. J. <em>et al.</em> Distributed practice in verbal recall tasks: a review and quantitative synthesis. <strong>Psychological Bulletin</strong>, Washington, v. 132, n. 3, p. 354-380, 2006.</li>
+            <li>CHAPMAN, S. J. <strong>Fundamentos de máquinas elétricas</strong>. 5. ed. Porto Alegre: AMGH, 2013.</li>
+            <li>CIRILLO, F. <strong>The Pomodoro Technique</strong>. New York: Currency, 2018.</li>
+            <li>DUNLOSKY, J. <em>et al.</em> Improving students' learning with effective learning techniques: promising directions from cognitive and educational psychology. <strong>Psychological Science in the Public Interest</strong>, v. 14, n. 1, p. 4-58, 2013.</li>
+            <li>FITZGERALD, A. E.; KINGSLEY JR., C.; UMANS, S. D. <strong>Máquinas elétricas de Fitzgerald e Kingsley</strong>. 7. ed. Porto Alegre: AMGH, 2014.</li>
+            <li>HALLIDAY, D.; RESNICK, R.; WALKER, J. <strong>Fundamentos de física</strong>: eletromagnetismo. 10. ed. Rio de Janeiro: LTC, 2016. v. 3.</li>
+            <li>INTERNATIONAL ELECTROTECHNICAL COMMISSION. <strong>IEC 60034-30-1</strong>: rotating electrical machines: part 30-1: efficiency classes of line operated AC motors (IE code). Geneva: IEC, 2014.</li>
+            <li>INTERNATIONAL ELECTROTECHNICAL COMMISSION. <strong>IEC 60085</strong>: electrical insulation: thermal evaluation and designation. Geneva: IEC, 2007.</li>
+            <li>KARLSRUHE INSTITUTE OF TECHNOLOGY. <strong>History: the invention of the electric motor 1856-1893</strong>. Karlsruhe: KIT, [2022]. Disponível em: <a href="https://www.eti.kit.edu/english/1390.php" target="_blank" rel="noopener noreferrer">https://www.eti.kit.edu/english/1390.php</a>. Acesso em: 16 nov. 2026.</li>
+            <li>MOHAN, N. <strong>Eletrônica de potência</strong>: curso introdutório. Rio de Janeiro: LTC, 2014.</li>
+            <li>MONK, S. <strong>Programação com Arduino</strong>: começando com sketches. 2. ed. Porto Alegre: Bookman, 2017.</li>
+            <li>NASA. <strong>Solar System exploration</strong>. Washington, DC: NASA, [2026]. Disponível em: <a href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">https://science.nasa.gov/solar-system/</a>. Acesso em: 16 nov. 2026.</li>
+            <li>NILSSON, J. W.; RIEDEL, S. A. <strong>Circuitos elétricos</strong>. 10. ed. São Paulo: Pearson, 2016.</li>
+            <li>ROEDIGER, H. L.; KARPICKE, J. D. Test-enhanced learning: taking memory tests improves long-term retention. <strong>Psychological Science</strong>, v. 17, n. 3, p. 249-255, 2006.</li>
+            <li>TESLA, N. <strong>Electro-magnetic motor</strong>. Depositante: Nikola Tesla. US 381968. Concessão: 1 maio 1888.</li>
+            <li>W3C. <strong>Web Content Accessibility Guidelines (WCAG) 2.2</strong>. [S. l.]: W3C, 2023. Disponível em: <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">https://www.w3.org/TR/WCAG22/</a>. Acesso em: 16 nov. 2026.</li>
+            <li>WEG. <strong>Guia de especificação de motores elétricos</strong>. Jaraguá do Sul: WEG, 2024. Disponível em: <a href="https://static.weg.net/medias/downloadcenter/h32/hc5/WEG-motores-eletricos-guia-de-especificacao-50032749-brochure-portuguese-web.pdf" target="_blank" rel="noopener noreferrer">https://static.weg.net/medias/downloadcenter/h32/hc5/WEG-motores-eletricos-guia-de-especificacao-50032749-brochure-portuguese-web.pdf</a>. Acesso em: 16 nov. 2026.</li>
+            <li>WIEMAN, C. E.; ADAMS, W. K.; PERKINS, K. K. PhET: simulations that enhance learning. <strong>Science</strong>, v. 322, n. 5902, p. 682-683, 2008.</li>
+          </ol>
+          <p class="ee-note">Como citar este site: ARAÚJO, Nicoly Canteiro. <strong>Elétrons e Estrelas</strong>: Engenharia Elétrica e Física explicadas por uma estudante. Pontes e Lacerda, 2026. Disponível em: https://niinacanteiro.github.io/eletrons-e-estrelas/. Acesso em: dia mês ano.</p>
+        </section>
+
         <section class="section" id="material">
           <div class="head">
             <p class="head__eyebrow">Material recomendado</p>
@@ -908,11 +1334,11 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.
           <p class="fineprint"><strong>Links de afiliado:</strong> os botões "Ver oferta" são links de afiliado do Mercado Livre. Se você comprar por eles, eu posso ganhar uma pequena comissão, sem nenhum custo extra para você. Preços e estoque podem mudar na loja.</p>
         </section>
 
-        <aside class="x-ad" aria-label="Publicidade 3"><span>Publicidade</span>
+        <aside class="x-ad" aria-label="Publicidade 2"><span>Publicidade</span>
           <div class="x-ad__slot"><script>EEAds.banner(true);</script></div>
         </aside>
 
-        <section class="section" id="visitantes" data-nav="Visitantes">
+        <section class="section" id="visitantes">
           <div class="head">
             <p class="head__eyebrow">Visitantes</p>
             <h2>Quem já passou por aqui.</h2>
@@ -1468,7 +1894,7 @@ function tick(){if(parado())return fixo();i++;live.textContent=txt.slice(0,i);if
 function apaga(){if(parado())return fixo();i--;live.textContent=txt.slice(0,i);if(i>0)t=setTimeout(apaga,12);else t=setTimeout(tick,900)}
 document.addEventListener('ee:movimento',function(){if(parado())fixo();else{clearTimeout(t);p.classList.remove('done');i=txt.length;t=setTimeout(apaga,1500)}});
 if(parado())fixo();else t=setTimeout(tick,600)})();</script>
-<script src="cosmos.js?v=6" defer></script><script src="extras.js?v=3" defer></script>
+<script src="estudo.js?v=1" defer></script><script src="cosmos.js?v=6" defer></script><script src="extras.js?v=3" defer></script>
 <!-- VLibras: tradução do conteúdo para Libras (widget oficial gov.br) -->
 <div vw class="enabled">
   <div vw-access-button class="active"></div>
